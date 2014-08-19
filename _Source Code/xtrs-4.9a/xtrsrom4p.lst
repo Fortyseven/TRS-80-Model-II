@@ -1,0 +1,361 @@
+   1:			;------------------------------------------------------------------
+   2:			; Free Model 4P mode boot ROM for xtrs - Version 0.05
+   3:			; Copyright 1999, Peter W. Cervasio (cervasio@airmail.net)
+   4:			;------------------------------------------------------------------
+   5:			; This software may be copied, modified, and used for any purpose
+   6:			; without fee, provided that (1) the above copyright notice is
+   7:			; retained, and (2) modified versions are clearly marked as having
+   8:			; been modified, with the modifier's name and the date included.
+   9:			;------------------------------------------------------------------
+  10:			; Checks to see if a disk image is loaded in emulated drive 0.  If
+  11:			; so, it reads the boot sector to 0x4300 and jumps to that address.
+  12:			; If no disk image loaded, complains and sits in a loop.
+  13:			;
+  14:			; This is only useful for the Model 4P mode of operation, and it
+  15:			; might not work for all programs.  Complains if xtrs thinks it's
+  16:			; in model 1, 3, or 4 mode.
+  17:			;
+  18:			; Written with the help of the LS-DOS 6.3.1 source code, which is
+  19:			; freely avaliable, though Roy Soltoff holds the copyright to it,
+  20:			; and the Model 4/4P technical reference.
+  21:			;
+  22:			; 3-19-99, Tim Mann:  Improved disk error handling.  Ruled out 
+  23:			;   attempts to work in plain Model 4 mode. (v0.03)
+  24:			; 4-4-99, Tim Mann:  Made read loop continue until NMI instead of
+  25:			;   counting 256 bytes; this should let boot sectors of other than
+  26:			;   256 bytes work. (v0.04)  Fixed bug in sending fdc read command;
+  27:			;   don't use fdcmd, since that waits for completion. (v0.05)
+  28:			;
+  29:			; TODO:
+  30:			;   possibly write code for the RST handlers as in the real 4P rom
+  31:			;
+  32:			; Last modified on Sat Mar 25 21:33:08 PST 2000 by mann 
+  33:			;      modified on Mon Mar 15 17:25:49 CST 1999 by petec
+  34:			;
+  35:			;------------------------------------------------------------------
+  36:			
+  37:			;
+  38:			;	misc equates needed
+  39:			;
+  40:	3DC0          	video	equ	3c00h+7*64
+  41:	4300          	bootram	equ	4300h		; load to this address
+  42:	401A          	goboot	equ	401ah		; jump here to run boot sec!
+  43:			;
+  44:			;	hardware addresses
+  45:			;
+  46:	0084          	opreg	equ	084h		; Operation control
+  47:	009C          	romport	equ	09ch		; ROM control
+  48:	00E4          	wrnmiport equ	0e4h		; NMI mask register
+  49:	00EC          	modport	equ	0ech		; speed, etc.
+  50:			;
+  51:	00F0          	fdccmnd equ	0f0h		; FDC Command register (write)
+  52:	00F0          	fdcstat equ	0f0h		; FDC Status register (read)
+  53:	00F1          	fdctrak equ	0f1h		; FDC Track register (r/w)
+  54:	00F2          	fdcsect equ	0f2h		; FDC Sector register (r/w)
+  55:	00F3          	fdcdata equ	0f3h		; FDC Data register (r/w)
+  56:	00F4          	fdcslct equ	0f4h		; Drive select, SDEN/DDEN,
+  57:			
+  58:	0000          		org	0
+  59:			
+  60:			;	The following three instructions are what you would
+  61:			;	have in RAM at address 0, which would set up the
+  62:			;	Model 4/4P to turn the ROM back on (lsdos does this)
+  63:			;
+  64:	0000  F3      	start:	di			; disable interrupts
+  65:	0001  3E01    		ld	a,1		; map in the ROM
+  66:	0003  D39C    		out	(romport),a	; do it!
+  67:			;
+  68:			;	start of "real" ROM instructions
+  69:			;
+  70:	0005  C36900  		jp	contin		; continue farther up
+  71:			;
+  72:			;	rst 08h through rst 38h jumps (per tech ref)
+  73:			;
+  74:	0008  C30040  	rst8:	jp	4000h
+  75:	000B  00000000		db	0,0,0,0,0
+	      00
+  76:	0010  C30340  	rst10:	jp	4003h
+  77:	0013  00000000		db	0,0,0,0,0
+	      00
+  78:	0018  C30640  	rst18:	jp	4006h
+  79:	001B  00000000		db	0,0,0,0,0
+	      00
+  80:	0020  C30940  	rst20:	jp	4009h
+  81:	0023  00000000		db	0,0,0,0,0
+	      00
+  82:	0028  C30C40  	rst28:	jp	400ch
+  83:	002B  00000000		db	0,0,0,0,0
+	      00
+  84:	0030  C30F40  	rst30:	jp	400fh
+  85:	0033  00000000		db	0,0,0,0,0
+	      00
+  86:	0038  C31240  	rst38:	jp	4012h
+  87:			;
+  88:			;	Data to load from 4000h to ??
+  89:			;
+  90:	003B  C9      	retdat:	ret			; 4000h (rst 8h)
+  91:	003C  0000    		dw	0
+  92:	003E  C9      		ret			; 4003h (rst 10h)
+  93:	003F  0000    		dw	0
+  94:	0041  C9      		ret			; 4006h (rst 18h)
+  95:	0042  0000    		dw	0
+  96:	0044  C9      		ret			; 4009h (rst 20h)
+  97:	0045  0000    		dw	0
+  98:	0047  C9      		ret			; 400ch (rst 28h)
+  99:	0048  0000    		dw	0
+ 100:	004A  C9      		ret			; 400fh (rst 30h)
+ 101:	004B  0000    		dw	0
+ 102:	004D  C9      		ret			; 4012h (rst 38h)
+ 103:	004E  0000    		dw	0
+ 104:	0050  C32C01  		jp	nmiret		; 4015h (nmi)
+ 105:			;
+ 106:	0053  4D4F    		db	'MO'		; 4P detect by sysinit
+ 107:			;
+ 108:			;	code that jumps to the boot sector (401ah)
+ 109:			;
+ 110:	0055  AF      		xor	a
+ 111:	0056  D39C    		out	(romport),a	; disable rom
+ 112:	0058  C30043  		jp	bootram		; run boot sector
+ 113:			;
+ 114:	0020          	retlen	equ	$-retdat	; size of code
+ 115:			;
+ 116:			;	nmi address
+ 117:			;
+ 118:	0066          		org	66h
+ 119:			;
+ 120:	0066  C31540  		jp	4015h		; std M4 point in RAM
+ 121:			;
+ 122:			;	continue booting the machine
+ 123:			;
+ 124:	0069  AF      	contin:	xor	a
+ 125:	006A  D3E4    		out	(wrnmiport),a	; disable interrupts
+ 126:	006C  3E01    		ld	a,1
+ 127:	006E  D384    		out	(opreg),a	; set ram mode
+ 128:	0070  3E50    		ld	a,01010000b
+ 129:	0072  D3EC    		out	(modport),a	; set speed/vid
+ 130:			;
+ 131:	0074  310042  		ld	sp,bootram-100h	; set stack pointer
+ 132:			;
+ 133:	0077  213B00  		ld	hl,retdat	; code for RAM
+ 134:	007A  110040  		ld	de,4000h	; move it here
+ 135:	007D  012000  		ld	bc,retlen
+ 136:	0080  EDB0    		ldir
+ 137:			;
+ 138:	0082  21003C  		ld	hl,3c00h	; clear video screen
+ 139:	0085  11013C  		ld	de,3c01h
+ 140:	0088  01FF03  		ld	bc,1023
+ 141:	008B  3620    		ld	(hl),' '
+ 142:	008D  EDB0    		ldir
+ 143:			;
+ 144:	008F  ED56    		im	1
+ 145:			;
+ 146:	0091  CDA000  		call	chkmdl		; check for model 4p
+ 147:	0094  CDD400  		call	rstdrv		; restore drive
+ 148:	0097  CCEB00  		call	z,readbt	; read boot sector
+ 149:	009A  C2B900  		jp	nz,dskerr	; go on error
+ 150:			;
+ 151:	009D  C31A40  	jmprom:	jp	goboot		; jump to boot sector
+ 152:			;
+ 153:			;	chkmdl - make sure we're in 4P mode
+ 154:			;
+ 155:	00A0  3E05    	chkmdl:	ld	a,5		; model query
+ 156:	00A2  ED3C    		dw	3cedh		; emt_misc instr.
+ 157:	00A4  7D      		ld	a,l		; get model in a
+ 158:	00A5  FE05    		cp	5		; model 4p?
+ 159:	00A7  C8      		ret	z
+ 160:			;
+ 161:			;	romerr - rom installed in model 1, 3, or 4 mode!!
+ 162:			;
+ 163:	00A8  F5      	romerr:	push	af
+ 164:	00A9  214901  		ld	hl,rommsg	; "invalid rom for model"
+ 165:	00AC  11C03D  		ld	de,video
+ 166:	00AF  013100  		ld	bc,romlen
+ 167:	00B2  EDB0    		ldir			; put msg
+ 168:	00B4  C630    		add	a,'0'		; convert model to ascii
+ 169:	00B6  12      		ld	(de),a		; stuff onto screen
+ 170:	00B7  18FE    		jr	$		; and hang
+ 171:			;
+ 172:			;	dskerr - error reading disk
+ 173:			;
+ 174:	00B9  217A01  	dskerr:	ld	hl,errtab	; table of error messages
+ 175:	00BC  37      		scf			; ensure termination
+ 176:	00BD  1F      	nxterr:	rra			; loop through bits, low first
+ 177:	00BE  3804    		jr	c,goterr	; go if error bit found
+ 178:	00C0  23      		inc	hl		; no, step to next message
+ 179:	00C1  23      		inc	hl
+ 180:	00C2  18F9    		jr	nxterr
+ 181:	00C4  5E      	goterr:	ld	e,(hl)		; get message address
+ 182:	00C5  23      		inc	hl
+ 183:	00C6  56      		ld	d,(hl)
+ 184:	00C7  EB      		ex	de,hl
+ 185:	00C8  11C03D  		ld	de,video	; where to show it
+ 186:	00CB  7E      	chrout:	ld	a,(hl)
+ 187:	00CC  A7      		and	a
+ 188:	00CD  28FE    		jr	z,$		; hang in a loop when done
+ 189:	00CF  12      		ld	(de),a
+ 190:	00D0  23      		inc	hl
+ 191:	00D1  13      		inc	de
+ 192:	00D2  18F7    		jr	chrout
+ 193:			;
+ 194:			;	rstdrv - seek track 0 and set up for boot read
+ 195:			;
+ 196:	00D4  3E81    	rstdrv:	ld	a,81h		; drive 0, dden (no nmi)
+ 197:	00D6  D3F4    		out	(fdcslct),a	; select drive
+ 198:	00D8  3ED0    		ld	a,0d0h		; force interrupt
+ 199:	00DA  CD3901  		call	fdcmd		; send to fdc
+ 200:	00DD  0600    		ld	b,0
+ 201:	00DF  10FE    		djnz	$		; wait a bit
+ 202:	00E1  3E0C    		ld	a,0ch		; restore w/verify
+ 203:	00E3  CD3901  		call	fdcmd		;
+ 204:	00E6  E699    		and	99h		; mask error bits
+ 205:	00E8  C8      		ret	z		; return if okay
+ 206:	00E9  18CE    		jr	dskerr
+ 207:			;
+ 208:			;	readbt - read boot sector from drive 0
+ 209:			;
+ 210:	00EB  110100  	readbt:	ld	de,0001h	; trk 0, sec 1
+ 211:	00EE  210043  		ld	hl,bootram	; set buffer
+ 212:	00F1  CDFA00  		call	readsb		; attempt read
+ 213:	00F4  E61C    		and	1ch		; keep RNF,CRC,LOST DATA
+ 214:	00F6  C8      		ret	z		; return if no error
+ 215:	00F7  C3B900  		jp	dskerr		; go on error
+ 216:			;
+ 217:			;	readsb - read sector to buffer
+ 218:			;
+ 219:	00FA  0681    	readsb:	ld	b,81h
+ 220:	00FC  0EF4    		ld	c,fdcslct	; set dden,ds0
+ 221:	00FE  ED41    		out	(c),b		; select
+ 222:	0100  0D      		dec	c		; set to data register
+ 223:	0101  3E18    		ld	a,18h		; fdc seek command
+ 224:	0103  ED51    		out	(c),d		; track # to fdc
+ 225:	0105  CD3901  		call	fdcmd		; send command to fdc
+ 226:	0108  7B      		ld	a,e
+ 227:	0109  D3F2    		out	(fdcsect),a	; desired sector
+ 228:	010B  3E81    		ld	a,81h		; dden & ds0
+ 229:	010D  D3F4    		out	(fdcslct),a	; reselect drive
+ 230:	010F  111681  		ld	de,08116h	; D=DS0, dden, wait
+ 231:							; E=mask to see DRQ or error
+ 232:	0112  3E80    		ld	a,80h		; fdc read command
+ 233:	0114  D3F0    		out	(fdccmnd),a	; send command
+ 234:	0116  0664    		ld	b,100		; short delay
+ 235:	0118  10FE    		djnz	$
+ 236:	011A  3EC0    		ld	a,0c0h		; enable intrq
+ 237:	011C  D3E4    		out	(wrnmiport),a
+ 238:	011E  DBF0    	rdlp1:	in	a,(fdcstat)	; get status
+ 239:	0120  A3      		and	e		; test bit 1
+ 240:	0121  28FB    		jr	z,rdlp1
+ 241:	0123  EDA2    		ini
+ 242:	0125  7A      		ld	a,d
+ 243:	0126  D3F4    	rdlp2:	out	(fdcslct),a
+ 244:	0128  EDA2    		ini
+ 245:	012A  18FA    		jr	rdlp2		; tight loop waiting for NMI
+ 246:			;	jr	nz,rdlp2
+ 247:			;	in	a,(fdcstat)
+ 248:			;	ret
+ 249:			
+ 250:	012C  AF      	nmiret:	xor	a
+ 251:	012D  D3E4    		out	(wrnmiport),a	; no interrupts
+ 252:	012F  3E81    		ld	a,81h		; DS 0, dden
+ 253:	0131  D3F4    		out	(fdcslct),a
+ 254:	0133  DBF0    		in	a,(fdcstat)
+ 255:	0135  E3      		ex	(sp),hl		; discard one level of return address
+ 256:	0136  E1      		pop	hl
+ 257:	0137  ED45    		retn
+ 258:			
+ 259:			;
+ 260:			;	fdcmd - send command in A to fdc and wait for completion
+ 261:			;
+ 262:	0139  D3F0    	fdcmd:	out	(fdccmnd),a	; send command
+ 263:	013B  0664    		ld	b,100		; short delay
+ 264:	013D  10FE    		djnz	$
+ 265:	013F  DBF0    	fdst:	in	a,(fdcstat)
+ 266:	0141  CB47    		bit	0,a		; busy?
+ 267:	0143  C8      		ret	z		; return if not
+ 268:	0144  CB7F    		bit	7,a		; not ready?
+ 269:	0146  C0      		ret	nz		; return if set
+ 270:	0147  18F6    		jr	fdst		;   else loop
+ 271:				
+ 272:			
+ 273:			;------------------------------------------------------------------
+ 274:			;	messages
+ 275:			;------------------------------------------------------------------
+ 276:			;
+ 277:	0149  54686973	rommsg:	db	'This ROM code does NOT work when emulating Model '
+	      20524F4D
+	      20636F64
+	      6520646F
+	      6573204E
+	      4F542077
+	      6F726B20
+	      7768656E
+	      20656D75
+	      6C617469
+	      6E67204D
+	      6F64656C
+	      20
+ 278:	0031          	romlen	equ	$-rommsg
+ 279:			;
+ 280:	017A  D4018C01	errtab:	dw	dskmsg,ecant,elost,ecrc,ernf,ecant,ecant,dskmsg,ecant
+	      8C01A001
+	      B6018C01
+	      8C01D401
+	      8C01
+ 281:	018C          	elost:
+ 282:	018C  456D756C	ecant:	db	'Emulator or ROM bug',0
+	      61746F72
+	      206F7220
+	      524F4D20
+	      62756700
+ 283:	01A0  426F6F74	ecrc:	db	'Boot sector CRC error',0
+	      20736563
+	      746F7220
+	      43524320
+	      6572726F
+	      7200
+ 284:	01B6  426F6F74	ernf:	db	'Boot sector not found on disk',0
+	      20736563
+	      746F7220
+	      6E6F7420
+	      666F756E
+	      64206F6E
+	      20646973
+	      6B00
+ 285:	01D4  596F7520	dskmsg:	db	'You do not have a disk image loaded',0
+	      646F206E
+	      6F742068
+	      61766520
+	      61206469
+	      736B2069
+	      6D616765
+	      206C6F61
+	      64656400
+ 286:			;
+ 287:	0000          		end	start
+
+
+
+Statistics:
+
+    47	symbols
+   493	bytes
+
+
+
+Symbol Table:
+
+bootram        =4300     fdcstat        =  f0     romerr            a8+    
+chkmdl            a0     fdctrak        =  f1+    romlen         =  31     
+chrout            cb     fdst             13f     rommsg           149     
+contin            69     goboot         =401a     romport        =  9c     
+dskerr            b9     goterr            c4     rst10             10+    
+dskmsg           1d4     jmprom            9d+    rst18             18+    
+ecant            18c     modport        =  ec     rst20             20+    
+ecrc             1a0     nmiret           12c     rst28             28+    
+elost            18c     nxterr            bd     rst30             30+    
+ernf             1b6     opreg          =  84     rst38             38+    
+errtab           17a     rdlp1            11e     rst8               8+    
+fdccmnd        =  f0     rdlp2            126     rstdrv            d4     
+fdcdata        =  f3+    readbt            eb     start              0     
+fdcmd            139     readsb            fa     video          =3dc0     
+fdcsect        =  f2     retdat            3b     wrnmiport      =  e4     
+fdcslct        =  f4     retlen         =  20     

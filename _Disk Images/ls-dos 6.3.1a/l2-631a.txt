@@ -1,0 +1,24 @@
+LS-DOS 6.3.1A for the TRS-80 Model II
+Should also work on the Model 12, and the Model 16 and 6000 in Z-80 only mode
+
+These are .dmk-format images of 8-inch floppy disks.  These images
+cannot *boot* on any emulator that now exists -- at this writing there
+are no TRS-80 Model II/12/16/6000 emulators!  They can, however, be
+read as data disks by xtrs or David Keil's TRS-80 Model I/III/4
+emulators, using LDOS or LS-DOS with the XTRS8/DCT emulated 8-inch
+floppy driver.  You could make a real 8" floppy from one of these
+images by connecting an 8" drive to your PC and using the emulator to
+copy from the image to the real drive.  The result should boot on a
+real machine.
+
+l2-631a.dmk
+LS-DOS 6.3.1A, single sided.  This was a pristine release disk with a
+Misosys label.
+
+l2-631ss.dmk
+LS-DOS 6.3.1A, single sided.  Not a pristine disk; some extra files
+present.
+
+l2-631ds.dmk
+LS-DOS 6.3.1A, double sided.  Not a pristine disk; some extra files
+present.

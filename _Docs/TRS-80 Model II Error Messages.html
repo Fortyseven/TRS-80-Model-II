@@ -1,0 +1,426 @@
+<html><head><title>The TRS-80 Model II: Boot and TRSDOS-II Error Messages</title></head><body bgcolor="#ffffff">
+<center><h1>TRS-80 Model II Error Messages</h1>
+</center>
+<p></p><pre>There are three kinds of error messages you might get while
+using your computer:
+
+     .    <b>Boot errors</b>, such as BOOT ERROR DC. See the
+          <a href="#booterr">Boot Errors Table</a> for more information.
+
+     .    <b>Operating system errors</b>, such as ERROR 24 or
+          FILE NOT FOUND. To get a brief description of a
+          numbered error, type ERROR followed by the error
+          number displayed. For example, type:
+
+                      ERROR 31 (ENTER)
+
+          and your screen shows:
+
+                      PROGRAM NOT FOUND
+
+          For more information see the <a href="#oserr">System Errors Table</a>.
+
+     .    <b>Application program errors</b> -- see your application
+          program manual.
+ 
+
+When an error message is displayed:
+
+     .    Try the operation several times.
+
+     .    Look up boot errors and operating system errors in
+          the following tables and take the recommended
+          actions. See your application program manual for
+          explanations of application program errors.
+
+     .    Try using other diskettes.
+
+     .    Reset the computer and try the operation again.
+
+     .    Check all the power connections.
+
+     .    Check all interconnections.
+
+     .    Remove all diskettes from drives, turn off the
+          computer, wait 15 seconds, and turn it on again.
+
+     .   If you tried all these remedies and continue to get
+         an error message, contact a Radio Shack Service
+         Center.
+
+Note: If more than one thing is wrong, the computer might
+wait until you correct the first error before displaying the
+second error message.
+</pre>
+<hr>
+<a name="booterr">
+</a><h2><a name="booterr">Model II Boot Errors Table</a></h2>
+<pre><a name="booterr">Error            Message                Explanation/Action
+---------------- ----------------------- -------------------
+BOOT ERROR CK    Checksum error --       Contact RSSC.
+                 possibly a defective
+                 ROM.
+
+BOOT ERROR CT    Defective CTC           Contact RSSC.
+                 chip.
+
+BOOT ERROR DC    Floppy disk
+                 controller error.
+                 a. Defective            a. Try a different
+                    diskette.               diskette.
+                 b. Floppy disk          b. Turn on the
+                    expansion unit.         floppy disk
+                    not on.                 expansion unit.
+                 c. Defective FDC        c. Contact RSSC.
+                    Chip or Drive.
+
+BOOT ERROR DM    DMA chip failure.       Contact RSSC.
+
+BOOT ERROR D0    Drive not ready.
+                 a. Improperly           a. Insert the
+                    inserted                diskette again
+                    diskette.               and press <reset>.
+                 b. Defective            b. Try a different
+                    diskette.               diskette.
+                 c. Defective            c. Contact RSSC.
+                    drive.
+
+BOOT ERROR HA    Controller error.       Re-initialize the
+                 Aborted command:        hard disk or contact
+                 Problem during          RSSC.
+                 boot-up of hard
+                 disk.
+
+BOOT ERROR HC    CRC error.              Re-initialize the
+                 Invalid data in         hard disk or contact
+                 data field.             RSSC.
+
+BOOT ERROR HD    Controller error.       a. Re-initialize the
+                 Busy not reset.            hard disk.
+                                         b. Power down, wait
+                                            10 seconds, and
+                                            power up.
+                                         If the error occurs
+                                         again, contact RSSC.
+
+BOOT ERROR HI    CRC error.              Re-initialize the
+                 Invalid data in         hard disk.
+                 ID field.
+
+BOOT ERROR HM    Data address            Re-initialize the
+                 mark not found.         hard disk.
+
+BOOT ERROR HN    ID not found.           Re-initialize the
+                 No Boot Track.          hard disk.
+
+BOOT ERROR H0    Track 0 error
+                 on hard disk.
+                 a. Didn't find          a. Press RESET.
+                    Track 0 before
+                    time-out.
+                 b. Secondary hard       b. Turn on your
+                    disk drives             secondary hard
+                    not turned on.          disk drives.
+
+BOOT ERROR HT    Time-out while
+                 waiting for Ready.
+                 a. Hard disk drive      a. Follow correct
+                    not powered up.         procedure:
+                                            Turn on the
+                                            hard disk first.
+                 b. Hard disk drive      b. Press RESET.
+                    isn't turned on
+                    and ready within
+                    10 seconds after
+                    the computer.
+                 c. Hard disk drive      c. Connect the
+                    is disconnected.        hard disk drive
+                                            or operate
+                                            under floppy
+                                            disk control.
+
+BOOT ERROR LD    Lost data during        Try another
+                 read -- FDC (floppy     TRSDOS-II diskette
+                 disk controller) or     or contact RSSC.
+                 drive fault.
+
+BOOT ERROR MF    Memory failure in       Contact RSSC.
+                 address range
+                 X'1000'-X'7FFF'.
+
+BOOT ERROR MH    Memory failure in       Contact RSSC.
+                 address range
+                 X'8000'-X'FFFF'.
+
+BOOT ERROR ML    Memory failure in       Contact RSSC.
+                 address range
+                 X'0000'-X'0FFF'.
+
+BOOT ERROR PI    Defective PIO Chip.     Turn on the
+                                         expansion bay if it
+                                         is off. If the
+                                         error occurs again,
+                                         contact RSSC.
+
+BOOT ERROR RS    The diskette            Insert a TRSDOS-II
+                 in Drive 0 is not       formatted diskette
+                 Radio Shack operating   into Drive 0 and
+                 system format.          press RESET.
+
+BOOT ERROR SC    CRC Error.              Try a different
+                 Invalid data on         diskette.
+                 diskette or defective
+                 diskette.
+
+BOOT ERROR TK    Record not found        Re-format your
+                 bootstrap track.        diskette or try a
+                 Improperly formatted    different diskette.
+                 or defective diskette.
+
+BOOT ERROR Z8    Defective CPU.          Contact RSSC.
+
+NOT A SYSTEM     Diskette in Drive       Insert a TRSDOS-II
+DISK             0 isn't a TRSDOS-II     operating system
+                 operating system        diskette into
+                 diskette.               Drive 0.
+
+----
+RSSC = Radio Shack Service Center.
+</reset></a></pre>
+<hr>
+<a name="oserr">
+</a><h2><a name="oserr">TRSDOS-II System Errors Table</a></h2>
+<pre><a name="oserr">Code   Message                  Explanation/Action
+------ ------------------------ -------------------------
+0      No Error Found.          No error occurred.
+
+1      Bad Function Code        Check the function code
+       On SVC Call Or No        number used on the SVC
+       Function Exists.         call.
+
+2      Character Not            No record or character
+       Available.               was available when you
+                                you called the SVC.
+
+3      Parameter Error On       Parameter is incorrect or
+       Call.                    a required parameter
+                                is missing.
+
+4      CRC Error During Disk    Try the operation again,
+       I/O.                     using a different
+                                diskette. If the problem
+                                occurs often, contact
+                                RSSC.
+
+5      Disk Sector Not Found.   Try a different diskette.
+
+6      Attempt To Open A        Close the file before
+       File Which Has Not       re-opening.
+       Been Closed.
+
+7      Illegal Disk Change.     TRSDOS-II detected an
+                                illegal disk swap.
+
+8      Disk Drive Not Ready.    Drive door is open or the
+                                diskette is not in the
+                                drive. On Thinline
+                                drives, check the DRIVE
+                                command settings.
+
+9      Invalid Data Provided    Data stream to be
+       By Caller.               processed has illegal
+                                characters.
+
+10     Maximum Of 16 Files      Too many files are open
+       May Be Open At Once.     at once.
+
+11     File Already In          Filename already exists
+       Directory.               as a directory entry.
+                                Kill the existing file,
+                                choose another filename,
+                                or specify a drive
+                                number.
+
+12     No Drive Available       No on-line drive
+       For An Open.             a. is write enabled
+                                b. has enough space to
+                                   create a new file, or
+                                c. has a system
+                                   directory.
+
+13     Write Attempt To A       File was opened for read
+       Read Only File.          only, not for read/write.
+
+14     Write Fault On Disk      Error occurred during a
+       I/O.                     write operation. Try a
+                                different diskette. If
+                                the problem continues,
+                                contact RSSC.
+
+15     Disk Is Write            Write enable the disk.
+       Protected.
+
+16     DCB Is Modified And      DCB (used in machine-
+       Is Unusable.             language programming) has
+                                been modified since the
+                                last disk access (while
+                                the file was open).
+
+17     Directory Read Error.    Error occurred during an
+                                attempt to read the
+                                directory. Use a
+                                different diskette.
+
+18     Directory Write Error.   Error occurred during an
+                                attempt to write to the
+                                directory. Use a
+                                different diskette.
+
+19     Improper File Name       Filespec you gave does
+       (Filespec).              not meet TRSDOS-II
+                                standard file
+                                specifications.
+
+20     ** Unknown Error Code **
+
+21     ** Unknown Error Code **
+
+22     ** Unknown Error Code **
+
+23     ** Unknown Error Code **
+
+24     File Not Found.          Filename you gave was not
+                                found on the available
+                                disks or the file is the
+                                incorrect type for the
+                                desired operation.
+
+25     File Access Denied       You gave an incorrect
+       Due To Password          password. See
+       Protection.              the ATTRIB command.
+
+26     Directory Space Full.    Number of filenames
+                                has reached the amount
+                                set when you formatted
+                                the disk.
+
+27     Disk Space Full.         No space is available on
+                                the disk.
+
+28     Attempt To Read          Specified record number
+       Past EOF.                is past the EOF.
+
+29     Read Attempt Outside     Use valid record numbers.
+       Of File Limits.
+
+30     No More Extents          Use the COPY command to
+       Available (16            copy the files and
+       Maximum).                reduce fragmentation.
+                                See also SAVE/RESTORE and
+                                MOVE.
+
+31     Program Not Found.       Specified program is not
+                                found on the available
+                                disks.
+
+32     Unknown Drive Number     Specified drive number
+       (Filespec).              is not valid.
+
+33     Disk Space Allocation    Use the COPY command to
+       Cannot Be Made Due To    copy the files and reduce
+       Fragmentation Of Space.  fragmentation.
+
+34     Attempt To Use A         File specified for
+       NON Program File As      execution is not a
+       A Program.               program file or the load
+                                address given is illegal.
+                                Make sure you have a
+                                system diskette in
+                                Drive 0.
+
+35     Memory Fault During      Program is loaded
+       Program Load.            incorrectly, possibly
+                                because of faulty memory
+                                or a "bad" load address.
+
+36     Parameter For Open       Check the OPEN statements
+       Is Incorrect.            or the DCB for errors.
+
+37     Open Attempt For A       File specified for open
+       File Already Open.       is already open.
+
+38     I/O Attempt To An        Open the file before
+       Unopen File.             access.
+
+39     Illegal I/0              a. I command not given
+       Attempt.                    after a diskette swap.
+                                b. Can be caused by an
+                                   I/O attempt to a
+                                   differently formatted
+                                   disk. Format the disk
+                                   under the current
+                                   version of TRSDOS-II
+                                   or use FCOPY.
+
+40     Seek Error.              a. Data cannot be read
+                                   from the disk --
+                                   faulty disk.
+                                b. When re-initializing a
+                                   hard disk, you must
+                                   also reformat the
+                                   secondary drives.
+
+41     Data Lost During Disk    Contact RSSC.
+       I/O (Hardware Fault).
+
+42     Printer Not Ready.       Check the connections,
+                                power, ribbon, on-line
+                                status, and so on.
+
+43     Printer Out Of Paper.    Check the printer's paper
+                                supply.
+
+44     Printer Fault (May Be    Check the connections,
+       Turned Off).             power, ribbon, on-line
+                                status, and so on.
+
+45     Printer Not Available.   Check the connections,
+                                power, ribbon, on-line
+                                status, and so on.
+
+46     Not Applicable To        Operation performed is
+       VLR Type Files.          not valid for VLR files.
+
+47     Required Command         Required parameter or
+       Parameter Not Found.     argument is missing from
+                                the command.
+
+48     Incorrect Command        Option or argument
+       Parameter.               given in the command is
+                                incorrect.
+
+49     Hardware Fault           Contact RSSC.
+       During Disk I/O.
+
+50     Invalid Space            The space descriptor that
+       Descriptor.              tells TRSDOS-II which
+                                extent to read next is
+                                invalid. Try a different
+                                diskette.
+
+51-255 ** Unknown error code **
+
+These codes are also returned to machine code routines
+that call a SVC (System Service Call) of TRSDOS-II.
+Register A usually has a return code after any function
+call. The Z flag is set when no error occurs. Exceptions
+are certain computational routines, which use Registers A
+and F to pass back data and status information.
+
+----
+RSSC = Radio Shack Service Center.
+</a></pre>
+<hr>
+<p><a name="oserr">Back to </a><a href="http://home.iae.nl/users/pb0aia/cm/modelii.html">Model II page</a>
+
+</p></body></html>

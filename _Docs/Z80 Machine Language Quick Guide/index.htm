@@ -1,0 +1,1223 @@
+<html><head><title>Ira Goldklang's TRS-80 Revived Site: Z80 Machine Language Quick Guide</title>
+
+  
+  <link rel="STYLESHEET" type="text/css" href="trs80-z8_files/trs80_w3c.css">
+  <meta name="keywords" content="TRS-80, TRS80, trs-80, trs80, Tandy, Radio Shack, RadioShack, Portable, TRS, TRS-80, Model 1, Model 3, Model III, TRS-80, Model 4, Model IV, Model 4P, TRS-80, Model 100, Emulators, Games, Ira, Goldklang, Resume, Fun, Orchestra, ORCH-80, TRS-80, ORCH-85, ORCH-90, COCO, Color Computer, Ira Goldklang, Adventure">
+	<meta name="MSSmartTagsPreventParsing" content="TRUE">
+	<meta http-equiv="Pragma" content="no_cache">
+	<meta http-equiv="description" content="TRS-80 Revived Site by Ira Goldklang's featuring almost all models of the Tandy Radio Shack TRS-80 computers.  Site contains emulators, programs, games, hints, discussions, questions, forums, and tons more."><!-- JavaScript DropDown Menu Builder 1.0 http://www.usingit.com/ --><!-- (C)Copyright 1999-2005 USINGIT.COM, All rights reserved! --><!-- BEGIN (PART 1 of 2) --><!-- NOTE: PLEASE INSERT CODES INTO <HEAD> SECTION OF WEB PAGES -->
+
+	
+	
+	
+	
+	<link href="trs80-z8_files/usingitjsmddb_002.htm" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="trs80-z8_files/usingitjsmddb.htm"></script><!-- END (PART 1 of 2) --></head><body alink="#ff0000" bgcolor="#cccccc" link="#0000ee" text="#000000" vlink="#551a8b">
+
+<h1 align="center">
+  Z80 Machine Language Quick Guide
+</h1>
+<h2 align="center">
+  (C)1976 by Mary Bell
+</h2>
+<p align="center">
+</p><p align="left">
+I created this guide to the Z80 machine code and Assembly instruction set
+mostly for my own purposes while using a Z80 and the Radio Shack TRS-80's,
+so thought it might be of use to others when learning or editing code. The
+guide consists of a series of tables not unlike the original Zilog Z80 Reference
+Manual, with signifigant changes to make the act of coding or decoding a
+program less clumbersome. The HTML versions are a little bit cluttered, so
+I recommend the graphical representations at the end of the page to be printed
+or followed for the construction of a 3x5 table for use by hand. Use of the
+tables themselves is un-restricted for non-commercial purposes.
+</p><p align="left">
+</p><p align="left">
+<table border="1" cellpadding="2">
+  <caption>
+    Jumps &amp; INCs 00 to 3F
+  </caption>
+  <tbody><tr>
+    <td><p align="center">
+      1's</p></td>
+    <td><p align="center">
+      16's&gt;</p></td>
+    <td><p align="center">
+      0</p></td>
+    <td><p align="center">
+      1</p></td>
+    <td><p align="center">
+      2</p></td>
+    <td><p align="center">
+      3</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      0</p></td>
+    <td><p align="center">
+      JR</p></td>
+    <td><p align="center">
+      NOP</p></td>
+    <td><p align="center">
+      DJNZ</p></td>
+    <td><p align="center">
+      NZ</p></td>
+    <td>NC</td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      1</p></td>
+    <td><p align="center">
+      nn-&gt;</p></td>
+    <td><p align="center">
+      BC</p></td>
+    <td><p align="center">
+      DE</p></td>
+    <td><p align="center">
+      HL</p></td>
+    <td><p align="center">
+      SP</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      2</p></td>
+    <td><p align="center">
+      A-&gt;</p></td>
+    <td><p align="center">
+      (BC)</p></td>
+    <td><p align="center">
+      (DE)</p></td>
+    <td><p align="center">
+      (HL)</p></td>
+    <td><p align="center">
+      (nn)</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      3</p></td>
+    <td><p align="center">
+      INC</p></td>
+    <td><p align="center">
+      BC</p></td>
+    <td><p align="center">
+      DE</p></td>
+    <td><p align="center">
+      HL</p></td>
+    <td><p align="center">
+      SP</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      4</p></td>
+    <td><p align="center">
+      INC</p></td>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      H</p></td>
+    <td><p align="center">
+      (HL)</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      5</p></td>
+    <td><p align="center">
+      DEC</p></td>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      H</p></td>
+    <td><p align="center">
+      (HL)</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      6</p></td>
+    <td><p align="center">
+      n-&gt;</p></td>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      H</p></td>
+    <td><p align="center">
+      (HL)</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      7</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      RLCA</p></td>
+    <td><p align="center">
+      RLA</p></td>
+    <td><p align="center">
+      DAA</p></td>
+    <td><p align="center">
+      SCF</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      8</p></td>
+    <td><p align="center">
+      JR</p></td>
+    <td><p align="center">
+      AF&lt;-&gt;AF'</p></td>
+    <td><p align="center">
+      UNC</p></td>
+    <td><p align="center">
+      Z</p></td>
+    <td><p align="center">
+      C</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      9</p></td>
+    <td><p align="center">
+      HL+</p></td>
+    <td><p align="center">
+      BC</p></td>
+    <td><p align="center">
+      DE</p></td>
+    <td><p align="center">
+      HL</p></td>
+    <td><p align="center">
+      SP</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      A</p></td>
+    <td><p align="center">
+      -&gt;A</p></td>
+    <td><p align="center">
+      (BC)</p></td>
+    <td><p align="center">
+      (DE)</p></td>
+    <td><p align="center">
+      (nn)-&gt;(HL)</p></td>
+    <td><p align="center">
+      (nn)</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+      DEC</p></td>
+    <td><p align="center">
+      BC</p></td>
+    <td><p align="center">
+      DE</p></td>
+    <td><p align="center">
+      HL</p></td>
+    <td><p align="center">
+      SP</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      INC</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      L</p></td>
+    <td><p align="center">
+      A</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      DEC</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      L</p></td>
+    <td><p align="center">
+      A</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      n-&gt;</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      L</p></td>
+    <td><p align="center">
+      A</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      F</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      RRCA</p></td>
+    <td><p align="center">
+      RRA</p></td>
+    <td><p align="center">
+      CPL</p></td>
+    <td><p align="center">
+      CCF</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      1's</p></td>
+    <td><p align="center">
+      16's&gt;</p></td>
+    <td><p align="center">
+      0</p></td>
+    <td><p align="center">
+      1</p></td>
+    <td><p align="center">
+      2</p></td>
+    <td><p align="center">
+      3</p></td>
+  </tr>
+</tbody></table>
+</p><p align="left">
+</p><p align="left">
+<table border="1" cellpadding="2">
+  <caption>
+    Call &amp; Pushes C0 to FF
+  </caption>
+  <tbody><tr>
+    <td><p align="center">
+      1's</p></td>
+    <td><p align="center">
+      16's&gt;</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      F</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      0</p></td>
+    <td><p align="center">
+      RTN</p></td>
+    <td><p align="center">
+      NZ</p></td>
+    <td><p align="center">
+      NC</p></td>
+    <td><p align="center">
+      PO</p></td>
+    <td><p align="center">
+      NM</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      1</p></td>
+    <td><p align="center">
+      POP</p></td>
+    <td><p align="center">
+      BC</p></td>
+    <td><p align="center">
+      DE</p></td>
+    <td><p align="center">
+      HL</p></td>
+    <td><p align="center">
+      AF</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      2</p></td>
+    <td><p align="center">
+      JMP (nn)</p></td>
+    <td><p align="center">
+      NZ</p></td>
+    <td><p align="center">
+      NC</p></td>
+    <td><p align="center">
+      PO</p></td>
+    <td><p align="center">
+      NM</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      3</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      JMP (nn)</p></td>
+    <td><p align="center">
+      OUT (n)</p></td>
+    <td><p align="center">
+      HL&lt;-&gt;(SP)</p></td>
+    <td><p align="center">
+      DIS INT</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      4</p></td>
+    <td><p align="center">
+      CALL (nn)</p></td>
+    <td><p align="center">
+      NZ</p></td>
+    <td><p align="center">
+      NC</p></td>
+    <td><p align="center">
+      PO</p></td>
+    <td><p align="center">
+      NM</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      5</p></td>
+    <td><p align="center">
+      PUSH</p></td>
+    <td><p align="center">
+      BC</p></td>
+    <td><p align="center">
+      DE</p></td>
+    <td><p align="center">
+      HL</p></td>
+    <td><p align="center">
+      AF</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      6</p></td>
+    <td><p align="center">
+      A/n</p></td>
+    <td><p align="center">
+      +</p></td>
+    <td><p align="center">
+      -</p></td>
+    <td><p align="center">
+      AND</p></td>
+    <td><p align="center">
+      OR</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      7</p></td>
+    <td><p align="center">
+      RST</p></td>
+    <td><p align="center">
+      00h</p></td>
+    <td><p align="center">
+      10h</p></td>
+    <td><p align="center">
+      20h</p></td>
+    <td><p align="center">
+      30h</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      8</p></td>
+    <td><p align="center">
+      RTN</p></td>
+    <td><p align="center">
+      Z</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      PE</p></td>
+    <td><p align="center">
+      M</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      9</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      RTN</p></td>
+    <td><p align="center">
+      EXX</p></td>
+    <td><p align="center">
+      JMP (HL)</p></td>
+    <td><p align="center">
+      HL-&gt;SP</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      A</p></td>
+    <td><p align="center">
+      JMP (nn)</p></td>
+    <td><p align="center">
+      Z</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      PE</p></td>
+    <td><p align="center">
+      M</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      CNTL BITS</p></td>
+    <td><p align="center">
+      IN (n)</p></td>
+    <td><p align="center">
+      HL&lt;-&gt;DE</p></td>
+    <td><p align="center">
+      ENA INT</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      CALL (nn)</p></td>
+    <td><p align="center">
+      Z</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      PE</p></td>
+    <td><p align="center">
+      M</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      CALL (nn)</p></td>
+    <td><p align="center">
+      IX for HL</p></td>
+    <td><p align="center">
+      Ext Ins</p></td>
+    <td><p align="center">
+      IY for HL</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      A/n</p></td>
+    <td><p align="center">
+      +/cy</p></td>
+    <td><p align="center">
+      -/cy</p></td>
+    <td><p align="center">
+      XOR</p></td>
+    <td><p align="center">
+      CP</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      F</p></td>
+    <td><p align="center">
+      RST</p></td>
+    <td><p align="center">
+      08h</p></td>
+    <td><p align="center">
+      18h</p></td>
+    <td><p align="center">
+      28h</p></td>
+    <td><p align="center">
+      38h</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      1's</p></td>
+    <td><p align="center">
+      16's&gt;</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      F</p></td>
+  </tr>
+</tbody></table>
+</p><p>
+</p><p>
+<table border="1" cellpadding="2">
+  <caption>
+    Extended Instructions ED+n
+  </caption>
+  <tbody><tr>
+    <td><p align="center">
+      1's</p></td>
+    <td><p align="center">
+      16's&gt;</p></td>
+    <td><p align="center">
+      4</p></td>
+    <td><p align="center">
+      5</p></td>
+    <td><p align="center">
+      6</p></td>
+    <td><p align="center">
+      7</p></td>
+    <td><p align="center">
+      A</p></td>
+    <td><p align="center">
+      B</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      0</p></td>
+    <td><p align="center">
+      IN(c)</p></td>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      H</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      LDI</p></td>
+    <td><p align="center">
+      LDIR</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      1</p></td>
+    <td><p align="center">
+      OUT(c)</p></td>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      H</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      CPI</p></td>
+    <td><p align="center">
+      CPIR</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      2</p></td>
+    <td><p align="center">
+      HL-/cy</p></td>
+    <td><p align="center">
+      BC</p></td>
+    <td><p align="center">
+      DE</p></td>
+    <td><p align="center">
+      HL</p></td>
+    <td><p align="center">
+      SP</p></td>
+    <td><p align="center">
+      INI</p></td>
+    <td><p align="center">
+      INIR</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      3</p></td>
+    <td><p align="center">
+      -&gt;(nn)</p></td>
+    <td><p align="center">
+      BC</p></td>
+    <td><p align="center">
+      DE</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      SP</p></td>
+    <td><p align="center">
+      OUTI</p></td>
+    <td><p align="center">
+      OUTIR</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      4</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      NEG</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      5</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      RET NMI</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      6</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      IM0</p></td>
+    <td><p align="center">
+      IM2</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      7</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      A-&gt;I</p></td>
+    <td><p align="center">
+      I-&gt;A</p></td>
+    <td><p align="center">
+      RRD</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      8</p></td>
+    <td><p align="center">
+      IN(c)</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      L</p></td>
+    <td><p align="center">
+      A</p></td>
+    <td><p align="center">
+      LDD</p></td>
+    <td><p align="center">
+      LDDR</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      9</p></td>
+    <td><p align="center">
+      OUT(c)</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      L</p></td>
+    <td><p align="center">
+      A</p></td>
+    <td><p align="center">
+      CPD</p></td>
+    <td><p align="center">
+      CPDR</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      A</p></td>
+    <td><p align="center">
+      HL+/cy</p></td>
+    <td><p align="center">
+      BC</p></td>
+    <td><p align="center">
+      DE</p></td>
+    <td><p align="center">
+      HL</p></td>
+    <td><p align="center">
+      SP</p></td>
+    <td><p align="center">
+      IND</p></td>
+    <td><p align="center">
+      INDR</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+      (nn)-&gt;</p></td>
+    <td><p align="center">
+      BC</p></td>
+    <td><p align="center">
+      DE</p></td>
+    <td><p align="center">
+      HL</p></td>
+    <td><p align="center">
+      SP</p></td>
+    <td><p align="center">
+      OUTD</p></td>
+    <td><p align="center">
+      OUTDR</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      RET MI</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      IM2</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      F</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      A-&gt;R</p></td>
+    <td><p align="center">
+      R-&gt;A</p></td>
+    <td><p align="center">
+      RLD</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+    </p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      1's</p></td>
+    <td><p align="center">
+      16's&gt;</p></td>
+    <td><p align="center">
+      4</p></td>
+    <td><p align="center">
+      5</p></td>
+    <td><p align="center">
+      6</p></td>
+    <td><p align="center">
+      7</p></td>
+    <td><p align="center">
+      A</p></td>
+    <td><p align="center">
+      B</p></td>
+  </tr>
+</tbody></table>
+</p><p>
+</p><p>
+<table border="1" cellpadding="2">
+  <caption>
+    Register Ops 40 to 7F
+  </caption>
+  <tbody><tr>
+    <td colspan="9"><p align="center">
+    </p></td>
+    <td colspan="8"><p align="center">
+      source reg</p></td>
+    <td><p align="center">
+    </p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+    </p></td>
+    <td colspan="4"><p align="center">
+      operations w/A</p></td>
+    <td colspan="4"><p align="center">
+    </p></td>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      H</p></td>
+    <td><p align="center">
+      L</p></td>
+    <td><p align="center">
+      (HL)</p></td>
+    <td><p align="center">
+      A</p></td>
+    <td><p align="center">
+    </p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      +/cy</p></td>
+    <td><p align="center">
+      -/cy</p></td>
+    <td><p align="center">
+      XOR</p></td>
+    <td><p align="center">
+      CP</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      L</p></td>
+    <td><p align="center">
+      A</p></td>
+    <td><p align="center">
+      8</p></td>
+    <td><p align="center">
+      9</p></td>
+    <td><p align="center">
+      A</p></td>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      F</p></td>
+    <td><p align="center">
+      &lt;1's</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      +</p></td>
+    <td><p align="center">
+      -</p></td>
+    <td><p align="center">
+      AND</p></td>
+    <td><p align="center">
+      OR</p></td>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      H</p></td>
+    <td><p align="center">
+      (HL)</p></td>
+    <td><p align="center">
+      0</p></td>
+    <td><p align="center">
+      1</p></td>
+    <td><p align="center">
+      2</p></td>
+    <td><p align="center">
+      3</p></td>
+    <td><p align="center">
+      4</p></td>
+    <td><p align="center">
+      5</p></td>
+    <td><p align="center">
+      6</p></td>
+    <td><p align="center">
+      7</p></td>
+    <td><p align="center">
+      &lt;1's</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      16's&gt;</p></td>
+    <td><p align="center">
+      8</p></td>
+    <td><p align="center">
+      9</p></td>
+    <td><p align="center">
+      A</p></td>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+      4</p></td>
+    <td><p align="center">
+      5</p></td>
+    <td><p align="center">
+      6</p></td>
+    <td><p align="center">
+      7</p></td>
+    <td colspan="9"><p align="center">
+    </p></td>
+  </tr>
+  <tr>
+    <td colspan="5"><p align="center">
+      Ex: 9A=SBC A,D</p></td>
+    <td colspan="4"><p align="center">
+      move destination</p></td>
+    <td colspan="9"><p align="center">
+      Note: 76=HALT</p></td>
+  </tr>
+</tbody></table>
+</p><p>
+</p><p>
+<table border="1" cellpadding="2">
+  <caption>
+    Control Bits CB+ 00-FF
+  </caption>
+  <tbody><tr>
+    <td><p align="center">
+    </p></td>
+    <td colspan="8"><p align="center">
+      Source Reg</p></td>
+    <td colspan="9"><p align="center">
+      Ex: CB 5A=TEST BIT 3,D</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      H</p></td>
+    <td><p align="center">
+      L</p></td>
+    <td><p align="center">
+      (HL)</p></td>
+    <td><p align="center">
+      A</p></td>
+    <td colspan="4"><p align="center">
+      BIT#</p></td>
+    <td colspan="5"><p align="center">
+    </p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      1's&gt;</p></td>
+    <td><p align="center">
+      8</p></td>
+    <td><p align="center">
+      9</p></td>
+    <td><p align="center">
+      A</p></td>
+    <td><p align="center">
+      B</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      F</p></td>
+    <td><p align="center">
+      1</p></td>
+    <td><p align="center">
+      3</p></td>
+    <td><p align="center">
+      5</p></td>
+    <td><p align="center">
+      7</p></td>
+    <td><p align="center">
+      RRC</p></td>
+    <td><p align="center">
+      RR</p></td>
+    <td><p align="center">
+      SRA</p></td>
+    <td><p align="center">
+      SRL</p></td>
+    <td><p align="center">
+      &lt;ops</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      1's&gt;</p></td>
+    <td><p align="center">
+      0</p></td>
+    <td><p align="center">
+      1</p></td>
+    <td><p align="center">
+      2</p></td>
+    <td><p align="center">
+      3</p></td>
+    <td><p align="center">
+      4</p></td>
+    <td><p align="center">
+      5</p></td>
+    <td><p align="center">
+      6</p></td>
+    <td><p align="center">
+      7</p></td>
+    <td><p align="center">
+      0</p></td>
+    <td><p align="center">
+      2</p></td>
+    <td><p align="center">
+      4</p></td>
+    <td><p align="center">
+      6</p></td>
+    <td><p align="center">
+      RLC</p></td>
+    <td><p align="center">
+      RL</p></td>
+    <td><p align="center">
+      SLA</p></td>
+    <td><p align="center">
+    </p></td>
+    <td><p align="center">
+      &lt;ops</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      16's&gt;</p></td>
+    <td colspan="7"><p align="center">
+    </p></td>
+    <td><p align="center">
+      SET&gt;</p></td>
+    <td><p align="center">
+      C</p></td>
+    <td><p align="center">
+      D</p></td>
+    <td><p align="center">
+      E</p></td>
+    <td><p align="center">
+      F</p></td>
+    <td><p align="center">
+      0</p></td>
+    <td><p align="center">
+      1</p></td>
+    <td><p align="center">
+      2</p></td>
+    <td><p align="center">
+      3</p></td>
+    <td><p align="center">
+      &lt;16's</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      16's&gt;</p></td>
+    <td colspan="7"><p align="center">
+    </p></td>
+    <td><p align="center">
+      RESET&gt;</p></td>
+    <td><p align="center">
+      8</p></td>
+    <td><p align="center">
+      9</p></td>
+    <td><p align="center">
+      A</p></td>
+    <td><p align="center">
+      B</p></td>
+    <td colspan="4"><p align="center">
+    </p></td>
+    <td><p align="center">
+      &lt;16's</p></td>
+  </tr>
+  <tr>
+    <td><p align="center">
+      16's&gt;</p></td>
+    <td colspan="7"><p align="center">
+    </p></td>
+    <td><p align="center">
+      TEST&gt;</p></td>
+    <td><p align="center">
+      4</p></td>
+    <td><p align="center">
+      5</p></td>
+    <td><p align="center">
+      6</p></td>
+    <td><p align="center">
+      7</p></td>
+    <td colspan="4"><p align="center">
+    </p></td>
+    <td><p align="center">
+      &lt;16's</p></td>
+  </tr>
+</tbody></table>
+</p><p>
+</p><p>
+</p><h1>
+  Graphics Version
+</h1>
+<p>
+You might want to print this out full page and then cut it apart and paste
+to 3 by 5 cards for a home-made handy reference.
+</p><p>
+</p><p>
+<img src="trs80-z8_files/z80chrt.gif" height="1700" width="1425">
+</p><p>
+</p><p>
+</p></body></html>

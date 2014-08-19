@@ -1,0 +1,163 @@
+<html><head><title>The TRS-80 Model II</title></head><body bgcolor="#ffffff">
+<center><h1>The TRS-80 Model II</h1>
+<img src="modelii_files/m2front.jpg" alt="TRS-80 Model II (without floppy drive)" height="359" width="387">
+<p><font size="2">My Model II. The floppy drive has been removed for repairs.</font></p>
+</center>
+<p>The first computer I owned was a TRS-80 Model I. 
+<a href="http://www.trs-80.com/">A great deal of pages</a> have
+been written about this machine, no need for me to add another one. Later
+Tandy introduced the Models III and 4, wonderful machines you could upgrade
+to if your Model I gave up the ghost. But what always intrigued me was the
+"missing link", the TRS-80 Model II. There were impressive stories (and prices)
+about it in the Tandy catalog, but nobody I knew owned one. Years later,
+when my "fame" as a computer collector had spread around, I finally got a call from
+someone who wanted to get rid of a Model II. Bingo!</p>
+
+<h2>Information on the TRS-80 Model II</h2>
+<ul>
+<li><a href="#sysdescr">System description</a></li>
+<li><a href="http://home.iae.nl/users/pb0aia/cm/m2errors.html">Boot error codes and runtime error codes</a></li>
+<li><a href="http://home.iae.nl/users/pb0aia/cm/m2hwlst.html">Catalog numbers of Model II family hardware and options</a></li>
+<li><a href="http://home.iae.nl/users/pb0aia/cm/m2gazlst.html">Gav's list of Model II family software and hardware</a> with the original prices and first year of appearance</li>
+<li><a href="http://www.vaxarchive.org/compmus/kees/model16/index.html">Model 16 complete schematics</a></li>
+<li><a href="http://nemesis.lonestar.org/computers/tandy/hardware/model16_6000/floppyfix.html">How to connect 5.25 drives to your Model II/16</a></li>
+<li><a href="http://home.iae.nl/users/pb0aia/cm/8-525.html">Don Maslin's Notes on connecting a 5.25i drive in place of an 8i one</a></li>
+<li><a href="http://www.trs-80.com/trs80-2.htm">Scans of Model II manuals</a></li>
+<li><a href="#m2links">Links to other Model II sites</a></li>
+</ul>
+<hr>
+<a name="sysdescr">
+</a><center><p><a name="sysdescr"><img src="modelii_files/m2ins.jpg" alt="The inside of a Model II" height="473" width="533"></a></p>
+<p><a name="sysdescr"><font size="2">Inside of Model II. Computer card cage on the left, monitor circuit and power supply on the right.</font></a></p></center>
+<h2><a name="sysdescr">Model II system description</a></h2>
+<p><a name="sysdescr">The Model II is a computer system that was manufactured in the USA 
+by Tandy between ~1980 and ~1984. It is a
+large cabinet which holds the computer, the monitor and a single sided full height
+Shugart 8 inch drive, which used single sided floppies with a capacity of
+500K. (That was an enormous amount compared to the ~87K that was free on a
+Model I TRSDOS system disk.) The computer itself is on a number of cards in a
+passive backplane. The processor is a 4 MHz Z80A.
+The system has a complete Z80 chipset, the PIO, SIO, DMA
+and CTC are all there. It has 64K RAM and a ROM that can be bank switched away,
+ideal to run CP/M. There are two serial ports and one parallel. The display
+is 80x24. Three extra 8 inch drives can be connected, so you could have
+2MB disk space online. Later there even was a 8 meg external hard disk
+available.</a></p>
+
+<p><a name="sysdescr">You got TRSDOS and BASIC with the system, and an impressive set of manuals
+with detailed descriptions of the DOS and BASIC commands, and even 
+detailed descriptions of the DOS service calls you could use in machine
+code programs. To top it off you also got the technical hardware manual
+with all the schematics of the computer and monitor, and a service manual
+of the disk drive. Options for the machine included a hard disk controller, 
+an arcnet network card, a graphics card and a 6 MHz 68000 board set with extra 
+memory (up to 512K) so it could run XENIX.</a></p>
+<center><p><a name="sysdescr"><img src="modelii_files/m16.jpg" alt="The Model 16" height="293" width="458"></a></p>
+<p><a name="sysdescr"><font size="2">The Model 16 (1983)</font></a></p></center>
+<p><a name="sysdescr">Later there appeared extra members of the Model II family that were
+compatible:</a></p>
+<ul>
+<li><a name="sysdescr">The Model 16, which was a Model II with one or
+two slimline 8 inch drives in the cabinet instead of one big drive and
+the 68000 board set, 512K memory max</a></li>
+<li><a name="sysdescr">The Model 12, which had one or two slimline
+drives and the electronics on a big PCB in the machine (the card cage
+was optional), 80K memory</a></li>
+<li><a name="sysdescr">The Model 16B/16B-HD, two slimline drives or one slimline drive and one internal 15MB hard disk, 768K memory max</a></li>
+<li><a name="sysdescr">Tandy 6000, a much faster version of the Model 16B, 1MB memory max</a></li>
+</ul>
+<p><a name="sysdescr">The Tandon slimline drives used in the later models were different from 
+the old Shugart full-size ones, they were double sided and could hold 1.2MB. They had a 
+faster step rate which speeded up disk access. They used low voltage
+motors to rotate the floppy, so were less noisy and ran only when there was
+disk access instead of all the time like the old drives did. Unfortunately
+they were less reliable.</a></p><a name="sysdescr"> 
+</a><center><p><a name="sysdescr"><img src="modelii_files/m12.jpg" alt="The Model 12" height="363" width="585"></a></p>
+<p><a name="sysdescr"><font size="2">The Model 12 (1984)</font></a></p></center>
+<p><a name="sysdescr">The Model 12 and Model 16B had a new keyboard and a white cabinet, instead of 
+the dark grey other ones, a bit like a giant Model 4. The Model II had a white screen,
+all the others a green one.</a></p>
+
+<p><a name="sysdescr">There were several operating systems for the Model II range:</a></p>
+<ul>
+<li><a name="sysdescr">TRSDOS 1 - obsolete</a></li>
+<li><a name="sysdescr">TRSDOS 2.0a - for the fullheight single sided drives</a></li>
+<li><a name="sysdescr">TRSDOS 2.0b - for software compatibility of TRSDOS 2.0a, but for thinline drives</a></li>
+<li><a name="sysdescr">TRSDOS II - For HD support (non-hierarchical filesystem)</a></li>
+<li><a name="sysdescr">TRSDOS 16 - Uses the 68K board, single user OS</a></li>
+<li><a name="sysdescr">TRS-XENIX 1.03 - OS for the 68K boards, multiuser</a></li>
+<li><a name="sysdescr">TRS-XENIX 3.01 - OS for the Tandy 6000 only (or 16B with upgrade)</a></li>
+<li><a name="sysdescr">LS-DOS 6.3.1 - could interchange data and most programs with the Model IV</a></li>
+<li><a name="sysdescr">CP/M 2.2 - The standard CP/M was available from different vendors for the Model II</a></li>
+<li><a name="sysdescr">CP/M Plus aka CP/M v3 - available in a banked an unbanked version for the II and 12</a></li>
+</ul>
+
+<center><p><a name="sysdescr"><img src="modelii_files/trs16b.jpg" alt="The Model 16B" height="412" width="436"></a></p>
+<p><a name="sysdescr"><font size="2">Benson Chow's Model 16B with internal hard disk (1984)</font></a></p></center>
+<p><a name="sysdescr">The Model 16 came with TRSDOS-II, TRSDOS-16 and a 68000 machine code editor/assembler.
+If you ran XENIX you could attach two terminals
+to the system for a total of three working positions. If you were very
+careful with the external hard disk, especially with the power up and power down
+sequences, the system was reliable.</a></p>
+<p><a name="sysdescr">The Tandy 6000 had a better designed 68000 board that ran at 8 MHz and a faster
+hard disk, so its total speed was much faster than the Model 16 and 16B. </a></p>
+<center><p><a name="sysdescr"><img src="modelii_files/m2mans.jpg" alt="Row of Model II manuals" height="399" width="541"></a></p>
+<p><a name="sysdescr"><font size="2">Row of Model II/16 software</font></a></p></center>
+<p><a name="sysdescr">Tandy had a great deal of software for the Model II. In the DOS itself was
+a communications program. There was an advanced version of their strange
+Scripsit word processor, that had the posibility of outputting documents to
+the serial port for transfering to other systems. The well known Visicalc
+was available (and it could use extra memory cards for very big spreadsheets)
+as well as the Profile Plus database program. The programming
+languages COBOL, FORTRAN and compiled BASIC were available, as well as a
+great macro assembler. There even were very specific programs, like
+Ligitation Support for lawyers, Job Costing for architects, ReFormatter to
+exchange disks with IBM mainframes, Financial software etc etc. 
+The list is very long.</a></p>
+
+<p><a name="sysdescr">Unfortunately there was not much support for the system from firms other
+than Tandy. There was a thin bimonthly magazine, the Twelve/Sixteen, and
+the 80 Micro magazine had a Model II/12/16 column, and with every BASIC
+program it published there was a list of changes needed to get it to work
+on the Model II. RACET Computes sold a number of utilities for the Model
+II, so you had almost all the features of NewDOS/80 added to the Model II
+DOS. There were Superzap, a disk editor, a fast single pass assembler, a
+disassembler, extensions to the BASIC language, etc. It was a great
+package.</a></p>
+<p></p><center><a name="sysdescr"><img src="modelii_files/m2cpmpl2.jpg" alt="m2cpmpl2.jpg" height="691" width="607"></a></center><p></p>
+<p><a name="sysdescr">But fortunately there was CP/M for the Model II. I have two. One was made by
+FMG corporation, version 2.21. It ran every CP/M program I tried. Tandy had a CP/M Plus
+for the Model II, 12 and 16, available in the original Digital Research binders, with
+the TRS-80 logo added to them! It supported hard disks in the TRSDOS format. 
+It could read Pickles and Trout CP/M double density disks. You got four diskettes. CP/M plus boot disk
+banked, boot disk unbanked, utilities disk and TRSDOS floppy conversion disk.</a></p><a name="sysdescr"> </a><p><a name="sysdescr">For CP/M
+there was the IMP communications program, which had an extension for the
+serial ports on the Model II. It was quite fast. </a></p>
+
+<p><a name="sysdescr">The Model II and its siblings were a fast enough and flexible machine with
+a great deal of software available for it. They could do things that were
+impossible with most other systems available at their time. Unfortunately
+it was very expensive and very noisy.
+</a></p><hr>
+<h2><a name="sysdescr">System disks</a></h2>
+<p><a name="sysdescr">It is hard to make system disks for the Model II available for download, since
+the Model II uses 8 inch drives. But finally there is a solution. If you build
+a cable to connect a HD 5.25i drive to the Model II, it is possible to use 5.25
+floppies with the machine, and you can use the Teledisk program to create copies
+of system disks on 5.25 floppies. As a test I built a cable per the instructions
+on </a><a href="http://nemesis.lonestar.org/computers/tandy/hardware/model16_6000/floppyfix.html">Frank Durda's page</a>
+and I created an image of a CP/M disk for the Model II 
+<a href="http://www.xs4all.nl%7Esrsnl/imgs/CPM-MII.TD0">CPM-MII.TD0</a>
+
+</p><p>Warning! This image might or might not work. It should be able
+to boot the Model II, but I have not always been successful in running
+programs off it.</p>
+
+<a name="m2links">
+</a><h2><a name="m2links">TRS-80 Model II Links</a></h2>
+<ul>
+<li><a href="http://www.trs-80.com/">www.trs-80.com</a> has an extensive Model II page</li>
+<li><a href="http://www.kjsl.com/trs80/trsother.html">http://www.kjsl.com/trs80/trsother.html</a></li>
+<li><a href="http://www.obsoletecomputermuseum.org/%3Ewww.obsoletecomputermuseum.org%3C/a%3E%20has%20some%20Model%2016b%20and%20DT1%20pictures%3C/li%3E%3C/ul%3E%3Cp%3EThanks%20to%20Benson,%20xdm%20at%20mci2000.com%20for%20proofreading%20and%20correcting%20this%20page.%3C/p%3E%3Chr%3E%3Cp%3EBack%20to%20%3Ca%20href=" index.html="">Computer Home page</a>
+
+</li></ul></body></html>

@@ -1,0 +1,1 @@
+. DPIMPORT/PAT - DOSPLUS patch for IMPORT/CMD by Tim Mann. correct size calculation from FCB same as NEWDOS/80A=53C0H,F=3A27,C=180C

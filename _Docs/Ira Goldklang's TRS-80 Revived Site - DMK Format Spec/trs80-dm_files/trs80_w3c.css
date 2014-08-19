@@ -1,0 +1,163 @@
+/* TRS-80 Content Style Sheet */
+
+a {
+	color: #0000EE;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #551A8B;
+	font-weight: bold;
+}
+
+a:hover {
+	color: RED;
+	font-weight: bold; text-decoration: none;
+}
+
+a:active {
+	color: #2D5E8C;
+	font-weight: bold; text-decoration: underline;
+}
+
+body {
+	background-color: #CCCCCC;
+	scrollbar-arrow-color: #FFFFFF;
+	scrollbar-base-color: #244F7A;
+	scrollbar-track-color: #071F37;
+}
+
+/* Fonts */
+p,div,span,font,td {
+	color: #000000;
+	font-family: Verdana;
+	font-size: 11px;
+}
+
+.black {
+	background-color: #000000;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.blacklink {
+	color: #000000;
+	font-weight: normal;
+}
+
+.boldblue {
+	color: #0E3B8F;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+/* Image Borders */
+.border {
+	background-color: #EAEDEF;
+	border: 1px solid #000000;
+}
+
+.bordergray {
+	background-color: #EAEDEF;
+	border: 1px solid #363636;
+}
+
+/* Forms */
+.forminput {
+	background: #EAEDEF;
+	border: 1px solid #000000;
+	color: #000000;
+	font: 12px verdana,arial;
+	width: 132px;
+}
+
+.forminputwhite	{
+	background: #FFFFFF;
+	border: 1px solid #000000;
+	color: #000000;
+	font: 11px verdana,arial;
+	width: 200px;
+}
+
+.formselect {
+	background: #EEEEEE;
+	color: #000000;
+	font: 11px verdana,arial;
+	width: 85px;
+}
+
+.formselectwide {
+	background: #EAEDEF;
+	color: #000000;
+	font: 11px verdana,arial;
+	width: 250px;
+}
+
+.mediumhead {
+	font-family: Tahoma, Arial;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+/* Table Headers */
+.normalhead {
+	background-color: #E4E0D1;
+	background-image: url(buttons/css-newstableheader.gif);
+	background-repeat: no-repeat;
+}
+
+.normalheadblank {
+	background-color: #E4E0D1;
+	background-image: url(buttons/tableheader.gif);
+	background-repeat: no-repeat;
+}
+
+.red {
+	color: #FF0000;
+}
+
+.reviewcolor {
+	background-color: #F6F5F1;
+}
+
+.sidehead {
+	background-color: #E4E0D1;
+	background-image: url(buttons/tableheader.gif);
+	background-repeat: no-repeat;
+	font-weight: bold;
+}
+
+.smallhead {
+	font-family: Verdana,;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+/* Table Colors */
+.tablecolor {
+	background-color: #FFFFFF;
+}
+
+.notdonetablecolor {
+	background-color: #555555;
+}
+
+.thinhead {
+	background-color: #E4E0D1;
+	background-image: url(buttons/tableheader.gif);
+	background-repeat: no-repeat;
+}
+
+/* Colors */
+.white {
+	background-color: #FFFFFF;
+}
+
+.widehead {
+	background-color: #E4E0D1;
+	background-image: url(buttons/tableheader.gif);
+	background-repeat: no-repeat;
+}

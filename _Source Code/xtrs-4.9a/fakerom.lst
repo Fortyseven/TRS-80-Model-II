@@ -1,0 +1,79 @@
+   1:			;
+   2:			; Fake ROM for xtrs, initial hack
+   3:			;
+   4:			
+   5:	3DC0          	video	equ	3c00h+7*64
+   6:			
+   7:	0000          		org	0
+   8:	0000  F3      	start:	di
+   9:	0001  213700  		ld	hl,fakemsg
+  10:	0004  11C03D  		ld	de,video
+  11:	0007  013000  		ld	bc,fmend-fakemsg
+  12:	000A  EDB0    		ldir
+  13:	000C  3E05    		ld	a,5		;query model
+  14:	000E  ED3C    		defw	3cedh		;emt_misc
+  15:	0010  3E30    		ld	a,'0'
+  16:	0012  85      		add	a,l
+  17:	0013  FE35    		cp	'5'
+  18:	0015  2816    		jr	z,mod4p
+  19:	0017  32F03D  		ld	(model-fakemsg+video),a
+  20:	001A  FE34    		cp	'4'
+  21:	001C  2802    		jr	z,mod4
+  22:	001E  18FE    		jr	$
+  23:			
+  24:	0020  216700  	mod4:	ld	hl,m4msg
+  25:	0023  11003E  		ld	de,video+64
+  26:	0026  012B00  		ld	bc,m4end-m4msg
+  27:	0029  EDB0    		ldir
+  28:	002B  18FE    		jr	$
+  29:			
+  30:	002D  21F03D  	mod4p:	ld	hl,model-fakemsg+video
+  31:	0030  3634    		ld	(hl),'4'
+  32:	0032  23      		inc	hl
+  33:	0033  3650    		ld	(hl),'P'
+  34:	0035  18FE    		jr	$
+  35:			
+  36:	0037  596F7520	fakemsg:defb	'You do not have a ROM image installed for Model '
+	      646F206E
+	      6F742068
+	      61766520
+	      6120524F
+	      4D20696D
+	      61676520
+	      696E7374
+	      616C6C65
+	      6420666F
+	      72204D6F
+	      64656C20
+  37:	0067          	model	equ	$
+  38:	0067          	fmend	equ	$
+  39:	0067  284D6F64	m4msg:	defb	'(Model 4 mode requires a Model 3 ROM image)'
+	      656C2034
+	      206D6F64
+	      65207265
+	      71756972
+	      65732061
+	      204D6F64
+	      656C2033
+	      20524F4D
+	      20696D61
+	      676529
+  40:	0092          	m4end	equ	$
+  41:			
+  42:	0000          		end	start
+
+
+
+Statistics:
+
+     9	symbols
+   146	bytes
+
+
+
+Symbol Table:
+
+fakemsg           37     mod4              20     video          =3dc0     
+fmend          =  67     mod4p             2d     
+m4end          =  92     model          =  67     
+m4msg             67     start              0     

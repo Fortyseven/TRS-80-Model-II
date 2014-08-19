@@ -1,0 +1,255 @@
+mkdisk(1)                                                            mkdisk(1)
+
+
+
+[1mName[0m
+       mkdisk  -  Make  a  blank  emulated  floppy  or  hard disk for xtrs, or
+       add/remove an emulated write protect tab
+
+[1mSyntax[0m
+       [1mmkdisk -1 filename[0m
+       [1mmkdisk [-3] filename[0m
+       [1mmkdisk -k [-s sides] [-d density] [-8] [-i] filename[0m
+       [1mmkdisk -h [-c cyl] [-s sec] [-g gran] filename[0m
+       [1mmkdisk {-p|-u} {-1|-3|-k|-h} filename[0m
+
+[1mDescription[0m
+       The mkdisk program is part of the [1mxtrs[22m(1) package.  It has two distinct
+       functions:  (1)  It  can  make a blank (unformatted) emulated floppy or
+       hard drive in a file.  (2) With the -p or -u  flag,  it  can  turn  the
+       write  protect  flag  on or off for an existing emulated floppy or hard
+       drive file.  See the xtrs man page for background information.
+
+       The conventional file extensions are .dsk  for  emulated  floppies  and
+       .hdv for emulated hard drives, but [1mmkdisk [22mdoes not enforce this conven-
+       tion; you can use any filename.  Other extensions  sometimes  used  for
+       emulated floppies are .jv1, .jv3, .8in, and .dmk.
+
+[1mMaking Emulated Floppies[0m
+       With  the  -1 flag, [1mmkdisk [22mmakes an unformatted emulated floppy of type
+       JV1.  No additional flags are accepted.
+
+       With the -3 flag (which is the default and should  normally  be  used),
+       [1mmkdisk [22mmakes an unformatted emulated floppy of type JV3.  No additional
+       flags are accepted.
+
+       With the -k flag, [1mmkdisk [22mmakes an unformatted emulated floppy  of  type
+       DMK.   With  -k,  the  optional flags -s, -d, -8, and -i can be used to
+       give the emulated floppy special properties.  Specifying -s1 limits the
+       floppy to one side; with -s2 (the default), the floppy can be formatted
+       as either one- or two-sided.  Specifying -d1 limits the floppy to  sin-
+       gle  density;  with  -d2  (the default), the floppy can be formatted in
+       either single or double density.  Specifying -8 allows the floppy to be
+       formatted  in  an  emulated  8" drive; by default it will work properly
+       only in an emulated 5" drive.  Setting -s1 or -d1 saves space after the
+       floppy  is formatted; setting -8 consumes additional space.  Specifying
+       -i activates a peculiar feature in some TRS-80  emulators  that  causes
+       each formatted sector to appear to be both single and double density.
+
+[1mMaking Emulated Hard Drives[0m
+       With  the -h flag, [1mmkdisk [22mmakes an unformatted emulated hard drive with
+       [4mcyl[24m cylinders, [4msec[24m sectors, and [4mgran[24m granules (LDOS  allocation  units)
+       per  cylinder.  The hard drive will have cylinder [4mdir[24m marked for use as
+       its directory.
+
+       You will usually want to use the default values for all  these  parame-
+       ters.  The default is 202 cylinders, 256 sectors per cylinder (that is,
+       8 heads and 32 sectors per track), and 8 granules per  cylinder.   This
+       is the largest hard drive that can be used by all LDOS/LS-DOS operating
+       systems without partitioning the drive or patching the FORMAT  command.
+       The  details  on what nondefault values are possible vary, depending on
+       which of xtrs's two hard drive emulations you are using and which other
+       emulators  you  want to be compatible with, and it is probably best not
+       to delve into these complexities, but read on if you really want to.
+
+       For [4mcyl[24m, the number of cylinders on the drive,  the  default  value  is
+       202,  the  minimum is 3, and the maximum that can be represented in the
+       HDV file's header is 256.  You can use 203 cylinders with LDOS and  LS-
+       DOS  if  you format the drive with Model 4 LS-DOS; a minor bug in Model
+       I/III FORMAT/CMD prevents more than 202 cylinders from being formatted,
+       but  the  system can use 203 thereafter.  203 cylinders is the absolute
+       maximum for LDOS/LS-DOS  drivers  that  do  not  support  partitioning,
+       including  the  emulator-specific  drivers  supplied  with  xtrs  (XTR-
+       SHARD/DCT), with Matthew Reed's emulator  (HARD/CMD),  and  with  David
+       Keil's emulator (EHARD/DCT).
+
+       In  xtrs  4.1  and  later, and in David Keil's emulator version 6.0 and
+       later, a true emulation of Radio Shack's WD1010-based  hard  disk  con-
+       troller  is also available, which works with the native drivers for the
+       original hardware, such as RSHARDx/DCT and the hard  disk  drivers  for
+       NEWDOS  and  CP/M.   In  xtrs, the WD1010 emulation ignores the maximum
+       number of cylinders specified in the HDV file's header and  allows  the
+       driver  to  format  up  to 65536 cylinders.  This may be useful if your
+       drivers support partitioning (but why would anyone want to partition an
+       emulated  hard  drive  instead of just making two smaller ones?), or if
+       your operating system supports more than 203 cylinders  per  partition.
+       Note  that  although  RSHARDx/DCT allows up to 406 cylinders per parti-
+       tion, if you use more than 203,  the  maximum  number  of  sectors  per
+       cylinder  is limited to 128, so you gain nothing; the maximum size of a
+       partition is still the same.
+
+       For [4msec[24m, the number of sectors per cylinder, the default value is  256,
+       the  maximum is 256, and the minimum is 4.  There are some restrictions
+       on the values that will work.  For the greatest portability,  choose  a
+       value  that  is  divisible  by  32.  With xtrs's XTRSHARD/DCT and David
+       Keil's EHARD/DCT, any value is allowed that can be evenly divided  into
+       granules; see the next paragraph.  With Matthew Reed's HARD/CMD, if [4msec[0m
+       is greater than 32, it must be divisible by 32.  With the emulation  of
+       a real WD1010 in newer versions of xtrs (and probably David Keil's emu-
+       lator too), [4msec[24m must always be divisible by 32, because we always  emu-
+       late  a  drive  with 32 sectors per track and from 1 to 8 heads (tracks
+       per cylinder).  The RSHARDx/DCT driver assumes that there are always 32
+       sectors per track.
+
+       For  [4mgran[24m, the default value is 8, the maximum is 8, and the minimum is
+       1.  In addition, it is necessary that [4msec[24m be evenly divisible by  [4mgran[24m,
+       and that [4msec/gran[24m be less than or equal to 32.  This value is used only
+       with the emulator-specific drivers listed above;  it  is  ignored  when
+       xtrs is using native hardware drivers such as RSHARDx/DCT.
+
+       The maximum size of a hard drive image is controlled by [4mcyl[24m and [4msec[24m: it
+       can be at most [4mcyl*sec[24m 256-byte sectors.  The  image  file  starts  out
+       small  and  grows as you write to more cylinders.  The allocation effi-
+       ciency is controlled by the granule size: LDOS allocates file space  in
+       granules.  Therefore (1) [4mgran[24m should always be set as large as possible
+       and (2) reducing [4msec[24m, thereby  making  the  granules  smaller,  reduces
+       wasted  space  due  to fragmentation but limits the maximum size of the
+       drive.
+
+       Seeing that the maximum unpartitioned drive size is less than 13 MB and
+       that  the maximum granule size is only 8 KB, wasted space should not be
+       much of a concern for most [1mxtrs [22musers.  Therefore the  default  parame-
+       ters  have  been  chosen to give you the largest drive possible without
+       partitioning.
+
+[1mWrite Protection[0m
+       With the -p flag, [1mmkdisk [22mturns on write protection for an existing emu-
+       lated  floppy  or  hard  drive.  It turns off all Unix write permission
+       bits on the file, and (except for JV1 floppies) also sets a  write-pro-
+       tected flag inside the file.
+
+       With  the  -u  flag,  [1mmkdisk [22mturns off write protection for an existing
+       emulated floppy or hard drive.  It turns on Unix write  permissions  to
+       the file, masked by your current umask and the file's current read per-
+       missions.  It also  clears  a  write-protected  flag  inside  the  file
+       (except on JV1 floppies, which don't have such a flag).
+
+       [1mmkdisk  [22mcurrently does not have code to auto-recognize file formats, so
+       the -p or -u flag must be accompanied by either -1 (JV1), -3 (JV3),  -k
+       (DMK), or -h (hard disk) to identify the file format.  There is also no
+       checking for the correct file format, so if you give  the  wrong  flag,
+       the wrong byte inside your file will be changed.
+
+
+[1mTechnical data[0m
+       The  JV1  format  is  just  an  array of 256-byte sectors, in the order
+       (track 0 sector 0, track 0 sector 1, ... track 0 sector 9, track 1 sec-
+       tor  0, ...).  It can represent only single-sided, single-density flop-
+       pies.  The directory is assumed to be track 17.
+
+       The original JV3 format is documented in the printed  manual  for  Jeff
+       Vavasour's  commercial  Model  III/4 emulator.  The xtrs implementation
+       includes some extensions.
+
+       Full documentation for both JV1 and JV3 can be found at http://www.tim-
+       mann.org/trs80/dskspec.html.  A copy of this html file is also included
+       in the [1mxtrs [22mdistribution.
+
+       The DMK format is documented in  a  file  on  David  Keil's  web  site,
+       http://discover-net.net/~dmkeil/trsdoc.htm#Technical-disks;  this  file
+       is also included with his emulator.  Some updates to the  4.00  version
+       of  the  document: (1) If neither the single density nor ignore density
+       option is set and single density data is recorded, each single  density
+       byte  is  written twice (i.e., the four bytes 12345678 would be written
+       as 1212343456567878).  This ensures that when single and double density
+       sectors  are  mixed,  each type occupies the correct relative amount of
+       space in the track.  This update will be effective in  version  4.3  of
+       David's emulator; it is incompatible with previous versions. (2) Bit 15
+       of an IDAM offset is 1 if the sector is  double-density,  0  if  single
+       density.   Bit 14 is reserved; it currently must be 0.  The actual off-
+       set is in bits 13-0.  These offsets are relative to the  start  of  the
+       track header, they must be in ascending order (I hope!!), and an offset
+       of 0 or 0xffff terminates the list.
+
+       An HDV (hard disk) image has the following format.  This information is
+       based  on email from Matthew Reed.  There is an initial 256-byte header
+       block, followed by an array of sectors.  The geometry of the  drive  is
+       defined in the header block, which looks like this (from mkdisk.c):
+
+       typedef unsigned char Uchar;
+       typedef struct {
+         Uchar id1;       /* 0: Identifier #1: 56H */
+         Uchar id2;       /* 1: Identifier #2: CBH */
+         Uchar ver;       /* 2: Version of format: 10H = version 1.0 */
+         Uchar cksum;     /* 3: Simple checksum:
+                             To calculate, add together bytes 0 to 31 of header
+                             (excepting byte 3), then XOR result with 4CH */
+         Uchar blks;      /* 4: Number of 256 byte blocks in header: should be 1 */
+         Uchar mb4;       /* 5: Not used, currently set to 4 */
+         Uchar media;     /* 6: Media type: 0 for hard disk */
+         Uchar flag1;     /* 7: Flags #1:
+                             bit 7: Write protected: 0 for no, 1 for yes
+                                    [warning: xtrs currently ignores this flag]
+                             bit 6: Must be 0
+                             bit 5 - 0: reserved */
+         Uchar flag2;     /* 8: Flags #2: reserved */
+         Uchar flag3;     /* 9: Flags #3: reserved */
+         Uchar crtr;      /* 10: Created by:
+                             14H = HDFORMAT
+                             42H = xtrs mkdisk
+                             80H = Cervasio xtrshard port to Vavasour M4 emulator */
+         Uchar dfmt;      /* 11: Disk format: 0 = LDOS/LS-DOS */
+         Uchar mm;        /* 12: Creation month: mm */
+         Uchar dd;        /* 13: Creation day: dd */
+         Uchar yy;        /* 14: Creation year: yy (offset from 1900) */
+         Uchar res1[12];  /* 15 - 26: reserved */
+         Uchar dparm;     /* 27: Disk parameters: (unused with hard drives)
+                             bit 7: Density: 0 = double, 1 = single
+                             bit 6: Sides: 0 = one side, 1 = 2 sides
+                             bit 5: First sector: 0 if sector 0, 1 if sector 1
+                             bit 4: DAM convention: 0 if normal (LDOS),
+                             1 if reversed (TRSDOS 1.3)
+                             bit 3 - 0: reserved */
+         Uchar cyl;       /* 28: Number of cylinders per disk */
+         Uchar sec;       /* 29: Number of sectors per track (floppy); cyl (hard) */
+         Uchar gran;      /* 30: Number of granules per track (floppy); cyl (hard)*/
+         Uchar dcyl;      /* 31: Directory cylinder [mkdisk sets to 1; xtrs
+                             ignores, but value must be correct if image is
+                             to be used with Reed emulators.] */
+         char label[32];  /* 32: Volume label: 31 bytes terminated by 0 */
+         char filename[8];/* 64 - 71: 8 characters of filename (without extension)
+                             [Cervasio addition.  xtrs actually doesn't limit this
+                              to 8 chars or strip the extension] */
+         Uchar res2[184]; /* 72 - 255: reserved */
+       } ReedHardHeader;
+
+
+[1mSee also[0m
+       [1mxtrs[22m(1)
+
+       http://www.tim-mann.org/trs80/dskspec.html
+
+[1mAuthors[0m
+       [1mmkdisk [22mwas written by Timothy Mann (see http://tim-mann.org/).
+
+       The  floppy file formats here called JV1 and JV3 were developed by Jeff
+       Vavasour for his MSDOS-based Model I and Model III/4 emulators (respec-
+       tively).   They have become a de facto standard in the TRS-80 emulation
+       community, and much TRS-80 software is available  on  the  Internet  in
+       .dsk format.  Thanks to Jeff for designing and documenting the formats.
+
+       The format here called DMK was developed by David Keil for  his  MSDOS-
+       based Model 4 emulator.  This format has the advantage that it can rep-
+       resent essentially everything the  original  TRS-80  floppy  disk  con-
+       trollers can write, including all forms of copy protected disk.  Thanks
+       to David for designing and documenting this format.
+
+       The hard drive format was developed by Matthew Reed for his MSDOS-based
+       Model  I/III  and  Model  4 emulators.  I have duplicated his format to
+       allow users to  exchange  .hdv  hard  drive  images  between  [1mxtrs  [22mand
+       Matthew's  emulators.   Thanks  to Matthew for designing the format and
+       providing documentation.
+
+
+
+                                                                     mkdisk(1)

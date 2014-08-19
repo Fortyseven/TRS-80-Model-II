@@ -1,0 +1,1 @@
+. DPEXPORT/PAT - DOSPLUS patch for EXPORT/CMD by Tim Mann. correct size calculation from FCB same as NEWDOS/80A=53CDH,F=3A27,C=180B

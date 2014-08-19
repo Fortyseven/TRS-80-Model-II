@@ -1,0 +1,110 @@
+
+#
+# Makefile.local: local customizations for the xtrs Makefile
+#
+
+# If your machine is not a sun, vax, or DEC MIPS, uncomment the line below
+# if the processor has big-endian byte ordering.  If you're not sure what
+# to do, don't worry -- the program will complain if it's not right.
+
+# ENDIAN = -Dbig_endian
+
+# If you would like the TRS-80 ROM to be built into the application,
+# use the following lines (with the appropriate file names).  You can
+# get a ROM image from a real TRS-80 with moderate effort, if you have
+# one.  There are also Web sites with TRS-80 ROMs that can be
+# downloaded, but none are included with this package due to copyright
+# concerns.  As another alternative, for -model III or 4, you can
+# export the MODELA/III file from a Model III or 4 TRSDOS or
+# LDOS/LS-DOS diskette and use it as BUILT_IN_ROM3.
+
+# The default ROM for -model I, III and 4 (fakerom.hex) just prints a
+# message saying that you don't have a ROM.  The default ROM for
+# -model 4P (xtrsrom4p.hex) is a free minimal ROM that can boot a
+# Model 4 mode operating system (such as TRSDOS/LDOS 6); source code
+# is included in this package.  This ROM cannot boot a Model III mode
+# operating system.
+
+# for -model I
+BUILT_IN_ROM = fakerom.hex
+# for -model III and -model 4
+BUILT_IN_ROM3 = fakerom.hex
+# for -model 4P
+BUILT_IN_ROM4P = xtrsrom4p.hex
+
+# If you would like the application to load a default ROM file at startup
+# time, use these lines (with the appropriate file names).  The default file
+# name is ignored and can be omitted if the ROM for that model is built in.
+
+DEFAULT_ROM = -DDEFAULT_ROM='"/usr/local/lib/xtrs/level2rom.hex"' \
+              -DDEFAULT_ROM3='"/usr/local/lib/xtrs/romimage.m3"' \
+              -DDEFAULT_ROM4P='"/usr/local/lib/xtrs/romimage.m4p"'
+
+# If you would like to change where xtrs looks for disk?-? files, edit
+# this line.  "." of course means the current working directory.
+
+DISKDIR = -DDISKDIR='"."'
+
+# If you have the GNU readline package (the README file tells you where to
+# get it) and would like to use it with the built-in Z-80 debugger, use
+# these lines.  As of xtrs 2.7, it is now OK to use this feature again.
+
+READLINE = -DREADLINE
+READLINELIBS = -lreadline -lncurses
+
+# If you want to debug the emulator, use the -g flag instead:
+
+DEBUG = -O2 -g
+#DEBUG = -g -DKBDEBUG -DXDEBUG
+#DEBUG = -g
+#DEBUG = -Wall
+
+# If you have gcc, and you want to use it:
+
+#CC = gcc
+
+# If you need a different path for libraries:
+
+LDFLAGS = -L/usr/X11R6/lib
+#LDFLAGS = -non_shared -L/usr/X11/lib
+
+# If you need a different path for include files:
+
+IFLAGS = -I/usr/include/X11
+
+# Re-define this if your X library is strangely named:
+
+XLIB = -lX11
+
+# Use this if you need yet more libraries:
+
+#EXTRALIBS = -ldnet
+#EXTRALIBS = -lots
+#EXTRALIBS = -ldnet_stub
+
+# If you want xtrs to look for a global app-defaults file
+# at runtime in $APPDEFAULTS/Xtrs:
+
+APPDEFAULTS = -DAPPDEFAULTS='"/usr/X11/lib/X11/app-defaults"'
+
+# prefix directory
+
+PREFIX=/usr/local
+#If included in distribution: PREFIX=/usr
+
+# Set these to where you want installed stuff to go, if you install them.
+
+BINDIR = $(PREFIX)/bin
+MANDIR = $(PREFIX)/share/man
+
+# Change this if you have a BSD-compatible install program that is
+# not the first program named "install" on your $PATH
+
+INSTALL = install
+
+# If you are building in a subdirectory:
+#vpath %.c ..
+#vpath %.h ..
+#vpath %.man ..
+#old way:
+#VPATH = ..

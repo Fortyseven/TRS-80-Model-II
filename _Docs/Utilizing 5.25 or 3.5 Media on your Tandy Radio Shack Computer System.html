@@ -1,0 +1,991 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii"><!-- Utilizing 5.25" or 3.5" media on your Tandy/Radio Shack computer system.
+     Copyright 1988,1990,1991,2000,2002,2003 Frank Durda IV, All Rights Reserved.
+     Mirroring in any form is expressly prohibited.
+     The official web site for this material is:  http://nemesis.lonestar.org
+     Contact this address for
+     use clearances: clearance at nemesis.lonestar.org
+     Comments and queries to this address: web_stories at nemesis.lonestar.org
+
+1(1)	Sept. 1988	Original publication in the new comp.sys.tandy
+1(2)	20-Aug-2000	HTMLization of base document.
+1(3)	27-Aug-2000	Major additions of material related to 3.5" drives
+			and tables of potental drive models.
+1(4)	21-Oct-2000	Partial re-write and fixed some typos.
+1(5)	10-Feb-2002	HTML/site consistency sweep.
+1(6)	21-Dec-2003	A sentence made no sense.
+--><title>Utilizing 5.25" or 3.5" media on your Tandy/Radio Shack computer system.</title></head><body bgcolor="#ffffff" link="#009900" text="#000000" vlink="#990000">
+<basefont size="3">
+<center>
+<h1>
+Utilizing 5.25" or 3.5" media on your Tandy/Radio Shack computer system.
+<br>
+by Frank Durda IV
+</h1>
+</center>
+
+<blockquote>
+<pre>[Copyright 1988,1990,1991,2000,2002,2003 Frank Durda IV, All Rights Reserved.
+Mirroring in any form is expressly prohibited.
+The official web site for this material is:  http://nemesis.lonestar.org  
+Contact this address for use clearances: clearance at nemesis.lonestar.org
+Comments and queries to this address: web_software at nemesis.lonestar.org]
+</pre>
+<p>
+Disclaimer: In developing the solution for the Tandy 16A/16B/6000 XENIX
+systems, I have only tested the Sony MP-F73W-70D and the MF504B-347UA,
+and I have had no problems using these two drives together or separately.
+Your results may vary.  This information is provided on an "AS IS" basis,
+and should not be considered supported by anybody, nor is it guaranteed
+to identify all changes that must be made or all incompatibilities that may
+arise.  I am not responsible for anything that doesn't work, or if something
+fails or malfunctions or if there is any data loss resulting from changes made
+based on any of the information given here.  Use this information at your
+own risk.
+
+</p></blockquote>
+<p>
+<strong>This page is still being completed.  Excuse the dust.</strong>
+
+</p><p>
+If you own one of the non-IBM-compatible Tandy or Radio Shack computers
+made during the 1970s or 1980s, undoubtedly you have noticed that good media
+for these drives is becoming hard to find.  You may also be having troubles
+because these older 8" and 5.25" drives are wearing out.   If you would like
+to migrate to 5.25" or even 3.5" drives, then these pages can help you.
+
+</p><p>
+The following information will allow you to add or substitute 5.25"  high
+capacity  floppy  drives  in place of 8" double sided drives in your
+16A/16B/6000 XENIX system.  For certain computer systems and operating
+systems, you can also change from 8" or even 5.25" drives and switch to 
+3.5" drives.  These drives can be used with the original drives, or you
+can get rid of the original drives entirely.
+
+</p><p>
+</p><h2>What is the advantage of switching drives?</h2>
+<p>
+Reliability is the biggest advantage.  Just about everybody will agree
+that the 5.25" and 3.5" floppy diskette drives and the media sold for
+them these days are far superior to anything ever available for the 8"
+or older double- or single-density 5.25" floppy diskette drives.
+</p><p>
+The next advantage is availability.  The 8" floppy diskette drives are
+getting pretty rare and you don't want to get in a situation where you
+don't have at least two 8" drives remaining before you have migrated all
+of your important data to newer media.
+If your only 8" drive fails completely and you haven't migrated your
+important data to newer media, you will be forced to obtain
+another 8" drive before you could even consider migrating to 5.25" or
+3.5" drives.
+</p><p>
+Chances are, you have software on your existing 8" or
+low-capacity 5.25" floppies that you want to preserve.  Moving data on 8"
+media over to 5.25" media and maintaining most if not all of your
+diskette-based software on 5.25" media will prevent you from being trapped
+by having your data on a diskette size that you can't find media for anymore
+and that you can't find replacement drives for.  In my case, all the important
+8" diskettes I own are copied onto 5.25" media (at minimum), and the 5.25"
+diskettes are used whenever possible.  Typically I only have to use the
+8" diskettes if I have to boot from floppy on an unmodified system, and if
+that 8" boot diskette becomes damaged, I can always make a replacement one
+from the safe-copy I have on stable 5.25" media.
+</p><p>
+Another key advantage of migrating to newer drives and media is the
+cost-savings.  Pull out your handy Radio Shack catalog (I used the 1998
+edition as a price reference).  Ten 5.25" HD DS disks cost $7.99, (about
+79 cents each, and you can probably find them for quite a bit less elsewhere).
+I can't even find anyone selling 8" diskettes anymore, but the last price I
+did locate in a 1994 catalog showed ten 8" diskettes costing $39.95, or
+nearly $4 each.  If you buy all of your diskettes at those prices, it will
+take buying about four boxes of 5.25" diskettes instead of 8" diskettes to
+completely pay for a 5.25" drive, and a quality drive can be purchased for
+$40.
+
+ 
+</p><p>
+The general rule-of-thumb is that if the computer system came with 8" drives,
+you can replace them with 5.25" 1.2Meg floppy diskette drives without the
+operating system being aware of the change.   Similarly, the 5.25" 150K,
+180K and 360K floppy diskette drives can be replaced with 3.5" 720K or
+720K/1.44M floppy diskette drives without making any software changes.  For
+Model 16A/16B/6000 (or upgraded Model II/12) systems running XENIX, it is
+possible to use 3.5" 1.44 Meg floppy diskette drives in addition to 5.25"
+1.2Meg floppy diskette drives, but the XENIX operating system and utilities
+must be altered to support 3.5" drives.  (There are no equivalent modifications
+for other Tandy/Radio Shack operating systems for the Model II/12/16A/16B/6000
+family that would allow those systems to utilize 3.5" floppy diskette drives,
+but 5.25" 1.2Meg floppy diskette drives can be used on these operating 
+systems transparently.)
+
+</p><p>
+Depending on the system that you are trying to attach newer drives to, you may
+need to obtain additional hardware or software components.   Here is a table
+of what systems can accept alternate drives and what major items will be
+needed.
+
+</p><p>
+</p><table border="1">
+<tbody><tr>
+<td>
+Computer Model(s)
+</td>
+<td>
+Operating System
+</td>
+<td>
+Original Manufacturer Drives
+</td>
+<td>
+Alternate Drives possible?
+</td>
+<td>
+Data Pin-out Conversion Cable needed?
+</td>
+<td>
+Software changes needed?
+</td>
+</tr>
+<tr>
+<td>
+II/12/16A/16B/6000
+</td>
+<td>
+TRSDOS 2.0
+</td>
+<td>
+8" SSDD (620K) or DSDD (1.2M)
+</td>
+<td>
+5.25" DSHD (1.2M)
+</td>
+<td>
+Yes
+</td>
+<td>
+TRSDOS 2.0B "Thinline" patches
+</td>
+</tr>
+<tr>
+<td>
+II/12/16A/16B/6000
+</td>
+<td>
+TRSDOS-II 4.1.x/4.2.x and TRSDOS-16
+</td>
+<td>
+8" SSDD (620K) or DSDD (1.2M)
+</td>
+<td>
+5.25" DSHD (1.2M)
+</td>
+<td>
+Yes
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+16A/16B/6000 and II/12+68K Upgrade
+</td>
+<td>
+XENIX (3.x, 1.x Tandy Releases)
+</td>
+<td>
+8" SSDD (620K) or DSDD (1.2M)
+</td>
+<td>
+5.25" DSHD (1.2M)
+</td>
+<td>
+Yes
+</td>
+<td>
+No
+</td>
+</tr>
+<tr>
+<td>
+16A/16B/6000 and II/12+68K Upgrade
+</td>
+<td>
+XENIX (3.3 - unofficial version)
+</td>
+<td>
+8" SSDD (620K) or DSDD (1.2M)
+</td>
+<td>
+5.25" DSHD (1.2M) or 3.5" DSHD (1.44M)
+</td>
+<td>
+Yes
+</td>
+<td>
+Yes (only required if 3.5" drives are used)
+</td>
+</tr>
+<tr>
+<td>
+I/III/4/4D/4P
+</td>
+<td>
+TRSDOS 2.x, TRSDOS 1.3, LDOS 5.x, TRSDOS 6, LS-DOS 6
+(and most third-party Model I/III OSes)
+</td>
+<td>
+5.25" SSDD (180K) or DSDD (360K)
+</td>
+<td>
+3.5" DSDD (720K)
+</td>
+<td>
+No
+</td>
+<td>
+No (TRSDOS 1.3 only utilizes 180K, others can use full 720K)
+</td>
+</tr>
+</tbody></table>
+
+<h2>
+Getting the items you will need
+</h2>
+<p>
+If you want to add 5.25" or 3.5" drives externally, you should obtain an
+enclosure to  mount  the  drives  in.  An external enclosure with its own
+power supply is absolutely required if you are trying to add drives to a
+Model II, 12, 16A, 16B or 6000, since none of these computers have the
+traditional four-prong power connectors used on 5.25" diskette drives.
+
+</p><p>
+Enclosures are available from stores that stock parts for people who wish
+to assemble their own computer systems, and from stores that custom-build
+systems from parts that they keep in stock.  Frys, a California chain with
+two stores in the Dallas Fort Worth area of Texas sells this sort of enclosure,
+but there are many other sources as well.  Such one- or two-drive external
+enclosures are usually built for external 5.25" SCSI drives (and overpriced
+accordingly), but they will work just fine in this application.  Removing the
+SCSI connector from the enclosure provides a place for the external floppy
+cable to enter the enclosure.  The power supply for a two-drive unit should
+be rated for at least 40 watts.
+
+</p><p>
+The type of data cable you need depends on the computer.  If the computer
+uses 5.25" floppy diskette drives now, adding 3.5" drives is accomplished
+either by making or obtaining a cable that has both 5.25" edge and 3.5" DIP
+(dual-inline pin) connectors.   Alternatively, some vendors sell an
+adapter that allows a 3.5" drive to be installed in a 5.25" drive bay, and
+these adapters frequently come with a small circuit board that converts the
+DIP connector that the 3.5" drive uses into an edge connector that matches
+what would be on a cable for a 5.25" drive.   Some of these adapters even
+take care of converting the mini-power plug on the 3.5" drive into the
+type used on 5.25" drives.  Using such an adapter would mean that a plain
+5.25" cable could be used for both 3.5" and 5.25" drives.  You may still
+have to make or obtain a longer cable, particularly if the drives are to be
+mounted in an external enclosure.
+
+</p><p>
+The cable used in IBM-compatible computers which contains folds and twists of
+some of the wires in the cable are not needed and might actually prevent
+these drives from working on these non-PC computers.  These "twist" cables
+are not recommended for this application.
+
+</p><p>
+If the computer came with 8" drives, you have to do more work than if the
+computer originally had 5.25" drives.  You have to make a custom cable that
+converts the 50-pin cable that the 8" drives use into a 34-pin cable that the
+5.25" and 3.5" drives use.  I am not aware of any place where you can order
+this cable pre-built.  Instructions on how to build one of these conversion
+cables yourself are discussed later in this document.
+
+</p><h2>Why any old 5.25" or 3.5" floppy diskette drive may not work
+</h2>
+<p>
+Finding modern 5.25" and 3.5" drives that can be used with the 
+non-IBM-compatible Tandy computer models is a problem, entirely due to changes
+IBM (in conjunction with Western Digital) made in how the mini-floppy
+diskette drives communicated with the host diskette drive controller.
+(The term "mini-floppy" was used to identify 5.25" drives back in 1980,
+ as compared to the full-sized, IBM 374x-compatible 8" drives.)
+
+</p><p>
+For both the 5.25" and the 3.5" drives, you <strong><i>must</i></strong> be
+able to disable a behavior that is the default for IBM-compatible computers
+but is alien to these older non-IBM-compatible computers.   In particular, 
+IBM-compatible drives use the READY line from the floppy drive to not only
+signal whether the drive has media and is spinning at the correct speed,
+but the drive also uses the READY signal to indicate if the diskette in the
+drive has been changed since the last drive operation was performed.
+
+</p><p>
+The 8" floppy drive 50-pin cable actually has a separate signal to report
+disk changes (called DISK CHANGE), but the mini-diskette cabling system that
+dates back to the mid-1970s did not include this signal.  The drives used in
+the Tandy Model I, III, 4/4D/4P and color computer systems were all unable
+to report that diskettes had been changed, so the operating systems had to
+rely on fairly primitive and unreliable methods to detect when a diskette
+had been changed, and mainly had to rely on the human to not change diskettes
+unless the operating system or the application said it was time to do so.
+
+</p><p>
+When designing the IBM Personal Computer, IBM apparently wanted to utilize
+the mini-diskette drives already made by several vendors (including Tandon,
+eventual maker of the drives used in the original IBM PC and already a
+supplier and licensor of 5.25" drive designs to Tandy) and the established
+mini-disk cabling system, but IBM also wanted the operating system to be
+able to find out about media changes.
+
+</p><p>
+To accomplish this goal, drives made for the IBM PC (and subsequent models
+"compatible" with the IBM PC) will falsely return a NOT READY signal even if
+media is in the drive, in the event that the diskette has been removed and
+replaced recently.  The operating system clears this false "NOT READY"
+indication by forcing the drive to reposition the heads by at least one
+track while ignoring the NOT READY status.  If the drive was simply trying to
+report a media change, moving the heads causes the drive to now appear to be
+READY.  If the drive really isn't ready, the NOT READY indication will persist
+even after the heads are moved.
+
+</p><p>
+This is why empty floppy drives in IBM PC (and compatible) computers make so
+much noise when there is no diskette in the drive if you tell the system to
+examine that drive.   This noise is caused by the BIOS or DOS-compatible
+operating system disk driver ordering the heads to be moved back and forth
+several times when a NOT READY error is detected, hoping to clear any
+disk-change condition that may exist before finally giving-up and returning
+an error to the software that called the diskette driver.
+
+</p><p>
+Of course, none of the Tandy Model II/12/16A/16B/6000 operating systems are
+aware that they need to do this little dance with the drive heads to clear a
+false not-ready error, as they have this separate wire that is supposed to be
+reporting disk changes and the ready wire is used only for READY.
+Similarly, the Model I/III/4/4D/4P/CoCo computers assume that if the drive
+says it isn't ready, it really isn't ready and there isn't any point of
+doing anything else with that drive.
+
+</p><p>
+Fortunately, some manufacturers realized that IBM was creating yet-another
+incompatibility, and most drive manufacturers initially provided either a
+jumper option or a zero-ohm resistor on their drives that could be removed,
+added or repositioned to make the drives not use the READY line to report
+diskette changes as mini-disk drives had done previously.  A similar option
+was made available on 3.5" drives when they came to market, since 
+non-IBM-compatible computers remained on the market, such as the Apple
+Macintosh, one of the earliest adopters of 3.5" media.
+
+</p><p>
+In order to use a 5.25" or 3.5" drive on the Tandy non-IBM-compatible systems,
+you <strong><i>MUST</i></strong> be able to force the READY line to be used
+only for READY.  Therefore, the drives must be able to adjust this behavior.
+
+</p><p>
+Unfortunately, most drives manufactured these days only provide you a set of
+drive select jumpers or a slide switch labeled 0, 1, 2, 3 or 1, 2, 3, 4, or
+sometimes DS0, DS1, DS2, DS3), as all the jumpers used by non-IBM-compatible
+computers have been cost-reduced out of floppy diskette drive designs over
+the years as essentially everybody is making IBM-compatible computers.
+
+</p><p>
+On some really-cheap drives, you don't even get a drive select control and the
+drive is permanently set to respond at DS1 (Drive 1), which is where the
+IBM PC always set its drive jumpers.  To make one of the drives respond as
+Drive 0 in the IBM-PC, some of the wires are twisted-around in the drive cable
+on most IBM-compatible computers.  In 1980, apparently the thinking in handling
+drive select via the cable was that the more expensive cable was less
+expensive in the long run than having to stock two types of drives in the IBM
+repair center inventories: those drives with the jumpers pre-set to be Drive 0
+and those pre-set to be Drive 1.  At the time, IBM thought that making their
+field techs change jumpers on a single type of drive would be a big support
+problem.  (Tandy was also guilty of short-sightedness in this area, with their
+early 5.25" drives jumpered to respond to any drive select signal, and the
+floppy diskette drive data cable connectors had different pins pulled-out of
+each connector so that each was a different drive select number.)
+
+</p><p>
+All that means is that if the drive you are considering doesn't have any
+jumpers at all or just drive-select jumpers or option shunts, you cannot
+use that drive here.
+
+</p><p>
+If you do come across a drive with jumper options of one sort or another,
+you are looking for a jumper marked "DC", "READY" or something similar.
+You want this jumper set opposite of the way it is set for use in an
+IBM-compatible computer.  For IBM compatible computers, it would usually be
+set to the "DC" or "DCH" position, so you want to set it to the "RDY" or "SR"
+or "READY" position.  For example, on the MF504B-347UA (5.25" 1.2Meg) drive,
+the jumper PM2 has three pins, one marked SR (Standard Ready) and one on the
+opposite end of the set of three pins is marked DC.  By moving the jumper
+to the SR position, the drive no longer reports diskette changes and can be
+used on non-IBM-compatible computers, like the Tandy 6000.
+
+</p><p>
+In researching how these alternate drives could be used with the 16A/16B/6000
+systems, I  used  Mitsubishi MF504B-347UA for the 1.2Meg 5.25" drive, and
+I used a Sony MP-F73W-70D 1.44 Meg 3.5" drive.   Both of these drives were
+used in Tandy computers in the mid to late 1980s.  If you have old Radio Shack
+catalogs, you can find a picture of both in the 1988 catalog.  The Sony 3.5"
+drive was used in the Tandy 4000 and is the type with the wide eject button
+under the diskette slot (not the model with the blue eject button used in
+later years.  The Mitsubishi 5.25" drive was used over several years and can
+be found in photos of the 12MHz, Tandy 3000 and 3000HL in the 1988 catalog.
+
+</p><p>
+On the MP-F73W-70D (3.5" 1.44Meg) drive, on initial inspection it had only
+a slim drive select switch accessible from the side with no other jumpers.
+However, on the silk screen writing on the circuit board, I located a 
+zero-ohm resistor in a position labeled "SL5 B READY".  Next to it was an
+empty position for a component marked "A".   By removing the zero-ohm resistor
+from the position "B" and installing it in the "A" position, the 3.5" drive
+stopped reporting disk change errors via the READY line.   Like you, I didn't
+and probably could not get a manual that would have told me such an adjustment
+was possible, so depending on the drive you are able purchase, you may have to
+do some research.
+
+</p><p>
+Obviously, both of the drives I studied are old now and not likely to be
+available at your local computer parts store.  However, more modern drives
+are still available with the needed jumpers.  A search through the odd drives
+I find around here turned-up the following drive models as ones that can
+potentially be used, but have <i>not</i> been tested unless the entry in
+the table specifically states that this type of drive was tested.
+
+</p><p>
+</p><p>
+</p><table border="1">
+<tbody><tr>
+<td>
+Drive type
+</td>
+<td>
+Manufacturer
+</td>
+<td>
+Model Number
+</td>
+<td>
+What to change
+</td>
+</tr>
+<tr>
+<td>
+3.5"
+</td>
+<td>
+Sony
+</td>
+<td>
+MP-F73W-70D
+</td>
+<td>About 1.0" from edge connector, a zero-ohm shunt/resistor and an empty position
+marked "SL5" "A" "B".  Position "A" disables disk change reporting via
+READY line.  (TESTED)
+</td>
+</tr>
+<tr>
+<td>
+3.5"
+</td>
+<td>
+Newtronics/Mitsumi
+</td>
+<td>D359T3
+</td>
+<td>
+About .5" from edge connector, a zero-ohm shunt/resistor and an empty position
+marked "D.C/RDY/34" (Pin 34 is READY) Move the shunt/resistor to the RDY
+position.
+</td>
+</tr>
+<tr>
+<td>
+3.5"
+</td>
+<td>
+Panasonic
+</td>
+<td>
+JU-257A213P
+</td>
+<td>
+Under the head motor (round device on back) is a switch marked "RY or DC".
+Set the switch in the "RY" position.
+</td>
+</tr>
+<tr>
+<td>
+3.5"
+</td>
+<td>
+Panasonic
+</td>
+<td>
+JU-257A135P
+</td>
+<td>
+The blank side of the circuit board faces out, but a narrow slot
+marked "SW1" "RY" "DC" provides jewelers-screwdriver access to a slide
+switch on the component side.  Move switch to the "RY" position.  If the
+switch is absent, a zero-ohm shunt/resistor at R53 (DC) and R52 (RY) on the
+component side is installed by the manufacturer instead, and this part can
+be moved to the R52 position (RY) to obtain the desired setting.
+</td>
+</tr>
+<tr>
+<td>
+5.25"
+</td>
+<td>
+Mitsubishi
+</td>
+<td>
+MF504C-347UA
+</td>
+<td>
+Along the head track is a row of jumpers.  Move the jumper in DC and put it
+in SR.  (TESTED. Jumper settings were TD MS SR-PM2 RI SB DSx)
+</td>
+</tr>
+<tr>
+<td>
+5.25"
+</td>
+<td>
+Newtronics/Mitsumi
+</td>
+<td>
+D509V3
+</td>
+<td>
+On top of drive is an opening allowing access to a block of jumpers near
+the edge connector.  Move jumper from the CH to RDY position (horizontal).
+Tweezers needed.
+</td>
+</tr>
+<tr>
+<td>
+5.25"
+</td>
+<td>
+TEAC
+</td>
+<td>
+FD-55GFV-07-U
+</td>
+<td>
+Next to terminating resistor pack, locate three pins and one jumper marked
+"DCRY".  Move jumper to "RY" position.
+</td>
+</tr>
+<tr>
+<td>
+5.25"
+</td>
+<td>
+TEAC
+</td>
+<td>
+FD-55BR-114-U
+</td>
+<td>
+Next to terminating resistor pack, locate an "L-shaped" configuration of
+jumper pins with (as you view from the edge-connector side) RY written
+horizontally and DC written vertically.  Add jumper to RY position (existing
+jumper may not be present as the DC staking pin may be absent.  Not having a
+jumper apparently defaults to DC.)
+</td>
+</tr>
+</tbody></table>
+
+<p>
+The Drive Select jumpers or switch (may be labeled DSx) should be set as you
+prefer.  
+</p><p>
+For Model I/III/4/4D/4P systems, once you have identified a compatible drive,
+altered the jumpers as needed and provided any 3.5" to 5.25" cable or cable
+adapter, your work should be complete, as the new drive can be treated exactly
+the same as the drive you replaced.  If you switched from a single-sided
+drive, you can now format new media double-sided.  It is suggested that
+you make exact copies of critical and master software diskettes in the same
+format as you originally got them, even if you are only using a fraction of
+the storage on the newer diskettes.
+</p><p>
+Chances are that the new drives are 80 track drives and the ones you 
+replaced were 35, 40 or 77 track drives, and most third-party
+Model I/III/4/4D/4P operating systems allow you to format the full 80 tracks
+and utilize the full 720K of storage.    The Tandy operating systems 
+(TRSDOS 2.x and 1.x) typically do not allow you to specify drive sizes other
+than those originally sold with that operating system.  These systems will
+work with these new drives without change, but won't be able to use all the
+space on each new diskette.
+</p><p>
+If you can't locate 720K 3.5" media any more (as even some office supply stores
+now only carry them as a special-order item), 1.44Meg 3.5" media can be used
+on Model I/III/4/4D/4P systems, provided that you cover the media density
+hole with electrical tape or duct tape (opaque) on both sides of each
+diskette used.  This hole is located opposite of the write-protect switch.
+Since most 1.44Meg diskettes come pre-formatted, you should completely erase
+the 1.44Meg media before trying to use it at the lower recording capacity, and
+a bulk-eraser made for diskettes, audio or video tapes will erase diskettes.
+These devices are sold at most electronics stores.
+
+</p><p>
+For the Model II/12/16/16B/6000/6000HD systems, you have more work to do,
+so keep reading.
+
+
+</p><h2>Model II/12/16/16B/6000/6000HD Drive select choices</h2>
+<p>
+On a Model 12, 16B and 6000 drive 0  may  not be  selected on the
+external connector.  If you have two internal drives on a 12/16B/6000 and want
+to keep using them, your external drives  must  be  DS2 and DS3.  The last
+external drive must contain a terminating resistor pack.
+
+</p><p>
+If you only have one internal drive, you may have  three  5.25"  external
+drives.  Set the strap DS1 for the first drive, DS2 for the second, and DS3
+for the third.
+
+</p><p>
+If your 12/16B/6000 has two internal 8" drives and you wish to disable one  of
+them,  it  will  be  necessary to disassemble your 12/16B/6000, and disconnect
+power and data  cables  going  to  your  second  internal  drive.   If  the
+terminating  resistor pack is installed on the drive you are disconnecting,
+you must move the resistor pack to drive 0.  By  disconnecting  the  power,
+you  will  reduce  the power consumption and heat load on your system.  You
+must also add a jumper at E40-E41 on the 12/16B/6000 main CPU board (under the
+card cage).  This moves the DS1 signal to the external connector.
+
+</p><p>
+If you have a Model II or 16A, you can have at least  two  external  drives
+and  as  many  as  four  if  you  decide  to  disable  the internal drives.
+Initially it is suggested that you leave drive 0 as an 8" drive  until  you
+can copy your installation floppies onto 5.25" media.
+
+</p><p>
+On the Model II, 12, 16A, 16B and 6000, it is advised that you leave one
+internal drive  connected to power even if you decide to disconnect its data
+cables.  This is to insure a minimum load on certain power supply voltages.
+
+</p><h2>Constructing the Conversion Cable for Model II/12/16A/16B/6000 Systems</h2>
+<p>
+You must construct the cable between the Model II/12/16A/16B/6000 and the
+5.25" drives.  You will need a 50 pin DIP (Dual-Inline Pins) connector and at
+least one 34 pin edge connector  (one per drive).  You may use either 34 or
+50 pin wire.
+
+</p><p>
+If you have an existing 50 pin cable and a 34 pin  cable,  you  may  simply
+wish  to  cut  the connector off one end and splice the appropriate signals
+together.  Just try to keep the total length to under six feet.
+
+</p><p>
+Because the cable you build may be delicate, you may want to build it as  a
+short  cable which can fit entirely inside your drive enclosure with the 50
+pin connector mounted so that a longer  standard  50-to-50  pin  cable  can
+connect  between  the computer and the drive enclosure by plugging into the
+"translation" cable.
+
+</p><p>
+Here is the wiring table.  Keep in mind that the odd numbers are ground  on
+both the 34 and 50 pin connectors.  The new cable should re-route the wires
+in pairs to help simplify assembly and insure adequate  ground.   When  an
+entire group of wires can be moved as a single section of ribbon cable, they
+are listed together.
+
+</p><p>
+</p><table border="1">
+<tbody><tr>
+<td>
+Signal Name(s) - Number in Parens is the 50-Pin connector signal name
+</td>
+<td>
+50 Pin Connector Pins
+</td>
+<td>
+Tie To 34 Pin Connector (See Note 1)
+</td>
+</tr>
+<tr><td>Double Sided media detect(10)
+				</td><td>9-10	</td><td>No Connect - See Note 2
+								</td></tr>
+<tr><td>Side Select (14)	</td><td>14-15	</td><td>31-32	</td></tr>
+<tr><td>Index (20)		</td><td>20-21	</td><td>7-8	</td></tr>
+<tr><td>Ready (22),		</td><td>22-23	</td><td>33-34	</td></tr>
+<tr><td>Drive Select 1 (26),
+	Drive Select 2 (28),
+	Drive Select 3 (30)
+				</td><td>26-31	</td><td>9-14	</td></tr>
+<tr><td>Drive Select 4 (32)	</td><td>32-33	</td><td>5-6	</td></tr>
+<tr><td>Direction (34),
+	Step (36),
+	Write Data (38),
+	Write Gate (40),
+	Track 0 (42),
+	Write Protect (44),
+	Read Data (46)
+				</td><td>34-47  </td><td>17-30  </td></tr>
+<tr><td>Mini-disk Motor on (16)	</td><td>No Connect - See Note 3
+						</td><td>15-16	</td></tr>
+<tr>
+<td colspan="3">
+All other even-numbered pins on the 34 and 50 pin connector should
+not be connected to anything.  All odd-numbered pins are ground.
+</td>
+</tr>
+</tbody></table>
+
+<p>
+Notes:
+</p><dl compact="compact">
+<dt>1:
+</dt><dd>On both connectors, the odd numbered pins are  ground  and
+even  numbered  pins  are  the  signals.   Do not get the ground and signal
+reversed. For example,  the  Index  signal  line,  pin  20  on  the  50-pin
+connector,  connects  to  pin 8 on the 34-pin connector.  21 on the 50-pin
+connects to 7 on the 34-pin.
+When dealing with a group of signals such as  "26-31  goes  to  9-14",  you
+would  have  26-&gt;10, 27-&gt;9, 28-&gt;12, 29-&gt;11, 30-&gt;14, 31-&gt;13.
+
+<p>
+</p></dd><dt>2:
+</dt><dd>Pins 9 and 10 on the 50 pin connector must be tied together to produce the
+"double-sided" signal that the Model II/12/16A/16B/6000 requires.  If you ever
+plan to use single-sided 8" diskettes, you will need to install a SPST
+(single-pole, single-throw) switch that makes or breaks the connection
+between pins 9 and 10 of the 50 pin connector.  The connection should be
+open when formatting, reading or writing single-sided media <i>on any
+drive</i> and closed when using double-sided media.  Almost all Model
+II/12/16A/16B/6000 operating systems use this signal to automatically select
+the media type and will get confused if the data on the media is organized
+as though this is a single or double-sided diskette and the electrical signal
+reports the opposite type of media is present.
+<p>
+If you happen to use an external SCSI enclosure, the SCSI drive select
+switch that probably came with the case can be used for the
+single-sided/double-sided control.
+
+</p><p>
+</p></dd><dt>3:
+</dt><dd>Pins 15 and 16 from the 34 pin drives should be connected together.
+This signal forces the motors on the 5.25" or 3.5" drives to run at all
+times.  On the 8" drives, the selecting of the drive caused the motor to
+turn on.  A few 5.25" drives can start their motor based on drive select or
+a combination of drive select and motor on, but rather than figuring this
+out for the type of drives you find that meet all the other requirements,
+simply connect these two wires together.  The side-effect is that these
+drives will spin whenever they have media loaded, so don't leave diskettes in
+the drives when you aren't using them.  Pins 15 and 16 from the 34-pin
+connector do not connect to anything on the 50-pin connector.
+
+</dd></dl>
+
+<p>
+Once constructed, your cable can look like this:
+</p><pre>        +---+                           +-----+        +-----+
+        ! 5 !--------\           /------!  3  !--------!  3  !
+        ! 0 !--------\ A miracle/-------!  4  !--------!  4  !
+        !   !-N/C       occurs----------!     !--------!     !
+        ! p !------------here-----------!  p  !--------!  p  !
+        ! i !--------/          \-------!  i  !--------!  i  !
+        ! n !-------/               N/C-!  n  !--------!  n  !
+        +---+                           +-----+        +-----+
+        DIP                              Edge           Edge
+    (facing down)                     (facing up)     (facing up)
+</pre>
+
+<h2>Testing the Conversion Cable (Model II/12/16A/16B/6000 only)</h2>
+
+Once you have built your cable, and applied power to your drive enclosure,
+connect the cable to your Model II/12/16A/16B/6000 external floppy connector
+(on the 12/16B/6000 it is behind the access door and in the lower right
+corner), and turn on your system.  If the drive light immediately comes on
+and stays on, this usually indicates that the data cable is plugged in upside
+down somewhere (check your pin 1 keying).
+
+<p>
+If the drive light does not light, XENIX users should run diskutil and attempt
+to format a new floppy in the new drive.  (TRSDOS users can use the FORMAT
+program.)  If the drive light does not come on when selected, check the drive
+select strap on the drive and make sure it is set to the drive number you
+tried to format.  If the drive select settings are correct, the cable may
+be at fault.
+
+</p><p>
+If the drive light does come on but diskutil does not get past cylinder 0
+or TRSDOS FORMAT aborts on track 000 or 0001 or reports almost immediately
+that the diskette is unusable, then the terminating resistor may not be
+installed or the cable is incorrectly wired.   3.5" drives may not be used
+with TRSDOS and can only be used with a special version of XENIX and diskutil.
+Attempting to run the Tandy-supplied diskutil on 3.5" drives will always fail.
+
+</p><p>
+If diskutil or FORMAT get all the way through formatting a floppy, and they
+behave as though they correctly formatted a double sided disk (check the
+external media-type switch if the media formats like a single-sided diskette),
+then you have a working cable.
+
+</p><p>
+If you use XENIX, some programs are hard coded to expect media in certain
+drives.  You might consider renaming the device names (/dev/fdn, /dev/rfdn,
+/dev/fdbtn and /dev/rfdbtn) so that you can use 5.25" media instead of the
+remaining 8" drive 0.  Be sure to rename all the floppy devs with the same
+drive number or else you can get into trouble.
+
+</p><p>
+Although the 5.25" 1.2Meg drives are 80 track drives, only 77 of the tracks
+are used under standard Model II/12/16A/16B/6000 operating systems, because
+they think they are talking to a 77-track 8" drive. However, because TRSDOS-II
+and XENIX write the correct number of sectors per track allowed for that
+transfer rate and motor speed (16 512-byte sectors at 360RPM), the
+TRSDOS-II and XENIX-usable storage will equal 1.224 meg (((76x2x16)+16)x512
+= 1,253,376, which is 24K more than the IBM AT format allows.  The full 80
+tracks can be utilized by XENIX, but this requires changes to XENIX and
+diskutil, plus more operator intervention when performing tars dumps and
+file-system creation.
+
+</p><h2>3.5" 1.44Meg drives - The 16A/16B/6000 XENIX Migration Route</h2>
+
+<p>
+When the time comes to migrate data off a Model 16A/16B/6000 XENIX system,
+using 3.5" diskettes is the way to go.  The reason is that the format that
+can be generated on these diskettes is identical to that used on IBM-compatible
+systems using 3.5" drives.  At that point, utilities like tar and cpio can
+be used to migrate data between these systems.  Although this isn't as
+potentially fast as using Iomega cartridges, the Iomega format used on the
+16A/16B/6000 isn't transparently readable by IBM-compatible systems, and
+Iomega cartridge drivers only exist for a few older operating systems.*
+</p><p>
+The biggest stumbling block in using 3.5" floppies as a transport medium is
+an incompatibility between the XENIX version of tar, and those commonly 
+available in systems like FreeBSD that are largely based on GNUtar.
+In particular, the mechanism XENIX used to split files across multiple
+diskettes (or cartridges) is different from how GNUtar elected to handle
+the same problem.   There are a couple of solutions.  One solution is to avoid
+letting any files span floppies.  That may or may not be practical, depending
+on the size of the data you wish to migrate.
+</p><p>
+Another solution would be to use cpio.  However, the XENIX
+version of cpio is based on the one from AT&amp;T V7 UNIX with a little
+tinkering from Microsoft and The Santa Cruz Operation thrown in, so it may
+not be compatible with GNUcpio, which is what is used in most of the modern
+operating systems.
+</p><p>
+Another alternative would be to port GNUtar or GNUcpio to XENIX.  That may
+be difficult, since the XENIX compiler pre-dates prototypes and C++, things
+that GNU programs frequently use.
+</p><p>
+A final alternative is to use a port of XENIX tar utility to FreeBSD, which
+has been done.  Not everything works in this port, but it does handle transfer
+files that span multiple diskettes.
+</p><p>
+</p><h2>Migrating Model II/12 TRSDOS-II (4.x) or TRDSOS 2.x data</h2>
+
+<p>
+If you happen a lot of material on TRSDOS-II diskettes that you want to
+migrate AND you have a working XENIX system, the easiest way to migrate the
+material is by using the XENIX "tx" utility to move files to XENIX, then
+use one of the above methods for getting the data onto 3.5" tar or cpio 
+diskettes which can be read on a PC.
+
+</p><p>
+TRSDOS 2.x disks require one more step. TRSDOS-II has a utility to read
+TRSDOS 2.0 programs, so use that utility to get the data onto TRSDOS-II
+diskettes, and then use tx to get that data onto XENIX media, and then use
+XENIX to get the data onto 3.5" media.  If you have only a small amount of
+data you wish to migrate, Kermit or some other RS-232 communication program
+that runs on TRSDOS 2.x/4.x might be a simpler, if slower, alternative.
+
+</p><p>
+In all cases, always dump the data out of these older programs in a flat
+ASCII format if at all possible using the native TRSDOS, TRSDOS-II or
+XENIX applications prior to migrating the data to 3.5" media on a PC.
+File formats from these older programs are not all known and few tools exist
+to read them.  You will have much better chances with the data in flat
+ASCII, even if you do lose some of the formatting information in the process.
+
+</p><p>
+* For those who manage to find a compatible SCSI driver to use in migrating
+via Iomega cartridges (the 256 byte sector size is usually the killer), it is
+important to know that the first 128 256-byte sectors of a Tandy XENIX Iomega
+cartridge are always used for a boot area and the PVH data, and the real data
+starts after that point.  The UNIX/XENIX dd utility can be used to skip over
+this area and then pipe the remaining drive content into a file, or directly
+to the tar or cpio utilities.
+
+</p><h2>XENIX Operating System support for 3.5" drives.</h2>
+<p>
+As distributed by Tandy, XENIX only knows how to write the 16-sector,
+77 track format utilized by 8" drives.  5.25" drives can use this format
+without change, but it isn't portable.  For some unknown reason, IBM
+elected to ignore their own format specifications when developing the IBM
+PC and only write 15 512-byte sectors per track on 360RPM media, despite
+16 512-byte sectors being completely valid and since 16 is an even number,
+it makes more sense to use.  (Strangely, this makes Tandy more compatible with
+IBMs floppy diskette standards than the IBM-PC was.)  In addition, XENIX
+as provided by Tandy doesn't know how to write the 18 512-byte sector format
+commonly used on 300 RPM 3.5" media.  
+
+</p><p>
+A version of diskutil (the XENIX stand-alone format utility) has been modified
+to create the traditional Model 16A/16B/6000 XENIX and TRSDOS-II formats,  and
+also create the 5.25" 15-sector format pattern used by IBM in the IBM-PC
+and compatibles, as well as the 3.5" 18-sector format also used on
+IBM-compatible computers.  Diskettes can be formatted on PCs as well, but
+diskutil is much faster at formatting, and far better at detecting media
+defects than any PC formatter.
+
+</p><p>
+Similarly, a modified version of z80ctl has been created to recognize these
+formats and allow them to be used.  Z80ctl is the program that runs on
+all Tandy Model 16A/16B/6000s on the z80-CPU while XENIX is running on the
+68000 CPU.  Z80ctl is responsible for all I/O operations, and communicates
+with XENIX via shared memory.  Z80ctl informs XENIX of the type and size of
+media it detects each time a floppy device is opened within XENIX.
+
+
+</p><h2>Caution to Model II/12/16A/16B/6000 systems with 5.25" or 3.5" drives</h2>
+One final note:  On systems where 8" drives are being replaced, the new 3.5"
+or 5.25" disk drives will not detect a diskette change as some of the older
+8" half-height drives did.  The original "thin-line" drives had square drive
+activity lights. The cost-reduced 8" drives Tandy used after 1983 usually had
+round lights and due to a flaw, these would only report a disk change if it
+occurred while the drive light was on.  Many of the older full-height 8"
+single-sided drives from the Model II era also failed to report disk changes.
+<p>
+All this means is that you should always make sure that the diskette media
+isn't being accessed anymore before removing a diskette.  If you happen to
+insert a new diskette, the operating system will not know about this and
+could write data it intended to write to the first diskette onto the second
+diskette.   This is usually an issue only when diskettes are mounted as
+filesystems as I/O operations can be delayed by 30 seconds or more, but could
+also occur during dump, tar or cpio operations.  For dump, tar and cpio,
+always wait for the "change disks" prompt or shell prompt to appear and for
+the drive light to go out before opening the drive.  If a diskette is mounted
+as a filesystem, wait ten seconds after the umount command completes and
+until the drive light goes out before removing a diskette that you just
+dismounted.
+<br>
+<br>
+<br>
+</p><blockquote>
+<pre>[Copyright 1988,1990,1991,2000,2002,2003 Frank Durda IV, All Rights Reserved.
+Mirroring in any form is expressly prohibited.
+The official web site for this material is: http://nemesis.lonestar.org 
+Contact this address for use clearances: clearance at nemesis.lonestar.org
+Comments and queries to this address: web_software at nemesis.lonestar.org]
+</pre>
+</blockquote>
+
+<a href="http://nemesis.lonestar.org/">Visit the nemesis.lonestar.org
+home page and index</a>
+
+<p>
+<img src="floppyfix_files/vh401.gif" alt="Valid HTML 4.01!" height="31" width="88">
+
+
+</p></body></html>

@@ -1,0 +1,323 @@
+   1:			;*=*=*
+   2:			;	xtrsmous/cmd
+   3:			;	LS-DOS driver for xtrs emulation of mouse
+   4:			;
+   5:			;	Copyright (c) 1998, Timothy Mann
+   6:			;
+   7:			;	This software may be copied, modified, and used for any
+   8:			;	purpose without fee, provided that (1) the above copyright
+   9:			;	notice is retained, and (2) modified versions are clearly
+  10:			;	marked as having been modified, with the modifier's name and
+  11:			;	the date included.  
+  12:			;
+  13:			;	Created 9-28-98
+  14:			;       Last modified on Sat Oct 10 20:57:36 PDT 1998 by mann
+  15:			;
+  16:			;	Usage:
+  17:			;	  xtrsmous		To load driver in high memory.
+  18:			;	  xtrsmous (low) 	To load driver in low memory if possible,
+  19:			;				  or in high memory if low memory is full.
+  20:			;
+  21:			;	The default is to use high memory because MDRAW/BAS contains a
+  22:			;	PEEK in the first line of code that looks for the driver in
+  23:			;	high memory; if it is in low memory, MDRAW thinks the driver
+  24:			;	is not installed and exits.  If you edit this line of code to
+  25:			;	remove the test, the driver will work fine in low memory.
+  26:			;*=*=*
+  27:			
+  28:			
+  29:			; ASCII chars
+  30:	000A          	LF      equ     10
+  31:	000D          	CR	equ	13
+  32:	0003          	ETX	equ	3
+  33:			
+  34:			; Model 4 SVC numbers
+  35:	0064          	@high   equ     100
+  36:	000A          	@dsply  equ     10
+  37:	0065          	@flags  equ     101
+  38:	000C          	@logot  equ     12
+  39:	0052          	@gtdcb  equ	82 
+  40:	0053          	@gtmod	equ	83
+  41:	0009          	@keyin	equ	9
+  42:	0011          	@param	equ	17
+  43:	0078          	@mouse	equ     120     ;unofficial value
+  44:			
+  45:	01F0          	svcvec	equ	100h + 2*@mouse
+  46:			
+  47:			; xtrs emts (byte-reversed)
+  48:	29ED          	emt_mouse  equ	029edh
+  49:			
+  50:	3000          		org	3000h
+  51:			;*=*=*
+  52:			; 	Relocator for disk driver
+  53:			;*=*=*
+  54:	3000  116B31  	instal:	ld	de,prmtab
+  55:	3003  3E11    		ld	a,@param	;Parse parameters
+  56:	3005  EF      		rst	40
+  57:	3006  C29530  		jp	nz,prmerr
+  58:	3009  21D230  		ld      hl,hello_
+  59:	300C  3E0A    		ld      a,@dsply        ;Display hello
+  60:	300E  EF      		rst     40
+  61:			;*=*=*
+  62:			;       Check if driver already loaded
+  63:			;*=*=*
+  64:	300F  118131  		ld	de,modnam
+  65:	3012  3E53    		ld	a,@gtmod
+  66:	3014  EF      		rst	40
+  67:	3015  CA9930  		jp	z,loaded	;Already loaded
+  68:			;*=*=*
+  69:			;	Check if OK to use low memory.
+  70:			;*=*=*
+  71:	3018  010000  	lparm:	ld	bc,0
+  72:	301B  78      		ld	a,b
+  73:	301C  B1      		or	c
+  74:	301D  2828    		jr	z,usehi
+  75:			;*=*=*
+  76:			;       Obtain low memory driver pointer.  Bizarre API here!
+  77:			;*=*=*
+  78:	301F  1E4B    	        ld      e,'K'           ;Locate pointer to *KI DCB
+  79:	3021  1649    		ld	d,'I'		;  via @GTDCB SVC
+  80:	3023  3E52    	        ld      a,@gtdcb        
+  81:	3025  EF      	        rst     40
+  82:	3026  C29D30  	        jp      nz,curdl        ;No error unless KI clobbered!
+  83:	3029  2B      	        dec     hl              ;Decrement to driver pointer
+  84:	302A  56      	        ld      d,(hl)          ;P/u hi-order of pointer,
+  85:	302B  2B      	        dec     hl              ;  decrement to and p/u
+  86:	302C  5E      	        ld      e,(hl)          ;  lo-order of pointer
+  87:			;*=*=*
+  88:			;       Check if driver will fit into [(LCPTR), X'12FF']
+  89:			;*=*=*
+  90:	302D  E5      		push	hl		;Save address of pointer
+  91:	302E  211F00  	        ld      hl,length	;New pointer will be
+  92:	3031  19      	        add     hl,de		;  pointer + LENGTH
+  93:	3032  54      		ld	d,h		;Save a copy in DE
+  94:	3033  5D      		ld	e,l
+  95:	3034  010113  	        ld      bc,1301h        ;If > 1300H, driver won't fit
+  96:	3037  97      	        sub     a               ;Reset carry flag
+  97:	3038  ED42    	        sbc     hl,bc
+  98:	303A  E1      		pop	hl		;Get back address of pointer
+  99:	303B  300A    	        jr      nc,usehi        ;Go if driver won't fit
+ 100:	303D  73      		ld	(hl),e		;Store new value of pointer
+ 101:	303E  23      		inc	hl
+ 102:	303F  72      		ld	(hl),d
+ 103:	3040  1B      		dec	de		;Last byte of driver goes here
+ 104:	3041  ED536931		ld      (newend),de
+ 105:	3045  1816    		jr	dorelo
+ 106:			;*=*=*
+ 107:			;       Put in high memory instead.
+ 108:			;*=*=*
+ 109:	3047  210000  	usehi:	ld      hl,0            ;Get current HIGH$
+ 110:	304A  45      		ld      b,l
+ 111:	304B  3E64    		ld      a,@high 
+ 112:	304D  EF      		rst     40
+ 113:	304E  C2A130  		jp      nz,nomem
+ 114:	3051  226931  		ld      (newend),hl	;Last byte of driver goes here
+ 115:	3054  111F00  		ld	de,length
+ 116:	3057  97      		sub	a		;Reset carry flag
+ 117:	3058  ED52    		sbc	hl,de		;Compute new HIGH$
+ 118:	305A  3E64    		ld      a,@high         ;Set new HIGH$ into the system
+ 119:	305C  EF      		rst     40
+ 120:			;*=*=*
+ 121:			;       Relocate internal references in driver.
+ 122:			;	HL = address for last byte of driver.
+ 123:			;*=*=*
+ 124:	305D  CDAB30  	dorelo:	call	relo
+ 125:			;*=*=*
+ 126:			;	Link to @ICNFG (must follow address relocation and precede movement)
+ 127:			;*=*=*
+ 128:	3060  3E65    		ld      a,@flags        ;Get flags pointer into IY
+ 129:	3062  EF      		rst     40
+ 130:	3063  FD7E1C  	        ld      a,(iy+28)       ;Copy current @ICNFG into LINK
+ 131:	3066  FD6E1D  	        ld      l,(iy+29)
+ 132:	3069  FD661E  	        ld      h,(iy+30)
+ 133:	306C  329131  		ld	(link),a
+ 134:	306F  229231  	        ld      (link+1),hl
+ 135:	3072  218E31  		ld	hl,dvrcfg	;Get relocated init address
+ 136:	3073          	rx01	equ	$-2
+ 137:	3075  FD751D  	        ld      (iy+29),l       ;Save in @ICNFG vector
+ 138:	3078  FD741E  	        ld      (iy+30),h
+ 139:	307B  FD361CC3		ld	(iy+28),0c3h	;Insert JP opcode
+ 140:			;*=*=*
+ 141:			;       Move driver into low or high memory.
+ 142:			;*=*=*
+ 143:	307F          	move:
+ 144:	307F  ED5B6931		ld      de,(newend)     ;Destination address
+ 145:	3083  219A31  		ld      hl,dvrend       ;Last byte of module
+ 146:	3086  011F00  		ld      bc,length       ;Length of filter
+ 147:	3089  EDB8    		lddr
+ 148:	308B  EB      		ex      de,hl
+ 149:	308C  23      		inc     hl              ;Bump to driver entry
+ 150:			;*=*=*
+ 151:			;	Driver is loaded; finish up.
+ 152:			;*=*=*
+ 153:	308D  CD9431  		call	dvrini		;Hook into SVC table
+ 154:			
+ 155:	3090  210000  		ld      hl,0            ;Successful completion
+ 156:	3093  97      		sub	a
+ 157:	3094  C9      		ret
+ 158:			
+ 159:			;*=*=*
+ 160:			;	Error vectors
+ 161:			;*=*=*
+ 162:	3095  215731  	prmerr:	ld	hl,prmerr_
+ 163:	3098  DD      		defb	0ddh
+ 164:	3099  213731  	loaded:	ld	hl,loaded_
+ 165:	309C  DD      		defb	0ddh
+ 166:	309D  210631  	curdl:	ld	hl,curdl_
+ 167:	30A0  DD      		defb	0ddh
+ 168:	30A1  211931  	nomem:  ld      hl,nomem_
+ 169:	30A4  3E0C    	logot:	ld	a,@logot 
+ 170:	30A6  EF      		rst	40
+ 171:	30A7  21FFFF  		ld      hl,-1            ;Unuccessful completion
+ 172:	30AA  C9      		ret
+ 173:			
+ 174:			;*=*=*
+ 175:			;       Relocate internal references in driver.
+ 176:			;	HL = address for last byte of driver.
+ 177:			;*=*=*
+ 178:	30AB  2A6931  	relo:	ld	hl,(newend)
+ 179:	30AE  FD219B31		ld      iy,reltab       ;Point to relocation tbl
+ 180:	30B2  119A31  		ld      de,dvrend
+ 181:	30B5  97      		sub     a               ;Clear carry flag
+ 182:	30B6  ED52    		sbc     hl,de
+ 183:	30B8  44      		ld      b,h             ;Move to BC
+ 184:	30B9  4D      		ld      c,l
+ 185:	30BA  FD6E00  	rloop:  ld      l,(iy)          ;Get address to change
+ 186:	30BD  FD6601  		ld      h,(iy+1)
+ 187:	30C0  7C      		ld      a,h
+ 188:	30C1  B5      		or      l
+ 189:	30C2  C8      		ret	z
+ 190:	30C3  5E      		ld      e,(hl)          ;P/U address
+ 191:	30C4  23      		inc     hl
+ 192:	30C5  56      		ld      d,(hl)
+ 193:	30C6  EB      		ex      de,hl           ;Offset it
+ 194:	30C7  09      		add     hl,bc
+ 195:	30C8  EB      		ex      de,hl
+ 196:	30C9  72      		ld      (hl),d          ;And put back
+ 197:	30CA  2B      		dec     hl
+ 198:	30CB  73      		ld      (hl),e
+ 199:	30CC  FD23    		inc     iy
+ 200:	30CE  FD23    		inc     iy
+ 201:	30D0  18E8    		jr      rloop           ;Loop till done
+ 202:			
+ 203:			;*=*=*
+ 204:			;	Messages and globals
+ 205:			;*=*=*
+ 206:	30D2  58545253	hello_: defb    'XTRSMOUS - Emulated mouse driver for xtrs - 9/28/98',CR
+	      4D4F5553
+	      202D2045
+	      6D756C61
+	      74656420
+	      6D6F7573
+	      65206472
+	      69766572
+	      20666F72
+	      20787472
+	      73202D20
+	      392F3238
+	      2F39380D
+ 207:	3106  4C532D44	curdl_:	defb	'LS-DOS is curdled!',CR
+	      4F532069
+	      73206375
+	      72646C65
+	      64210D
+ 208:	3119  48696768	nomem_: defb    'High memory is not available!',CR
+	      206D656D
+	      6F727920
+	      6973206E
+	      6F742061
+	      7661696C
+	      61626C65
+	      210D
+ 209:	3137  4D6F7573	loaded_:defb	'Mouse driver is already loaded!',CR
+	      65206472
+	      69766572
+	      20697320
+	      616C7265
+	      61647920
+	      6C6F6164
+	      6564210D
+ 210:	3157  42616420	prmerr_:defb	'Bad parameters!',CR
+	      70617261
+	      6D657465
+	      7273210D
+ 211:	3167  0000    	lcptr:	defw	0
+ 212:	3169  0000    	newend:	defw	0
+ 213:			
+ 214:			;*=*=*
+ 215:			;	Parameter table
+ 216:			;*=*=*
+ 217:	316B  4C4F5720	prmtab:	defb	'LOW   '
+	      2020
+ 218:	3171  1930    		defw	lparm+1
+ 219:	3173  4C202020		defb	'L     '
+	      2020
+ 220:	3179  1930    		defw	lparm+1
+ 221:	317B  00      		defb	0
+ 222:			
+ 223:			;*=*=*
+ 224:			;	Driver
+ 225:			;*=*=*
+ 226:	317C  180D    	entry:  jr      begin           ;The driver starts with the
+ 227:	317E  9A31    		defw    dvrend          ;  DOS standard header
+ 228:	317E          	rx00	equ	$-2
+ 229:	3180  06      		defb    modptr-modnam   ;Length of name
+ 230:	3181  244D4F55	modnam:	defb    '$MOUSE'        ;Name for @GTMOD requests
+	      5345
+ 231:	3187  0000    	modptr: defw    0               ;These pointers are unused, but 1st byte MBZ
+ 232:	3189  0000    		defw    0
+ 233:			;*=*=*
+ 234:			;	Do the real work using an emulator trap
+ 235:			;*=*=*
+ 236:	318B  ED29    	begin:	defw	emt_mouse
+ 237:	318D  C9      		ret
+ 238:			;*=*=*
+ 239:			;	Boot-time initialization
+ 240:			;*=*=*
+ 241:	318E          	dvrcfg:				;@ICNFG chains in here
+ 242:	318E  CD9431  		call	dvrini
+ 243:	318F          	rx02	equ	$-2	
+ 244:	3191  54696D  	link:	defb	'Tim'		;Replaced by next link in @ICNFG chain
+ 245:			;*=*=*
+ 246:			;	Hook into SVC table
+ 247:			;*=*=*
+ 248:	3194  217C31  	dvrini:	ld	hl,entry
+ 249:	3195          	rx03	equ	$-2
+ 250:	3197  22F001  		ld	(svcvec),hl
+ 251:	319A  C9      		ret
+ 252:			
+ 253:	319A          	dvrend  equ     $-1
+ 254:	001F          	length  equ     $-entry
+ 255:	319B  7E317330	reltab: defw    rx00,rx01,rx02,rx03,0
+	      8F319531
+	      0000
+ 256:	3000          		end     instal
+
+
+
+Statistics:
+
+    48	symbols
+   421	bytes
+
+
+
+Symbol Table:
+
+@dsply         =   a     emt_mouse      =29ed     nomem           30a1     
+@flags         =  65     entry           317c     nomem_          3119     
+@gtdcb         =  52     etx            =   3+    prmerr          3095     
+@gtmod         =  53     hello_          30d2     prmerr_         3157     
+@high          =  64     instal          3000     prmtab          316b     
+@keyin         =   9+    lcptr           3167+    relo            30ab     
+@logot         =   c     length         =  1f     reltab          319b     
+@mouse         =  78     lf             =   a+    rloop           30ba     
+@param         =  11     link            3191     rx00           =317e     
+begin           318b     loaded          3099     rx01           =3073     
+cr             =   d     loaded_         3137     rx02           =318f     
+curdl           309d     logot           30a4+    rx03           =3195     
+curdl_          3106     lparm           3018     svcvec         = 1f0     
+dorelo          305d     modnam          3181     usehi           3047     
+dvrcfg          318e     modptr          3187     
+dvrend         =319a     move            307f+    
+dvrini          3194     newend          3169     

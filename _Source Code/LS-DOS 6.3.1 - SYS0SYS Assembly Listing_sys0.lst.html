@@ -1,0 +1,3380 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii"><!-- LS-DOS 6.3.1 - SYS0/SYS Assembly Listing (HTML format version)
+     Copyright 1999,2002 Frank Durda IV, All Rights Reserved.
+     Mirroring in any form is expressly prohibited.&nbsp  Contact this address
+     for use clearances: clearance at nemesis.lonestar.org
+     Comments and queries to this address: web_software at nemesis.lonestar.org
+     The official web site for this material is http://nemesis.lonestar.org
+     Edit 1(3)  11-Apr-1999, Clean-up.
+     Edit 1(4)  23-Jun-2002, Conversion to HTML 4.01
+--><title>LS-DOS 6.3.1 - SYS0/SYS Assembly Listing (HTML format version)</title></head><body bgcolor="#ffffff" link="#009900" text="#000000" vlink="#990000">
+<basefont size="3">
+<center>
+<h1>
+LS-DOS 6.3.1 - SYS0/SYS Assembly Listing (HTML format version)
+</h1>
+</center>
+
+<blockquote>
+<pre>[Copyright 1999,2002 Frank Durda IV, All Rights Reserved.
+Mirroring of any material on this page in any form is expressly prohibited.
+The official web site for this material is:  http://nemesis.lonestar.org
+Contact this address for use clearances: clearance at nemesis.lonestar.org
+Comments and queries to this address: web_software at nemesis.lonestar.org]
+</pre>
+</blockquote>
+<pre>MISOSYS EDAS-4.3 04/11/99 20:43:48 SYSRES - LS-DOS 6.2          Page 00001 
+
+              00001 ;SYSRES/ASM - LS-DOS 6.2
+000A          00003 LF      EQU     10
+000D          00004 CR      EQU     13
+              00005 ;
+              00006 ;*LIST  OFF                     ;Xref of Lowcore
+0000          00007 *GET    LDOS60/EQU:2
+08F0          00008 @$SYS   EQU     08F0H
+0000          00009 @@1     DEFL    0000H
+0000          00010 @@2     DEFL    0000H
+0000          00011 @@3     DEFL    0000H
+0000          00012 @@4     DEFL    0000H
+0877          00013 @BANK   EQU     0877H
+FFFF          00014 @BLD631 EQU     0FFFFH
+FFFF          00015 @BLD631C        EQU     0FFFFH
+FFFF          00016 @BLD631D        EQU     0FFFFH
+FFFF          00017 @BLD631E        EQU     0FFFFH
+FFFF          00018 @BLD631F        EQU     0FFFFH
+FFFF          00019 @BLD631G        EQU     0FFFFH
+FFFF          00020 @BLD631H        EQU     0FFFFH
+1300          00021 @BYTEIO EQU     1300H
+0689          00022 @CHNIO  EQU     0689H
+0553          00023 @CKBRKC EQU     0553H
+0545          00024 @CLS    EQU     0545H
+0623          00025 @CTL    EQU     0623H
+06E3          00026 @DIV16  EQU     06E3H
+0642          00027 @DSP    EQU     0642H
+052D          00028 @DSPLY  EQU     052DH
+0000          00029 @FRENCH EQU     0000H
+0000          00030 @GERMAN EQU     0000H
+0638          00031 @GET    EQU     0638H
+07BD          00032 @HEX16  EQU     07BDH
+07C2          00033 @HEX8   EQU     07C2H
+06F8          00034 @HEXD   EQU     06F8H
+06F6          00035 @HEXDEC EQU     06F6H
+0000          00036 @HZ50   EQU     0000H
+0000          00037 @INTL   EQU     0000H
+0630          00038 @JCL    EQU     0630H
+0635          00039 @KBD    EQU     0635H
+0628          00040 @KEY    EQU     0628H
+0585          00041 @KEYIN  EQU     0585H
+0089          00042 @KITSK  EQU     0089H
+0503          00043 @LOGER  EQU     0503H
+0500          00044 @LOGOT  EQU     0500H
+0000          00045 @MOD2   EQU     0000H
+FFFF          00046 @MOD4   EQU     0FFFFH
+0530          00047 @MSG    EQU     0530H
+06C9          00048 @MUL16  EQU     06C9H
+0084          00049 @OPREG  EQU     0084H
+0528          00050 @PRINT  EQU     0528H
+063D          00051 @PRT    EQU     063DH
+0E29          00052 @PRTIMO EQU     0E29H
+0645          00053 @PUT    EQU     0645H
+0FE9          00054 @RSTNMI EQU     0FE9H
+0680          00055 @RSTREG EQU     0680H
+078D          00056 @TIME   EQU     078DH
+FFFF          00057 @USA    EQU     0FFFFH
+0B99          00058 @VDCTL  EQU     0B99H
+0D38          00059 @VDCTL3 EQU     0D38H
+0935          00060 @VDPRT  EQU     0935H
+0D42          00061 @_VDCTL EQU     0D42H
+0DF1          00062 ADDR_2_ROWCOL   EQU     0DF1H
+0201          00063 BAR$    EQU     0201H
+439D          00064 BOOTST$ EQU     439DH
+0200          00065 BUR$    EQU     0200H
+0A7B          00066 CASHK$  EQU     0A7BH
+006C          00067 CFLAG$  EQU     006CH
+0300          00068 CORE$   DEFL    0300H
+F800          00069 CRTBGN$ EQU     0F800H
+0033          00070 DATE$   EQU     0033H
+07A8          00071 DATELO$ EQU     07A8H
+04C7          00072 DAYTBL$ EQU     04C7H
+0031          00073 DCBKL$  EQU     0031H
+0470          00074 DCT$    EQU     0470H
+006D          00075 DFLAG$  EQU     006DH
+0846          00076 DIS_DO_RAM      EQU     0846H
+0B94          00077 DODATA$ EQU     0B94H
+0210          00078 DODCB$  EQU     0210H
+0C44          00079 DO_CONTROL      EQU     0C44H
+0CB8          00080 DO_DSPCHAR      EQU     0CB8H
+0C8C          00081 DO_INVERT_DIS   EQU     0C8CH
+0C89          00082 DO_INVERT_ENA   EQU     0C89H
+0C9B          00083 DO_INVERT_OFF   EQU     0C9BH
+0000          00084 DO_MASK EQU     0000H
+0BCB          00085 DO_RET  EQU     0BCBH
+0BCC          00086 DO_RET1 EQU     0BCCH
+0CCE          00087 DO_SCROLL       EQU     0CCEH
+0BEA          00088 DO_TABS EQU     0BEAH
+04C0          00089 DSKTYP$ EQU     04C0H
+04C2          00090 DTPMT$  EQU     04C2H
+0FF4          00091 DVREND$ EQU     0FF4H
+0206          00092 DVRHI$  EQU     0206H
+0817          00093 ENADIS_DO_RAM   EQU     0817H
+000E          00094 FDDINT$ EQU     000EH
+006A          00095 FLGTAB$ EQU     006AH
+0DAE          00096 GET_@_ROWCOL    EQU     0DAEH
+0750          00097 HERTZ$  EQU     0750H
+040E          00098 HIGH$   EQU     040EH
+0072          00099 IFLAG$  EQU     0072H
+0420          00100 INBUF$  EQU     0420H
+003E          00101 INTVC$  EQU     003EH
+0203          00102 JCLCB$  EQU     0203H
+0230          00103 JLDCB$  EQU     0230H
+07D6          00104 KCK@    EQU     07D6H
+0074          00105 KFLAG$  EQU     0074H
+08FC          00106 KIDATA$ EQU     08FCH
+0208          00107 KIDCB$  EQU     0208H
+0202          00108 LBANK$  EQU     0202H
+0401          00109 MAXDAY$ EQU     0401H
+0076          00110 MODOUT$ EQU     0076H
+04DC          00111 MONTBL$ EQU     04DCH
+0077          00112 NFLAG$  EQU     0077H
+0078          00113 OPREG$  EQU     0078H
+086E          00114 OPREG_SV_AREA   EQU     086EH
+0835          00115 OPREG_SV_PTR    EQU     0835H
+0410          00116 PAKNAM$ EQU     0410H
+0382          00117 PAUSE@  EQU     0382H
+07AF          00118 PCSAVE$ EQU     07AFH
+001B          00119 PDRV$   EQU     001BH
+0218          00120 PRDCB$  EQU     0218H
+0DCD          00121 PUTA@DE EQU     0DCDH
+0DCA          00122 PUT_@   EQU     0DCAH
+0DC6          00123 PUT_@_ROWCOL    EQU     0DC6H
+007B          00124 RFLAG$  EQU     007BH
+0DD0          00125 ROWCOL_2_ADDR   EQU     0DD0H
+04C4          00126 RSTOR$  EQU     04C4H
+0238          00127 S1DCB$  EQU     0238H
+0CF3          00128 SET_SCROLL      EQU     0CF3H
+007C          00129 SFLAG$  EQU     007CH
+0220          00130 SIDCB$  EQU     0220H
+0228          00131 SODCB$  EQU     0228H
+0380          00132 STACK$  EQU     0380H
+0000          00133 START$  EQU     0000H
+002D          00134 TIME$   EQU     002DH
+002C          00135 TIMER$  EQU     002CH
+002B          00136 TIMSL$  EQU     002BH
+0713          00137 TIMTSK$ EQU     0713H
+04C3          00138 TMPMT$  EQU     04C3H
+07B1          00139 TRACE_INT       EQU     07B1H
+0A8F          00140 TYPHK$  EQU     0A8FH
+0B26          00141 TYPTSK$ EQU     0B26H
+007F          00142 VFLAG$  EQU     007FH
+0401          00143 ZERO$   EQU     0401H
+              00144 ;*LIST  ON
+0000          00145 *GET    COPYCOM:3               ;Embed copyright notice
+              00146 ; COPYCOM - File for Copyright COMment block
+              00147 ;
+0000          00148 *GET BUILDVER/ASM:3
+              00149 ;
+              00150 ;       Buildver/asm is a bit of a kludge since not all utilities can load
+              00151 ;       equates from LDOS60 and still compile.  LOWCORE and everybody else
+              00152 ;       relies on this setting, and it eventually ends up in LDOS60/EQU
+              00153 ;       for programs that can use that.
+              00154 ;
+FFFF          00155 @BLD631         EQU     -1      ;&lt;631&gt;Build 631 distribution (LEVEL 1B)
+              00156 ;       These switches activate patches made since the 1B release.
+              00157 ;       It is important that all earlier patches be enabled when a higher
+              00158 ;       patch is enabled.
+              00159 ;       Patches C thru F were published in TMQ IV.iv, page 32 (NOTE: the
+              00160 ;       patch addresses listed for SPOOL in SPOOL1/FIX are 19H high.)
+FFFF          00161 @BLD631C        EQU     -1      ;&lt;631&gt;Apply 1C patches (SETKI)
+FFFF          00162 @BLD631D        EQU     -1      ;&lt;631&gt;Apply 1D patches (DIR)
+FFFF          00163 @BLD631E        EQU     -1      ;&lt;631&gt;Apply 1E patches (DIR &amp; MEMDISK/DCT)
+FFFF          00164 @BLD631F        EQU     -1      ;&lt;631&gt;Apply 1F patches (SPOOL)
+              00165 ;       Patches G and H were published in TMQ V.i, pages 10 and 18/19.
+FFFF          00166 @BLD631G        EQU     -1      ;&lt;631&gt;Apply 1G patches (//KEYIN,DIR,DO *)
+FFFF          00167 @BLD631H        EQU     -1      ;&lt;631&gt;Apply 1H patches (MEMORY)
+              00168 ;
+              00169 ;End of BUILDVER/ASM
+              00170         IF      @BLD631
+              00172         ELSE
+              00173         COM     '&lt;*(C) 1982,3,4,6 by LSI*&gt;'
+              00174         ENDIF
+              00175 ;
+              00177 ;
+              00178 ;       LDOS 6.2 Low Core RAM storage assignments
+              00179 ;       Copyright (C) 1982 by Logical Systems, Inc.
+              00180 ;
+0000          00181 START$  EQU     0
+0000          00182         ORG     0+START$
+              00183 ;
+              00184 ;       Page 0 - RST's, data, and buffers
+              00185 ;
+0000 F3       00186 @RST00  DI                      ;IPL Entry for R/S 4-P
+0001 3E01     00187         LD      A,00000001B     ;Set image in A
+0003 D39C     00188         OUT     (9CH),A         ;toggle in BOOT/ROM
+0005 00       00189         DB      0,0,0           ;CP/M emulator SVC
+     00 00 
+0008 C9       00190 @RST08  RET
+0009 0000     00191         DW      0
+000B 0000     00192 SVCRET$ DW      0               ;Return address from SVC
+000D 00       00193 LSVC$   DB      0               ;Last SVC executed
+000E F3       00194 FDDINT$ DI                      ;NOP or DI (F3H) for
+000F C9       00195         RET                     ;  System (Smooth)
+0010 C9       00196 @RST10  RET
+0011 0000     00197         DW      0
+0013          00198 USTOR$  DS      5               ;User storage area
+0018 C9       00199 @RST18  RET
+0019 0000     00200         DW      0
+001B 01       00201 PDRV$   DB      1               ;Current drive, physical
+001C 0000     00202 PHIGH$  DW      0               ;Physical HIGH$
+001E 0030     00203 LOW$    DW      3000H           ;Lowest usable memory
+0020 C9       00204 @RST20  RET
+0021 0000     00205         DW      0
+0023 00       00206 LDRV$   DB      0               ;Current drive, logical
+0024 0000     00207 JDCB$   DW      0               ;Saved FCB pointer
+0026 0000     00208 JRET$   DW      0               ;Saved I/O return address
+0028 C35B1A   00209 @RST28  JP      RST28           ;System SVC processor
+002B 55       00210 TIMSL$  DB      55H             ;Fast=55, slow=FF
+002C 00       00211 TIMER$  DB      0               ;RTC counter
+002D 00       00212 TIME$   DC      3,0             ;SS:MM:HH storage area
+     00 00 
+0030 C3A019   00213 @RST30  JP      @DEBUG          ;DEBUG call address
+0033          00214 DATE$   DS      5               ;YY/DD/MM/packed
+0038 C3FF1B   00215 @RST38  JP      RST38@          ;Interrupt RST
+              00216         IF      @BLD631
+003B 01       00217 OSRLS$  DB      01H             ;&lt;631&gt;OS Release #
+              00218         ELSE
+              00219 OSRLS$  DB      00H             ;OS Release #
+              00220         ENDIF
+              00221 ;
+              00222 ;       INTIM$ stores the image read from RDINTSTATUS*
+              00223 ;
+003C 00       00224 INTIM$  DB      0               ;Interrupt latch image
+              00225 ;
+              00226 ;       INTMSK$ masks the image read from RDINTSTATUS*
+              00227 ;       LDOS 6.x permits only RS-232 RCV INT, IOBUS INT,
+              00228 ;       and RTC INT to be used by the TASKER off of RST38
+              00229 ;
+003D 2C       00230 INTMSK$ DB      2CH             ;Mask for INTIM$
+              00231 ;
+              00232 ;       INTVC$ stores the eight vectors associated
+              00233 ;       with the INTIM$ bit assignments
+              00234 ;
+003E 481C     00235 INTVC$  DW      RETINST         ;Primary interrupts
+0040 481C     00236         DW      RETINST,RTCPROC,RETINST
+     941C 481C 
+0046 481C     00237         DW      RETINST,RETINST,RETINST,RETINST
+     481C 481C 481C 
+              00238 ;
+              00239 ;       TCB$ stores the TCB vectors for task slots 0-11
+              00240 ;
+004E          00241 TCB$    DS      24              ;Interrupt task vectors
+              00242 ;
+              00243 ;       NMI vector used in disk I/O
+              00244 ;
+0066          00245 @NMI    DS      3               ;Don't overlay this
+              00246 ;
+              00247 ;       OVRLY$ stores the system's overlay request #
+              00248 ;
+0069 00       00249 OVRLY$  DB      0               ;Current overlay resident
+              00250 ;
+              00251 ;       FLGTAB$ stores 26 flags and images. A pointer
+              00252 ;       to this table is obtained from SVC-@FLAGS
+              00253 ;
+006A          00254 FLGTAB$ EQU     $
+              00255 ;
+              00256 ;
+              00257 ;       AFLAG$ - Start CYL for Allocation search
+              00258 ;
+006A 01       00259 AFLAG$  DB      01              ;AFLAG
+006B 00       00260         DB      0               ;BFLAG
+              00261 ;
+              00262 ;       CFLAG$ assignments:
+              00263 ;        0 - Cannot change HIGH$ via SVC-100
+              00264 ;        1 - @CMNDR in execution
+              00265 ;        2 - @KEYIN request from SYS1
+              00266 ;        3 - System request for drivers, filters, DCTs
+              00267 ;        4 - @CMNDR to only execute LIB commands
+              00268 ;        5 - Sysgen inhibit bit
+              00269 ;        6 - @ERROR inhibit display
+              00270 ;        7 - @ERROR to use user (DE) buffer
+              00271 ;
+006C 00       00272 CFLAG$  DB      0               ;Condition flag
+              00273 ;
+              00274 ;       DFLAG$ assignments:
+              00275 ;        0 - SPOOL is active
+              00276 ;        1 - TYPE ahead is active
+              00277 ;        2 - VERIFY is on
+              00278 ;        3 - SMOOTH active
+              00279 ;        4 - MemDISK active
+              00280 ;        5 - FORMS active
+              00281 ;        6 - KSM active
+              00282 ;        7 - accept GRAPHICS in screen print
+              00283 ;
+006D 0A       00284 DFLAG$  DB      00001010B       ;DEV Flag (SMOOTH,TYPE)
+              00285 ;
+              00286 ;       EFLAG$ - Assignments: (sys13 usage)
+              00287 ;       use only bits 4, 5 and 6 to indicate user
+              00288 ;       entry code to be passed to SYS13. SYS13
+              00289 ;       will be executed from SYS1 if this byte
+              00290 ;       is NON/0, bit 4, 5 and 6 will be merged into
+              00291 ;       the SYS13 (1000,1111b) overlay request
+              00292 ;
+006E 00       00293 EFLAG$  DB      0               ;Flag E
+006F 00       00294 FEMSK$  DB      0               ;Port FE mask
+0070 00       00295         DC      2,0             ;Flags G-H
+     00 
+              00296 ;
+              00297 ;       IFLAG$ - Assignments: (INTERNATIONAL)
+              00298 ;        0 - FRENCH
+              00299 ;        1 - GERMAN
+              00300 ;        2 - SWISS
+              00301 ;        3 -
+              00302 ;        4 - 
+              00303 ;        5 - 
+              00304 ;        6 - Special DMP mode ON/OFF
+              00305 ;        7 - '7' bit mode ON/OFF
+              00306 ;
+0072          00307 IFLAG$  EQU     $
+              00308         IF      @FRENCH
+              00309         DB      01000001B
+              00310         ENDIF
+              00311         IF      @GERMAN
+              00312         DB      01000010B
+              00313         ENDIF
+              00314         IF      @USA
+0072 00       00315         DB      0
+              00316         ENDIF
+0073 00       00317         DB      0               ;Flag J
+              00318 ;
+              00319 ;       KFLAG$ assignments:
+              00320 ;        0 - BREAK latch
+              00321 ;        1 - PAUSE latch
+              00322 ;        2 - ENTER latch
+              00323 ;        3 - reserved
+              00324 ;        4 - reserved
+              00325 ;        5 - CAPs lock
+              00326 ;        6 - reserved
+              00327 ;        7 - character in TYPE ahead
+              00328 ;
+0074 00       00329 KFLAG$  DB      0               ;Keyboard flag
+              00330 ;
+              00331 ;       LFLAG$ assignments:
+              00332 ;        0 - inhibit step rate question in FORMAT
+              00333 ;        4 - inhibit 8" query in FLOPPY/DCT
+              00334 ;        5 - inhibit # sides question in FORMAT
+              00335 ;        6,7 - Reserved for IM 2 hardware
+              00336 ;
+0075 11       00337 LFLAG$  DB      00010001B       ;LDOS feature inhibit
+              00338 ;
+              00339 ;       MODOUT$ mask assignments:
+              00340 ;        0 -
+              00341 ;        1 - cassette motor on/off
+              00342 ;        2 - mode select (0 = 80/64, 1 = 40/32)
+              00343 ;        3 - enable alternate character set
+              00344 ;        4 - enable external I/O
+              00345 ;        5 - video wait states (0 = disable, 1 = enable)
+              00346 ;        6 - clock speed ( 1 = 4 Mhz, 0 = 2 MHz)
+              00347 ;        7 -
+              00348 ;
+              00349         IF      @INTL
+              00350 MODOUT$ DB      70H             ;MODOUT international
+              00351         ELSE
+0076 78       00352 MODOUT$ DB      78H             ;MODOUT port image (FAST)
+              00353         ENDIF
+              00354 ;
+              00355 ;
+              00356 ;       NFLAG$ - Network flag$
+              00357 ;        0 - Allow setting of file open bit in DIR
+              00358 ;        1 / 5 - Reserved
+              00359 ;        6 - Set if in Task Processor
+              00360 ;        7 - Reserved
+              00361 ;
+0077 00       00362         DB      0               ;Inhibit open bit in DIR
+              00363 ;
+              00364 ;       OPREG$ memory management image port
+              00365 ;        0 - SEL0 - Select map overlay bit 0
+              00366 ;        1 - SEL1 - Select map overlay bit 1
+              00367 ;        2 - 80/64 - 1 = 80 x 24
+              00368 ;        3 - Inverse video
+              00369 ;        4 - MBIT0 - memory map bit 0
+              00370 ;        5 - MBIT1 - memory map bit 1
+              00371 ;        6 - FXUPMEM - fix upper memory
+              00372 ;        7 - PAGE - page 1K video RAM (set for 80x24)
+              00373 ;
+0078 87       00374 OPREG$  DB      87H             ;Memory management image
+              00375 ;
+              00376 ;       PFLAG$ - Printer flag
+              00377 ;       7 = Printer spooler is paused
+              00378 ;       0 - 6 = Reserved
+              00379 ;
+0079 00       00380         DB      0
+007A 00       00381         DB      0               ;QFLAG$
+              00382 ;
+              00383 ;       RFLAG$ - Retry init for FDC driver
+              00384 ;
+007B 08       00385 RFLAG$  DB      08              ;FDC retry count &gt;=2
+              00386 ;
+              00387 ;       SFLAG$ assignments:
+              00388 ;        0 - inhibit file open bit
+              00389 ;        1 - set to 1 if bit-2 set &amp; EXEC file opened
+              00390 ;        2 - set by @RUN to permit load of EXEC file
+              00391 ;        3 - SYSTEM (FAST)
+              00392 ;        4 - BREAK key disabled
+              00393 ;        5 - JCL active
+              00394 ;        6 - force extended error messages
+              00395 ;        7 - DEBUG to be turned on after load
+              00396 ;
+007C 08       00397 SFLAG$  DB      8               ;System flag (FAST)
+              00398 ;
+              00399 ;
+              00400 ;       Machine TYPE assignment:
+              00401 ;       All values are in decimal
+              00402 ;
+              00403 ;        2 = TRS-80 Model 2
+              00404 ;        4 = TRS-80 Model 4
+              00405 ;        5 = TRS-80 MODEL 4P
+              00406 ;       12 = TRS-80 Model 12
+              00407 ;       16 = TRS-80 Model 16
+              00408 ;
+              00409         IF      @MOD4
+007D 04       00410 TFLAG$  DB      04              ;Model 4 assignment
+              00411         ELSE
+              00412         ERR     'Undefined machine TYPE for TFLAG'
+              00413         ENDIF
+007E 00       00414         DB      0               ;Flag U
+              00415 ;
+              00416 ;       Video FLAG$ assignments:
+              00417 ;        0-3 - Set blink rate (1=fastest,7=slowest)
+              00418 ;        4 - display CLOCK
+              00419 ;        5 - cursor blink toggle bit
+              00420 ;        6 - Inhibit blinking cursor (user)
+              00421 ;        7 - Inhibit blinking cursor (system)
+              00422 ;
+007F 00       00423 VFLAG$  DB      0               ;Blink,Slow,No clock
+              00424 ;
+              00425 ;       WRINT$ - interrupt mask register
+              00426 ;        0 - enable 1500 baud rising edge
+              00427 ;        1 - enable 1500 baud falling edge
+              00428 ;        2 - enable real time clock
+              00429 ;        3 - enable I/O bus interrupts
+              00430 ;        4 - enable RS-232 transmit interrupts
+              00431 ;        5 - enable RS-232 receive data interrupts
+              00432 ;        6 - enable RS-232 error interrupt
+              00433 ;
+0080 04       00434 WRINT$  DB      4               ;WRINTMASK port image
+0081 00       00435         DB      0               ;Flag x
+              00436 ;
+              00437 ;       Bits 0-7 indicate new style dating on drives 0-7
+              00438 ;
+0082 FF       00439 YFLAG$  DB      0FFH
+0083 00       00440         DB      0               ;Z flag
+              00441 ;
+              00442 ;       Contents are high-order byte of SVC table
+              00443 ;
+0084 01       00444         DB      SVCTAB$&lt;-8      ;MSB of SVC table
+              00445 ;
+              00446 ;       OSVER$ stores the operating system version
+              00447 ;
+0085 63       00448 OSVER$  DB      63H             ;OS version #
+              00449 ;
+              00450 ;       Vector for config initialization
+              00451 ;
+0086 C9       00452 @ICNFG  RET                     ;Initialization config
+0087 0000     00453         DW      0
+              00454 ;
+              00455 ;       Chain vector for KI task processor
+              00456 ;
+0089 C9       00457 @KITSK  RET                     ;Keyboard task routine
+008A 0000     00458         DW      0
+              00459 ;
+              00460 ;       System File Control Block for overlays
+              00461 ;
+008C 80       00462 SFCB$   DB      80H,0,0         ;System /SYS FCB
+     00 00 
+008F 001D     00463         DW      SBUFF$
+0091 00       00464         DB      0
+0092 0000     00465         DW      0,0,0,-1,0,-1,-1
+     0000 0000 FFFF 0000 FFFF FFFF 
+              00466 ;
+              00467 ;       32-byte DEBUG save area
+              00468 ;
+00A0          00469 DBGSV$  DS      32
+              00470 ;
+              00471 ;       Job Control Language File Control Block
+              00472 ;
+00C0 00       00473 JFCB$   DC      3,0
+     00 00 
+00C3 001D     00474         DW      SBUFF$
+00C5          00475         DS      27
+              00476 ;
+              00477 ;       System Command Line file control block
+              00478 ;
+00E0          00479 CFCB$   EQU     $               ;Command Interpreter FCB
+00E0 43       00480 CFGFCB$ DB      'CONFIG/SYS.CCC:0',3
+     4F 4E 46 49 47 2F 53 59
+     53 2E 43 43 43 3A 30 03
+00F1          00481         DS      15
+              00482 ;
+              00483 ;       Page 1 - System Supervisor Call Table
+              00484 ;
+0100          00485 SVCTAB$ EQU     $
+              00486         IFNE $,100H
+              00487         ERR     'SVCTBL location violation'
+              00488         ENDIF
+              00489 ;
+              00490 ;       Initial version
+              00491 ;
+2400          00492 MAXCOR$ EQU     2400H+START$
+3000          00493 MINCOR$ EQU     3000H+START$
+1300          00494         ORG     @BYTEIO
+              00495 ;
+              00496 ;       file positioning routines - MUST BE FIRST
+              00497 ;
+1300          00500 *GET    FILPOSN:3
+              00501 ;FILPOSN/ASM - LS-DOS 6.3
+              00502 ;
+              00503 ;       Entry for byte I/O from @GET &amp; @PUT
+              00504 ;
+1300 DDE5     00505 BYTEIO  PUSH    IX
+1302 D1       00506         POP     DE              ;Transfer DCB to DE
+1303 CD6815   00507         CALL    CKOPEN@         ;Ck file open, save regs
+1306 DDCB01FE 00508         SET     7,(IX+1)        ;Denote byte or LRec
+130A 78       00509         LD      A,B             ;Get type code &amp; test
+130B FE02     00510         CP      2               ;For get/put
+130D 79       00511         LD      A,C
+130E 281F     00512         JR      Z,WRCHAR        ;Go on PUT
+1310 3058     00513         JR      NC,IORETZ       ;Ignore if CTL
+              00514 ;
+              00515 ;       Get a byte from a file
+              00516 ;
+1312 CD9215   00517 RDCHAR  CALL    CKEOF1          ;Ck for end of file
+1315 C0       00518         RET     NZ              ;Return if at end
+1316 DDCB016E 00519         BIT     5,(IX+1)        ;If buffer not current,
+131A C47913   00520         CALL    NZ,NSEC1        ;  read next sector
+131D C0       00521         RET     NZ
+131E CD1214   00522         CALL    BFRPOS          ;Pt to byte posn in bfr
+1321 1A       00523         LD      A,(DE)          ;P/u the byte
+1322 DD3405   00524         INC     (IX+5)          ;Inc NEXT ptr
+1325 CC2A13   00525         CALL    Z,SET5          ;Set bit 5 if zero
+1328 BF       00526         CP      A               ;Set Z flag--no error
+1329 C9       00527         RET
+              00528 ;
+132A DDCB01EE 00529 SET5    SET     5,(IX+1)
+132E C9       00530         RET
+              00531 ;
+              00532 ;       Write a byte to a file
+              00533 ;
+132F DDCB0076 00534 WRCHAR  BIT     6,(IX+0)        ;Prot level give write acc?
+1333 CAC613   00535         JP      Z,RWRIT3        ;  go if not
+1336 F5       00536         PUSH    AF              ;Save byte
+1337 DDCB016E 00537         BIT     5,(IX+1)        ;Get next sector if
+133B C46C13   00538         CALL    NZ,WRCH2        ;  buffer is not current
+133E 2803     00539         JR      Z,WRCH1         ;Skip if read was ok
+1340 E3       00540         EX      (SP),HL         ;Pop stack but keep
+1341 E1       00541         POP     HL              ;  error # in AF
+1342 C9       00542         RET
+              00543 ;
+1343 CD1214   00544 WRCH1   CALL    BFRPOS          ;Next bfr byte posn
+1346 F1       00545         POP     AF
+1347 12       00546         LD      (DE),A          ;Stuff the byte
+1348 DDCB01E6 00547         SET     4,(IX+1)        ;Buffer contains updated data
+134C DD3405   00548         INC     (IX+5)          ;Inc NEXT byte
+134F F5       00549         PUSH    AF              ;Save Z or NZ flag
+1350 CC2A13   00550         CALL    Z,SET5          ;Set bit 5 if offset 0
+1353 CD9215   00551         CALL    CKEOF1          ;Check for EOF
+1356 2006     00552         JR      NZ,ATEOFW       ;Go if there
+1358 DDCB0176 00553         BIT     6,(IX+1)        ;Jump if EOF set to next
+135C 2009     00554         JR      NZ,DNTSET       ;  only if at EOF
+135E DD7108   00555 ATEOFW  LD      (IX+8),C        ;Set EOF
+1361 DD750C   00556         LD      (IX+12),L
+1364 DD740D   00557         LD      (IX+13),H
+1367 F1       00558 DNTSET  POP     AF              ;Restore offset flag
+1368 2846     00559         JR      Z,RWRIT1        ;Go to write sector if 00
+136A AF       00560 IORETZ  XOR     A               ;Set Z flag--no error
+136B C9       00561         RET
+              00562 ;
+              00563 ;       WRCHR needs the next sector - if UPDATE, ck EOF
+              00564 ;
+136C DD7E01   00565 WRCH2   LD      A,(IX+1)        ;Ck if UPD bit set
+136F E607     00566         AND     7               ;Mask for prot level
+1371 FE04     00567         CP      4               ;Check for UPD
+1373 2004     00568         JR      NZ,NSEC1        ;Bypass EOF ck on &gt; UPD
+1375 CD9215   00569 NXTSECT CALL    CKEOF1          ;Ck for end of file
+1378 C0       00570         RET     NZ              ;Can't extend in update mode
+1379 DD7E01   00571 NSEC1   LD      A,(IX+1)        ;Read access?
+137C E607     00572         AND     7
+137E FE06     00573         CP      6
+1380 3044     00574         JR      NC,RWRIT3       ;"Illegal access..." if not
+1382 CDCB15   00575 NSEC2   CALL    IOREC           ;Calc cylinder/sector
+1385 C0       00576         RET     NZ
+1386 DDCB01AE 00577         RES     5,(IX+1)        ;Show buffer current
+138A DD6E03   00578         LD      L,(IX+3)        ;P/u buffer address
+138D DD6604   00579         LD      H,(IX+4)
+1390 CDF419   00580         CALL    @RDSEC          ;Read the sector
+1393 2803     00581         JR      Z,BUMPNRN       ;Go if no error
+1395 FE06     00582         CP      6               ;Test for prot sector
+1397 C0       00583         RET     NZ              ;Quit if error not 6
+1398 DD340A   00584 BUMPNRN INC     (IX+10)         ;Inc the NRN ptr LSB
+139B 2003     00585         JR      NZ,ZEROA@
+139D DD340B   00586         INC     (IX+11)         ;  and MSB if necessary
+              00587         IF      @BLD631
+              00588 @SEEKSC:                        ;&lt;631&gt;
+              00589         ENDIF
+13A0 AF       00590 ZEROA@  XOR     A
+13A1 C9       00591         RET
+              00592 ;
+              00593 ;       Repositioning needs to write out the buffer
+              00594 ;
+13A2 DD7E01   00595 RWRIT@  LD      A,(IX+1)
+13A5 E690     00596         AND     90H             ;Test for non-sector i/o and
+13A7 FE90     00597         CP      90H             ;  buffer contents changed
+13A9 2805     00598         JR      Z,RWRIT1        ;Go if conditions true
+13AB 18F3     00599         JR      ZEROA@          ;  else no need to write
+13AD CD6815   00600 @RWRIT  CALL    CKOPEN@         ;Ck file open, save regs
+13B0 CD0B14   00601 RWRIT1  CALL    GETNRN          ;P/u NRN
+13B3 7C       00602         LD      A,H             ;Ignore if rewound
+13B4 B5       00603         OR      L
+13B5 C8       00604         RET     Z
+13B6 2B       00605         DEC     HL              ;Dec &amp; reset NRN
+13B7 DD750A   00606         LD      (IX+10),L
+13BA DD740B   00607         LD      (IX+11),H
+              00608 ;
+              00609 ;       Check access protection level
+              00610 ;
+13BD DD7E01   00611 RWRIT2  LD      A,(IX+1)        ;Get prot
+13C0 E607     00612         AND     7
+13C2 FE05     00613         CP      5               ;Update access or better?
+13C4 3804     00614         JR      C,RWRIT4
+13C6 3E25     00615 RWRIT3  LD      A,25H           ;Illegal access error code
+13C8 B7       00616         OR      A               ;Return NZ
+13C9 C9       00617         RET
+              00618 ;
+13CA E604     00619 RWRIT4  AND     4               ;If UPDATE access, then
+13CC 2805     00620         JR      Z,RWRIT5        ;  can't extend if at EOF
+13CE CD9215   00621         CALL    CKEOF1
+13D1 20F3     00622         JR      NZ,RWRIT3       ;  so show "Illegal access...
+13D3 CDCB15   00623 RWRIT5  CALL    IOREC           ;Calculate cylinder &amp; sector
+13D6 C0       00624         RET     NZ
+13D7 DD6E03   00625         LD      L,(IX+3)        ;P/u buffer addr
+13DA DD6604   00626         LD      H,(IX+4)
+13DD DDCB01A6 00627         RES     4,(IX+1)        ;Altered buffer flag off
+13E1 DDCB00D6 00628         SET     2,(IX+0)        ;Show modification done
+13E5 CDE819   00629         CALL    @WRSEC          ;  for directory mod flag
+13E8 C0       00630         RET     NZ
+13E9 3E00     00631 VEROP   LD      A,0             ;Verify operation if set
+13EB B7       00632         OR      A
+13EC C4DC19   00633         CALL    NZ,@VRSEC       ;Verify if no write error
+13EF C0       00634         RET     NZ              ;Return if wrt/ver error
+13F0 CD9813   00635         CALL    BUMPNRN         ;Increment NRN
+              00636 ;
+              00637 ;       Check if ERN to be set to NRN
+              00638 ;       Should be done for byte i/o, but not random i/o
+              00639 ;
+13F3 CD9215   00640         CALL    CKEOF1          ;Returns 0 if not at EOF
+13F6 3D       00641         DEC     A               ;Set bit 6 if retcod=0
+13F7 DDA601   00642         AND     (IX+1)          ;If IX+1, bit 6 set, then
+13FA E640     00643         AND     40H             ;  don't update EOF unless at
+13FC 20A2     00644         JR      NZ,ZEROA@       ;  or past the old EOF
+13FE DD750C   00645 YESEOF  LD      (IX+12),L       ;Update ERN
+1401 DD740D   00646         LD      (IX+13),H
+1404 DDCB015E 00647         BIT     3,(IX+1)        ;Test if ending '!'
+              00648         IF      @BLD631
+1408 202C     00649         JR      NZ,WEOF1        ;&lt;631&gt;Upd dir if so
+              00650         ELSE
+              00651         JP      NZ,WEOF1        ;Upd dir if so
+              00652         ENDIF
+140A C9       00653         RET
+              00654 ;
+140B DD6E0A   00655 GETNRN  LD      L,(IX+10)       ;Xfer NRN to HL
+140E DD660B   00656         LD      H,(IX+11)
+1411 C9       00657         RET
+              00658 ;
+1412 DD7E05   00659 BFRPOS  LD      A,(IX+5)        ;P/u byte offset in buffer
+1415 DD8603   00660         ADD     A,(IX+3)        ;Add to buffer lsb
+1418 5F       00661         LD      E,A
+1419 DD7E04   00662         LD      A,(IX+4)        ;  and adjust buffer MSB
+141C CE00     00663         ADC     A,0             ;  if needed
+141E 57       00664         LD      D,A             ;Return DE = posn
+141F C9       00665         RET
+              00666         IF      @BLD631
+              00667 ;&lt;631&gt;
+              00668 ;&lt;631&gt;  Return formatted date, HL =&gt; user buffer
+              00669 ;&lt;631&gt;
+1420 CDA807   00670 @DATE   CALL    DATELO$         ;&lt;631&gt;Call existing date code in LOWCORE
+1423 E5       00671         PUSH    HL              ;&lt;631&gt;
+1424 2B       00672         DEC     HL              ;&lt;631&gt;
+1425 2B       00673         DEC     HL              ;&lt;631&gt;
+1426 7E       00674         LD      A,(HL)          ;&lt;631&gt;
+1427 FE3A     00675         CP      ':'             ;&lt;631&gt;Test for decade overflow
+1429 3803     00676         JR      C,DATE1         ;&lt;631&gt;
+142B D60A     00677         SUB     0AH             ;&lt;631&gt;
+142D 77       00678         LD      (HL),A          ;&lt;631&gt;
+142E E1       00679 DATE1   POP     HL              ;&lt;631&gt;
+142F C9       00680         RET                     ;&lt;631&gt;
+              00681         ELSE
+              00682 ;
+              00683 ;       Entry to seek next record of a file
+              00684 ;
+              00685 @SEEKSC CALL    CKOPEN@         ;Link to FCB &amp; ck if open
+              00686         CALL    CKEOF1          ;Ensure not &gt; EOF
+              00687         CALL    Z,IOREC         ;Get track/sector data
+              00688         RET     NZ              ;Back on I/O error
+              00689         CALL    @SEEK           ;Issue seek to drive
+              00690         XOR     A               ;Ignore seek errors here
+              00691         RET
+              00692         ENDIF
+              00693         IF      @BLD631
+              00694 ;
+              00695 ;       Entry to Write an end-of-file mark
+              00696 ;&lt;631&gt;  This routine relocated here to allow more relative branch references.
+              00697 ;
+1430 CD6815   00698 @WEOF   CALL    CKOPEN@
+1433 CDA213   00699         CALL    RWRIT@          ;Write buffer if needed
+1436 DD4607   00700 WEOF1   LD      B,(IX+7)        ;P/u DEC of FPDE
+1439 DD4E06   00701         LD      C,(IX+6)        ;P/u drive #
+143C CDBB18   00702         CALL    @DIRRD          ;Read file's dir record
+143F C0       00703         RET     NZ              ;Back if read error
+1440 2C       00704         INC     L               ;Pt to ERN offset
+1441 2C       00705         INC     L
+1442 2C       00706         INC     L
+1443 DD7E08   00707         LD      A,(IX+8)        ;P/u EOF offset
+1446 77       00708         LD      (HL),A          ;Put in direc
+1447 111100   00709         LD      DE,17           ;Pt to EOF in dir
+144A 19       00710         ADD     HL,DE
+144B DD7E0C   00711         LD      A,(IX+12)       ;P/u lo EOF
+144E 77       00712         LD      (HL),A          ;Put EOF in direc
+144F 23       00713         INC     HL
+1450 DD7E0D   00714         LD      A,(IX+13)       ;P/u hi EOF
+1453 77       00715         LD      (HL),A
+1454 C30318   00716         JP      @DIRWR          ;Write direc and return
+              00717         ENDIF
+              00718 ;
+              00719 ;       Entry to Skip record routine
+              00720 ;
+1457 CDDA14   00721 @SKIP   CALL    @LOC            ;Locate next record
+145A 03       00722         INC     BC              ;Step past it
+              00723 ;
+              00724 ;       Entry to Position to record routine
+              00725 ;
+145B CD6815   00726 @POSN   CALL    CKOPEN@
+145E DDCB01F6 00727         SET     6,(IX+1)        ;Upd eof only if NRN&gt;EOF
+1462 DDCB017E 00728         BIT     7,(IX+1)        ;Jump if sector i/o only
+1466 281D     00729         JR      Z,POSN1
+1468 60       00730         LD      H,B             ;Record ptr to HL
+1469 69       00731         LD      L,C
+146A DDB609   00732         OR      (IX+9)          ;P/u LRL
+146D 2816     00733         JR      Z,POSN1         ;Skip nxt if LRL=256
+146F CDC906   00734         CALL    @MUL16          ;Calc sector &amp; offset
+1472 44       00735         LD      B,H             ;Physical sector =&gt;BC
+1473 4D       00736         LD      C,L
+1474 DD7705   00737         LD      (IX+5),A        ;Set byte ptr
+1477 DDCB016E 00738         BIT     5,(IX+1)        ;Jump if buffer does not
+147B 200B     00739         JR      NZ,POSN2        ;  contain current sector
+147D CD0B14   00740         CALL    GETNRN          ;P/u the NRN
+1480 37       00741         SCF
+1481 ED42     00742         SBC     HL,BC
+1483 2812     00743         JR      Z,$CKEOF        ;Pass on to CKEOF
+1485 DD7705   00744 POSN1   LD      (IX+5),A        ;Offset in buffer
+1488 C5       00745 POSN2   PUSH    BC
+1489 CDA213   00746 POSN2A  CALL    RWRIT@          ;Write current if needed
+148C C1       00747         POP     BC              ;  before moving
+148D C0       00748         RET     NZ              ;Back on write error
+148E DD710A   00749         LD      (IX+10),C       ;NRN
+1491 DD700B   00750         LD      (IX+11),B
+1494 CD2A13   00751         CALL    SET5            ;Show bfr does not
+1497 C39215   00752 $CKEOF  JP      CKEOF1          ;  contain current sector
+              00753 ;
+              00754 ;       Entry to force a physical read
+              00755 ;
+149A CD6815   00756 @RREAD  CALL    CKOPEN@
+149D 0E01     00757         LD      C,1             ;Cause ADJUST to bump
+              00758 ;                               ;  NRN when called
+149F CD0B14   00759 BKSP1   CALL    GETNRN          ;Get current record #
+14A2 7C       00760         LD      A,H             ;If file is rewound,
+14A3 B5       00761         OR      L               ;  then ignore the req
+14A4 2815     00762         JR      Z,BKSP0         ;  &amp; force OFFSET = 0
+14A6 2B       00763         DEC     HL              ;Back up by 1
+14A7 CDBA15   00764         CALL    ADJ2            ;RET if sector I/O only,
+              00765                                 ;  else bump fwd if RREAD
+              00766                                 ;  then back up if bit 5=0
+14AA E5       00767         PUSH    HL              ;Will be popped into BC
+14AB 18DC     00768         JR      POSN2A          ;Finish the job
+              00769 ;
+              00770 ;       Entry to backspace one logical record
+              00771 ;
+14AD CD6815   00772 @BKSP   CALL    CKOPEN@
+14B0 4F       00773         LD      C,A             ;Keep ADJUST from bumping
+14B1 DD4609   00774         LD      B,(IX+9)        ;P/u LRL
+14B4 B0       00775         OR      B               ;Is it a 0
+14B5 28E8     00776         JR      Z,BKSP1         ;Go if so
+14B7 DD7E05   00777         LD      A,(IX+5)        ;P/u next byte pointer
+14BA 90       00778         SUB     B               ;Sub one record length
+14BB DD7705   00779 BKSP0   LD      (IX+5),A
+14BE 38DF     00780         JR      C,BKSP1         ;Go if crossed sec bdry
+14C0 AF       00781         XOR     A               ;  else all done
+14C1 C9       00782         RET
+              00783 ;
+              00784 ;       Entry to Rewind to beginning
+              00785 ;
+14C2 CD6815   00786 @REW    CALL    CKOPEN@
+14C5 47       00787         LD      B,A             ;Zero NRN
+14C6 4F       00788         LD      C,A
+14C7 18BC     00789         JR      POSN1           ;Will also zero offset
+              00790 ;
+              00791 ;       Entry to Position to end-of-file
+              00792 ;
+14C9 CD6815   00793 @PEOF   CALL    CKOPEN@
+14CC DD4E0C   00794         LD      C,(IX+12)       ;ERN to BC
+14CF DD460D   00795         LD      B,(IX+13)
+14D2 DDB608   00796         OR      (IX+8)          ;P/u EOF byte
+14D5 28AE     00797         JR      Z,POSN1         ;Go if full sector
+14D7 0B       00798         DEC     BC              ;Point to last rec
+14D8 18AB     00799         JR      POSN1           ;Use POSN to get end
+              00800 ;
+              00801 ;       Entry to Locate current record number
+              00802 ;
+14DA CD6815   00803 @LOC    CALL    CKOPEN@
+14DD CD0B14   00804         CALL    GETNRN          ;P/u NRN
+14E0 CDB715   00805         CALL    ADJUST          ;Get offset and adj NRN
+14E3 DD5E09   00806 LOC1    LD      E,(IX+9)        ;P/u LRL
+14E6 7B       00807         LD      A,E             ;Test LRL for zero
+14E7 B7       00808         OR      A               ;If zero, then give NRN
+14E8 2816     00809         JR      Z,LOC3          ;LRL=0, NRN is correct
+14EA 0C       00810         INC     C               ;If offset is zero,
+14EB 0D       00811         DEC     C               ;  then it's at 256,
+14EC 2801     00812         JR      Z,LOC2          ;  and we don't dec NRN
+14EE 2B       00813         DEC     HL
+              00814 ;
+              00815 ;       Divide the three byte pointer (HLC) by the LRL
+              00816 ;
+14EF CDE306   00817 LOC2    CALL    @DIV16          ;Divide (NRN-1)/LRL
+14F2 45       00818         LD      B,L             ;Save high order result
+14F3 54       00819         LD      D,H             ;Save possible overflow
+14F4 67       00820         LD      H,A             ;Prepare 2nd dividend
+14F5 69       00821         LD      L,C             ;P/u low order dividend
+14F6 7B       00822         LD      A,E             ;P/u LRL divisor again
+14F7 CDE306   00823         CALL    @DIV16
+14FA 60       00824         LD      H,B             ;Xfer high order result
+14FB B7       00825         OR      A               ;If remainder, we have a
+14FC 2801     00826         JR      Z,$+3           ;  partial record to round
+14FE 23       00827         INC     HL              ;  up to next record #
+14FF 7A       00828         LD      A,D             ;Xfer possible overflow
+1500 C1       00829 LOC3    POP     BC              ;Pop RESTREG return adr
+1501 E3       00830         EX      (SP),HL         ;Exchange value with BC
+1502 C5       00831         PUSH    BC              ;Restore RESTREG
+              00832 ;
+              00833         IF      @MOD4
+1503          00834 ORARET@ EQU     $
+              00835         ENDIF
+1503 B7       00836         OR      A
+1504 C9       00837         RET
+              00838 ;
+              00839 ;       Entry to Locate the end-of-file record
+              00840 ;
+1505 CD6815   00841 @LOF    CALL    CKOPEN@
+1508 DD6E0C   00842         LD      L,(IX+12)       ;P/u ERN
+150B DD660D   00843         LD      H,(IX+13)
+150E DD4E08   00844         LD      C,(IX+8)        ;EOF byte
+1511 18D0     00845         JR      LOC1            ;Handle all LRLs
+              00846         IF      @BLD631
+              00847 ;&lt;631&gt;  @WEOF has been relocated above @SKIP in 6.3.1
+              00848         ELSE
+              00849 ;
+              00850 ;       Entry to Write an end-of-file mark
+              00851 ;
+              00852 @WEOF   CALL    CKOPEN@
+              00853         CALL    RWRIT@          ;Write buffer if needed
+              00854 WEOF1   LD      B,(IX+7)        ;P/u DEC of FPDE
+              00855         LD      C,(IX+6)        ;P/u drive #
+              00856         CALL    @DIRRD          ;Read file's dir record
+              00857         RET     NZ              ;Back if read error
+              00858         INC     L               ;Pt to ERN offset
+              00859         INC     L
+              00860         INC     L
+              00861         LD      A,(IX+8)        ;P/u EOF offset
+              00862         LD      (HL),A          ;Put in direc
+              00863         LD      DE,17           ;Pt to EOF in dir
+              00864         ADD     HL,DE
+              00865         LD      A,(IX+12)       ;P/u lo EOF
+              00866         LD      (HL),A          ;Put EOF in direc
+              00867         INC     HL
+              00868         LD      A,(IX+13)       ;P/u hi EOF
+              00869         LD      (HL),A
+              00870         JP      @DIRWR          ;Write direc and return
+              00871         ENDIF
+              00872 ;
+              00873 ;       Entry to Read a record
+              00874 ;
+1513 CD6815   00875 @READ   CALL    CKOPEN@
+1516 E5       00876         PUSH    HL
+1517 CDA213   00877         CALL    RWRIT@          ;Write buffer if needed
+151A E1       00878         POP     HL
+151B C0       00879         RET     NZ              ;Back on write error
+151C DD4609   00880         LD      B,(IX+9)        ;P/u LRL
+151F 78       00881         LD      A,B             ;If LRL=256, just
+1520 B7       00882         OR      A
+1521 CA7513   00883         JP      Z,NXTSECT       ;  get the next sector
+1524 E5       00884 RDREC   PUSH    HL              ;Save buffer posn
+1525 C5       00885         PUSH    BC              ;Save LRL
+1526 CD1213   00886         CALL    RDCHAR          ;Read next byte
+1529 C1       00887         POP     BC
+152A E1       00888         POP     HL
+152B C0       00889         RET     NZ              ;Back on read error
+152C 77       00890         LD      (HL),A          ;Put char into buffer
+152D 23       00891         INC     HL              ;Bump buffer ptr
+152E 10F4     00892         DJNZ    RDREC           ;Loop for entire record
+1530 C9       00893         RET
+              00894 ;
+              00895 ;       Entry to Write a record
+              00896 ;
+1531 CD6815   00897 @WRITE  CALL    CKOPEN@
+1534 32EA13   00898 WRIT1   LD      (VEROP+1),A     ;Turn on/off verify
+1537 DD4609   00899         LD      B,(IX+9)        ;P/u LRL
+153A 78       00900         LD      A,B             ;Bypass if LRL=256
+153B B7       00901         OR      A
+153C CABD13   00902         JP      Z,RWRIT2
+153F E5       00903         PUSH    HL              ;Save some FCB values
+1540 DD6605   00904         LD      H,(IX+5)        ;P/u buffer offset loc
+1543 DD6E08   00905         LD      L,(IX+8)        ;P/U EOF offset byte
+1546 E3       00906         EX      (SP),HL         ;Put values on stack
+              00907                                 ;  and recover HL
+1547 7E       00908 WRREC   LD      A,(HL)          ;Pass the logical record
+1548 23       00909         INC     HL              ;  to the writing routine
+1549 E5       00910         PUSH    HL              ;  byte by byte
+154A C5       00911         PUSH    BC
+154B CD2F13   00912         CALL    WRCHAR
+154E C1       00913         POP     BC
+154F E1       00914         POP     HL
+1550 2005     00915         JR      NZ,WRERROR      ;Exit and fix FCB
+1552 10F3     00916         DJNZ    WRREC           ;Loop for entire record
+1554 E3       00917         EX      (SP),HL         ;Remove stored FCB info
+1555 E1       00918         POP     HL              ;Recover HL
+1556 C9       00919         RET
+1557 E3       00920 WRERROR EX      (SP),HL         ;Get FCB Values
+1558 DD7405   00921         LD      (IX+5),H        ;  and put them back
+155B DD7508   00922         LD      (IX+8),L
+155E E1       00923         POP     HL              ;Restore HL
+155F C9       00924         RET                     ;Go back with error
+              00925 ;
+              00926 ;       Entry to Verify after write of a record
+              00927 ;
+1560 CD6815   00928 @VER    CALL    CKOPEN@
+1563 3C       00929         INC     A               ;Set verify byte
+1564 18CE     00930         JR      WRIT1
+1566 37       00931 LNKFCB@ SCF                     ;Init to force file open
+1567 D2       00932         DB      0D2H            ;  test by JP NC,aaaa
+1568 1A       00933 CKOPEN@ LD      A,(DE)          ;Ignore if from LNKFCB
+1569 07       00934         RLCA                    ;Test hi bit of FCB
+156A E3       00935         EX      (SP),HL
+156B 222600   00936         LD      (JRET$),HL      ;Save ret
+156E ED532400 00937         LD      (JDCB$),DE      ;Save DCB
+1572 E3       00938         EX      (SP),HL
+1573 300F     00939         JR      NC,NOTOPEN      ;Go if not an open FCB
+1575 F1       00940         POP     AF              ;Get return
+1576 D5       00941         PUSH    DE              ;Dcb addr to IX
+1577 DDE3     00942         EX      (SP),IX
+1579 E5       00943         PUSH    HL              ;Save regs
+157A D5       00944         PUSH    DE
+157B C5       00945         PUSH    BC
+157C E5       00946         PUSH    HL              ;Estab ret
+157D 218915   00947         LD      HL,RESTREG      ;  to restore registers
+1580 E3       00948         EX      (SP),HL
+1581 F5       00949         PUSH    AF              ;Put back ret
+1582 AF       00950         XOR     A
+1583 C9       00951         RET                     ;Go back
+              00952 ;
+1584 F1       00953 NOTOPEN POP     AF
+1585 3E26     00954         LD      A,26H           ;File not open
+1587 B7       00955         OR      A
+1588 C9       00956         RET
+              00957 ;
+1589 C1       00958 RESTREG POP     BC              ;Pop back registers save
+158A D1       00959         POP     DE              ;  in CKOPEN@
+158B E1       00960         POP     HL
+158C DDE1     00961         POP     IX
+158E C9       00962         RET
+              00963 ;
+              00964 ;       Entry to Check if at end-of-file
+              00965 ;
+158F CD6815   00966 @CKEOF  CALL    CKOPEN@
+1592 CD0B14   00967 CKEOF1  CALL    GETNRN          ;P/U NRN into HL
+1595 E5       00968         PUSH    HL              ;Save un-adjusted NRN
+1596 CDB715   00969         CALL    ADJUST          ;Adjust for special cases
+1599 7C       00970         LD      A,H             ;Compare hi byte
+159A DDBE0D   00971         CP      (IX+13)
+159D 200E     00972         JR      NZ,CKEOF2       ;Go if not equal
+159F 7D       00973         LD      A,L             ;Compare lo byte
+15A0 DDBE0C   00974         CP      (IX+12)
+15A3 2008     00975         JR      NZ,CKEOF2       ;Go if not equal
+15A5 0D       00976         DEC     C               ;Adjust for 00=256
+15A6 DD7E08   00977         LD      A,(IX+8)        ;Compare offset byte
+15A9 3D       00978         DEC     A
+15AA 91       00979         SUB     C
+15AB 3F       00980         CCF
+15AC 03       00981         INC     BC              ;Restore old C value
+15AD E1       00982 CKEOF2  POP     HL              ;Restore unadjusted NRN
+15AE 3E1D     00983         LD      A,1DH           ;Rec # out of range code
+15B0 2002     00984         JR      NZ,CKEOF3       ;Go if not at EOF
+15B2 3D       00985         DEC     A               ;X'1C'=EOF encountered
+15B3 C9       00986         RET                     ;Return with NZ flag
+15B4 D0       00987 CKEOF3  RET     NC              ;Return with error
+15B5 AF       00988         XOR     A               ;No error
+15B6 C9       00989         RET
+              00990 ;
+              00991 ;       File positioning adjustment routines
+              00992 ;
+15B7          00993 ADJUST  EQU     $               ;Entry from @CKEOF &amp; @LOC
+15B7 DD4E05   00994         LD      C,(IX+5)        ;Pick up offset
+15BA          00995 ADJ2    EQU     $               ;Entry from @BKSP/@RREAD
+15BA DDCB017E 00996         BIT     7,(IX+1)        ;Sector I/O only?
+15BE C8       00997         RET     Z               ;No adjustment if so
+15BF 79       00998         LD      A,C             ;Offset =0? (or "RREAD?")
+15C0 B7       00999         OR      A
+15C1 2801     01000         JR      Z,$+3           ;Go if zero
+15C3 23       01001         INC     HL              ;Adjust
+15C4 DDCB016E 01002         BIT     5,(IX+1)        ;Check magic bit
+15C8 C0       01003         RET     NZ              ;Go if set
+15C9 2B       01004         DEC     HL              ;Adjust
+15CA C9       01005         RET
+              01006 ;
+              01007 ;       Calculate the cylinder/sector of needed record
+              01008 ;
+15CB CD0B14   01009 IOREC   CALL    GETNRN          ;P/u record number
+15CE CD261A   01010         CALL    @DCTBYT-5       ;Get # of sectors/gran
+15D1 E61F     01011         AND     1FH
+15D3 3C       01012         INC     A
+15D4 CDE306   01013         CALL    @DIV16          ;By # of sectors/gran
+15D7 326016   01014         LD      (CALS5+1),A     ;Sv rmndr (sector offset)
+15DA DDE5     01015         PUSH    IX              ;Xfer fcb to HL
+15DC E3       01016         EX      (SP),HL
+15DD 010E00   01017         LD      BC,14           ;Pt to 1st extent info
+15E0 09       01018         ADD     HL,BC
+15E1 C1       01019         POP     BC              ;Pop gran ptr HL into BC
+15E2 3E05     01020         LD      A,5             ;Init to ck 4 extents
+15E4 110000   01021         LD      DE,0            ;  &amp; extended FXDE ptr
+15E7 F5       01022 GREC1   PUSH    AF
+15E8 7E       01023         LD      A,(HL)          ;P/u starting cyl byte
+15E9 23       01024         INC     HL              ;  &amp; bypass if FF
+15EA 3C       01025         INC     A
+15EB 280B     01026         JR      Z,GREC2
+15ED E5       01027         PUSH    HL              ;Xfer the # of grans up
+15EE 62       01028         LD      H,D             ;  to but not including
+15EF 6B       01029         LD      L,E             ;  this extent into HL
+15F0 AF       01030         XOR     A               ;Sub gran pointer from
+15F1 ED42     01031         SBC     HL,BC           ;  cumulative figure &amp; go
+15F3 380E     01032         JR      C,GREC3         ;  if not in previous ext
+15F5 E1       01033         POP     HL
+15F6 2829     01034         JR      Z,CALCSEC
+15F8 23       01035 GREC2   INC     HL
+15F9 F1       01036         POP     AF
+15FA 3D       01037         DEC     A
+15FB 2819     01038         JR      Z,GREC4         ;Jump when all quads c'kd
+15FD 5E       01039         LD      E,(HL)          ;P/u cumulative # grans
+15FE 23       01040         INC     HL              ;  up to but not
+15FF 56       01041         LD      D,(HL)          ;  including this extent
+1600 23       01042         INC     HL
+1601 18E4     01043         JR      GREC1
+1603 24       01044 GREC3   INC     H               ;Within 256 grans?
+1604 7D       01045         LD      A,L             ;Xfer lo-order difference
+1605 E1       01046         POP     HL              ;Rcvr # of contig grans
+              01047 ;                               ;  in this extent
+1606 20F0     01048         JR      NZ,GREC2        ;Go if not within 256
+1608 D5       01049         PUSH    DE              ;Save cumulative count 
+1609 5F       01050         LD      E,A             ;Xfer gran dif (neg)
+160A 7E       01051         LD      A,(HL)          ;P/u # of grans
+160B E61F     01052         AND     1FH             ;  in this extent
+160D 83       01053         ADD     A,E             ;Add to negative diff
+160E 7B       01054         LD      A,E             ;Put neg diff into A
+160F D1       01055         POP     DE
+1610 30E6     01056         JR      NC,GREC2        ;Go if not in this extent
+1612 ED44     01057         NEG                     ;Is in this extent, make
+1614 180B     01058         JR      CALCSEC         ;  diff positive &amp; use it
+              01059 ;
+              01060 ;       All current quads checked - Need directory info
+              01061 ;
+              01062 GREC4
+1616 CD6416   01063         CALL    ALLOC           ;Get # of grans
+1619 C0       01064         RET     NZ              ;  into the extent
+161A 325016   01065         LD      (CALS4+1),A     ;  or error RET
+161D 302A     01066         JR      NC,CALS3        ;Jp if record in 1st ext
+161F 181F     01067         JR      CALS1           ;  else jp if in another
+              01068 ;
+              01069 ;       Calc sector in gran
+              01070 ;
+1621 325016   01071 CALCSEC LD      (CALS4+1),A     ;Stuff # grans into
+1624 46       01072         LD      B,(HL)          ;  this extent
+1625 2B       01073         DEC     HL              ;P/u # contig grans &amp;
+1626 4E       01074         LD      C,(HL)          ;  rel start &amp; start cyl
+1627 23       01075         INC     HL
+1628 F1       01076         POP     AF              ;Rcvr # of quad
+1629 2F       01077         CPL
+162A C604     01078         ADD     A,4
+162C 3019     01079         JR      NC,CALS2        ;Jump if 1st ext or quad
+162E 3C       01080         INC     A               ;If not 1st, set up to move
+162F 07       01081         RLCA                    ;  matching quad to the
+1630 07       01082         RLCA                    ;  first position by
+1631 C5       01083         PUSH    BC              ;  shuffling the others up
+1632 D5       01084         PUSH    DE
+1633 4F       01085         LD      C,A             ;Get bytes to move
+1634 0600     01086         LD      B,0
+1636 EB       01087         EX      DE,HL           ;DE = top of last quad
+1637 21FCFF   01088         LD      HL,-4
+163A 19       01089         ADD     HL,DE           ;HL = top of next lower
+163B EDB8     01090         LDDR                    ;Do the shuffle
+163D EB       01091         EX      DE,HL
+163E D1       01092         POP     DE
+163F C1       01093         POP     BC
+1640 70       01094 CALS1   LD      (HL),B          ;Move info on matching quad
+1641 2B       01095         DEC     HL              ;  into position
+1642 71       01096         LD      (HL),C
+1643 2B       01097         DEC     HL
+1644 72       01098         LD      (HL),D
+1645 2B       01099         DEC     HL
+1646 73       01100         LD      (HL),E
+1647 60       01101 CALS2   LD      H,B             ;Xfer start &amp; contig gran
+1648 69       01102         LD      L,C             ;Xfer start cylinder
+1649 7C       01103 CALS3   LD      A,H
+164A 07       01104         RLCA                    ;P/u start gran on track
+164B 07       01105         RLCA
+164C 07       01106         RLCA
+164D E607     01107         AND     7
+164F C600     01108 CALS4   ADD     A,0             ;P/u # grans into extent
+1651 CD1919   01109         CALL    RELCYL          ;Calc 1st relative cyl
+1654 85       01110         ADD     A,L             ;Add starting cylinder
+1655 57       01111         LD      D,A
+1656 78       01112         LD      A,B             ;Rcvr # sectors/gran
+1657 E61F     01113         AND     1FH
+1659 3C       01114         INC     A
+165A D5       01115         PUSH    DE              ;Calculate sector offset
+165B CD0A19   01116         CALL    @MUL8           ;  into desired cylinder
+165E D1       01117         POP     DE              ;  for desired granule
+165F C600     01118 CALS5   ADD     A,0             ;P/u # of excess sectors
+1661 5F       01119         LD      E,A             ;  over even gran &amp; add
+1662 AF       01120         XOR     A               ;  to granule sector
+1663 C9       01121         RET
+              01122 ;
+              01123 ;       On entry, gran needed is in BC
+              01124 ;
+1664 CDAE16   01125 ALLOC   CALL    CYL_GRN         ;Find ext cntng gran
+1667 C0       01126         RET     NZ              ;Ret on error
+1668 E5       01127         PUSH    HL              ;Save starting cyl &amp; gran
+1669 60       01128         LD      H,B             ;Xfer granule needed to
+166A 69       01129         LD      L,C             ;  HL then calculate how
+166B AF       01130         XOR     A               ;  many grans into this
+166C ED52     01131         SBC     HL,DE           ;  extent is the desired
+166E 7D       01132         LD      A,L             ;  granule
+166F 32A716   01133         LD      (ALL6+1),A      ;Stuff rel gran from
+1672 E1       01134         POP     HL              ;  start of extent
+1673 D5       01135         PUSH    DE              ;Save granule count
+1674 DDE5     01136         PUSH    IX              ;  to extent
+1676 E3       01137         EX      (SP),HL         ;FCB pointer to HL
+1677 110E00   01138         LD      DE,14           ;Pt to 1st alloc in FCB
+167A 19       01139         ADD     HL,DE
+167B D1       01140         POP     DE              ;Pop starting cylinder
+167C 0605     01141         LD      B,5             ;  to this extent
+167E 7E       01142 ALL1    LD      A,(HL)          ;P/u a cyl
+167F 23       01143         INC     HL              ;Does starting cyl of
+1680 BB       01144         CP      E               ;  needed gran alloc
+1681 2006     01145         JR      NZ,ALL2         ;  appear in this extent?
+1683 7E       01146         LD      A,(HL)          ;Now see if needed gran is
+1684 AA       01147         XOR     D               ;  in this extent field
+1685 E6E0     01148         AND     0E0H            ;  by checking its starting gran
+1687 2819     01149         JR      Z,ALL4
+1689 05       01150 ALL2    DEC     B               ;Dec the count down loop
+168A 2805     01151         JR      Z,ALL3          ;Done if no match
+168C 23       01152         INC     HL              ;Go to next extent
+168D 23       01153         INC     HL              ;  info in FCB
+168E 23       01154         INC     HL
+168F 18ED     01155         JR      ALL1
+1691 D5       01156 ALL3    PUSH    DE              ;Save needed extent info
+1692 EB       01157         EX      DE,HL           ;Set up to shuffle extent
+1693 21FCFF   01158         LD      HL,-4           ;  info
+1696 19       01159         ADD     HL,DE
+1697 010C00   01160         LD      BC,12
+169A EDB8     01161         LDDR
+169C EB       01162         EX      DE,HL
+169D C1       01163         POP     BC
+169E AF       01164         XOR     A               ;Set Z, no error
+169F 37       01165         SCF                     ;Set CF, extent not found
+16A0 1803     01166         JR      ALL5
+16A2 72       01167 ALL4    LD      (HL),D
+16A3 EB       01168         EX      DE,HL
+16A4 AF       01169         XOR     A               ;Set Z no error
+16A5 D1       01170 ALL5    POP     DE
+16A6 3E00     01171 ALL6    LD      A,0             ;# of grans into this ext
+16A8 C9       01172         RET                     ;Where desired gran is
+              01173 ;
+              01174 ;       Extent is unused - need to allocate more space
+              01175 ;
+16A9 CDF216   01176 CG06    CALL    CG07            ;Try to allocate more
+16AC C1       01177         POP     BC              ;Get back desired gran
+16AD C0       01178         RET     NZ              ;Return on error
+              01179                                 ;Look for gran again
+              01180 ;
+              01181 ;       Find extent containing desired granule
+              01182 ;
+16AE C5       01183 CYL_GRN PUSH    BC              ;Save desired gran #
+16AF 110000   01184         LD      DE,0            ;Init gran counter
+16B2 DD4607   01185         LD      B,(IX+7)        ;P/u DEC of file
+16B5 78       01186 CG01    LD      A,B
+16B6 32AC17   01187         LD      (STUFDEC+1),A   ;Stuff
+16B9 DD4E06   01188         LD      C,(IX+6)        ;P/u drive for file
+16BC CDBB18   01189         CALL    @DIRRD          ;Read its directory
+16BF 011600   01190         LD      BC,22           ;Point to 1st extent
+16C2 09       01191         ADD     HL,BC           ;  of its directory
+16C3 EB       01192         EX      DE,HL           ;Gran count to HL
+16C4 C1       01193         POP     BC              ;Restore desired gran
+16C5 C0       01194         RET     NZ              ;Return on read error
+16C6 1A       01195 CG02    LD      A,(DE)          ;Is this extent
+16C7 FEFE     01196         CP      0FEH            ;  allocated?
+16C9 301F     01197         JR      NC,CG05         ;Jump if it is not
+16CB 13       01198         INC     DE              ;Point to allocation
+16CC 1A       01199         LD      A,(DE)          ;P/u relative gran &amp; #
+16CD E5       01200         PUSH    HL              ;  of contiguous grans
+16CE E61F     01201         AND     1FH             ;Keep contiguous grans
+16D0 3C       01202         INC     A               ;  &amp; bump for 0 offset
+16D1 85       01203         ADD     A,L             ;Add to count in HL
+16D2 6F       01204         LD      L,A
+16D3 3001     01205         JR      NC,CG03
+16D5 24       01206         INC     H               ;Bump hi order
+16D6 E5       01207 CG03    PUSH    HL              ;Save gran count to
+16D7 2B       01208         DEC     HL              ;  end of extent
+16D8 AF       01209         XOR     A               ;Test if EOF is in this
+16D9 ED42     01210         SBC     HL,BC           ;  allocation
+16DB E1       01211         POP     HL
+16DC 3004     01212         JR      NC,CG04         ;EOF not &gt; this alloc
+16DE 13       01213         INC     DE              ;Get rid of old
+16DF F1       01214         POP     AF              ;  current quantity
+16E0 18E4     01215         JR      CG02            ;Check next extent
+              01216 ;
+              01217 ;       The EOF is within this allocation. Recover
+              01218 ;       the allocation data and exit
+              01219 ;
+16E2 E1       01220 CG04    POP     HL              ;P/u gran count to extent
+16E3 EB       01221         EX      DE,HL           ;Gran count to DE
+16E4 7E       01222         LD      A,(HL)          ;P/u granule data
+16E5 2B       01223         DEC     HL
+16E6 6E       01224         LD      L,(HL)          ;P/u starting cylinder
+16E7 67       01225         LD      H,A
+16E8 AF       01226         XOR     A
+16E9 C9       01227         RET
+              01228 ;
+              01229 ;       This extent is 1) unused, or 2) FXDE pointer
+              01230 ;       and the needed gran has not been found yet
+              01231 ;
+16EA C5       01232 CG05    PUSH    BC              ;Gran count to DE &amp;
+16EB EB       01233         EX      DE,HL           ;DIR ptr to HL
+16EC 20BB     01234         JR      NZ,CG06         ;Jump if unused
+16EE 23       01235         INC     HL              ;Point to DEC of FXDE
+16EF 46       01236         LD      B,(HL)          ;P/u the DEC
+16F0 18C3     01237         JR      CG01            ;  &amp; loop
+              01238 ;
+              01239 ;       See if the drive has enough free space left
+              01240 ;
+16F2 C5       01241 CG07    PUSH    BC              ;Save needed gran
+16F3 DD4E06   01242         LD      C,(IX+6)        ;P/u file's drive
+16F6 CD7418   01243         CALL    @GATRD          ;Get GAT
+16F9 C1       01244         POP     BC              ;Rcvr needed gran
+16FA C0       01245         RET     NZ              ;Return if GAT error
+16FB E5       01246         PUSH    HL
+16FC 60       01247         LD      H,B             ;Xfer the requested
+16FD 69       01248         LD      L,C             ;  gran to HL &amp;
+16FE AF       01249         XOR     A               ;  subtract current gran
+16FF ED52     01250         SBC     HL,DE           ;Count to calculate how
+1701 44       01251         LD      B,H             ;  many excess grans
+1702 4D       01252         LD      C,L             ;  are needed
+1703 03       01253         INC     BC
+1704 D1       01254         POP     DE              ;Rcvr dir byte ptr
+1705 13       01255         INC     DE              ;Pt to next DIR byte
+1706 2623     01256         LD      H,DIRBUF$&lt;-8    ;Start looking at TRK #1
+1708 3A6A00   01257         LD      A,(AFLAG$)      ;P/u Search start CYL
+170B 6F       01258         LD      L,A             ;  and put it in L
+170C C5       01259         PUSH    BC              ;Save excess grans needed
+170D 7B       01260         LD      A,E             ;Is this extent the 1st?
+170E E61E     01261         AND     1EH             ;Jump if so, else we can
+1710 FE16     01262         CP      16H             ;  use it for allocation
+1712 2842     01263         JR      Z,CG14
+1714 1D       01264         DEC     E               ;Backup to previous
+1715 1D       01265         DEC     E               ;  extent
+1716 1A       01266 CG12    LD      A,(DE)          ;P/u # of contig grans to
+1717 E61F     01267         AND     1FH             ;  see if the last gran
+1719 3C       01268         INC     A               ;  used can be extended
+171A 4F       01269         LD      C,A             ;Is current # the max
+171B FE20     01270         CP      20H             ;  an extent can hold?
+171D 2820     01271         JR      Z,CG13          ;Jump if a full extent
+171F 1A       01272         LD      A,(DE)          ;  (32 grans max) - else
+1720 E6E0     01273         AND     0E0H            ;  p/u the relative
+1722 07       01274         RLCA                    ;  granule offset
+1723 07       01275         RLCA
+1724 07       01276         RLCA
+1725 81       01277         ADD     A,C             ;Add the # of contiguous
+1726 D5       01278         PUSH    DE              ;  granules
+1727 CD1919   01279         CALL    RELCYL          ;Calc relative cyl needed
+172A 47       01280         LD      B,A             ;Save offset
+172B 4B       01281         LD      C,E
+172C D1       01282         POP     DE
+172D 1B       01283         DEC     DE              ;Backup to starting cyl
+172E 1A       01284         LD      A,(DE)
+172F 13       01285         INC     DE              ;  &amp; repoint to alloc byte
+1730 80       01286         ADD     A,B             ;Add cyls used to
+1731 6F       01287         LD      L,A             ;  starting cyl
+1732 2623     01288         LD      H,DIRBUF$&lt;-8    ;Is it less than max?
+1734 FECB     01289         CP      0CBH
+1736 3007     01290         JR      NC,CG13         ;Jump if too big
+1738 79       01291         LD      A,C
+1739 46       01292         LD      B,(HL)          ;P/u the cyl's GAT
+173A CD5B18   01293         CALL    TSTBIT          ;Test if gran is free
+173D 284B     01294         JR      Z,CG21          ;Bypass if free gran
+              01295 ;
+              01296 ;       The next gran cannot be used - get another extent
+              01297 ;
+173F 1C       01298 CG13    INC     E               ;Else point to next
+1740 1C       01299         INC     E               ;  extent field
+1741 7B       01300         LD      A,E
+1742 E61E     01301         AND     1EH             ;Jump if not on the FXDE
+1744 FE1E     01302         CP      1EH             ;  field, else we have to
+1746 200E     01303         JR      NZ,CG14         ;  obtain an FXDE record
+              01304 ;
+              01305 ;       Last extent used up, get new dir rec for FXDE
+              01306 ;
+1748 CDA417   01307         CALL    CG23            ;Write curent GAT &amp; HIT
+174B C1       01308         POP     BC
+174C C0       01309         RET     NZ              ;Ret if GAT/HIT error
+174D C5       01310         PUSH    BC
+174E CDAF17   01311         CALL    NEWHIT          ;Get new HIT for FXDE
+1751 C1       01312         POP     BC
+1752 C0       01313         RET     NZ              ;Loop to process
+1753 C3AE16   01314         JP      CYL_GRN         ;  new extent
+              01315 ;
+              01316 ;       Extent is vacant - use it &amp; get new allocation
+              01317 ;
+1756 CDFE18   01318 CG14    CALL    MAXCYL          ;Get highest # cyl
+1759 326017   01319         LD      (CG17+1),A      ;Stuff highest cyl
+175C 0602     01320         LD      B,2
+175E 7D       01321 CG16    LD      A,L             ;Test last cyl used
+175F FE00     01322 CG17    CP      0               ;P/u max cyl
+1761 3007     01323         JR      NC,CG18
+1763 7E       01324         LD      A,(HL)          ;P/u a GAT byte
+1764 3C       01325         INC     A
+1765 2010     01326         JR      NZ,CG19         ;Go if space in this cyl
+1767 2C       01327         INC     L               ;  else bump to next one
+1768 18F4     01328         JR      CG16            ;  &amp; loop
+176A 2E00     01329 CG18    LD      L,0             ;Now start from begin
+176C 10F0     01330         DJNZ    CG16            ;  of disk &amp; recheck
+176E C1       01331         POP     BC
+176F CDA417   01332         CALL    CG23            ;Write out GAT &amp; HIT
+1772 C0       01333         RET     NZ
+1773 3E1B     01334         LD      A,1BH           ;"disk space full"
+1775 B7       01335         OR      A
+1776 C9       01336         RET
+              01337 ;
+              01338 ;       Found available space in cylinder
+              01339 ;
+1777 3EFF     01340 CG19    LD      A,0FFH          ;Set DIR extent to FF
+1779 12       01341         LD      (DE),A
+177A 0E00     01342         LD      C,0
+177C 46       01343         LD      B,(HL)          ;P/u current GAT alloc
+177D 79       01344 CG20    LD      A,C
+177E CD5B18   01345         CALL    TSTBIT          ;Find a free gran
+1781 2807     01346         JR      Z,CG21          ;  &amp; jump when found
+1783 1A       01347         LD      A,(DE)          ;  else advance starting
+1784 C620     01348         ADD     A,20H           ;  rel gran value
+1786 12       01349         LD      (DE),A
+1787 0C       01350         INC     C               ;Bump pointer to test
+1788 18F3     01351         JR      CG20            ;  next gran
+              01352 ;
+              01353 ;       Next gran in line is free - allocate it
+              01354 ;
+178A 79       01355 CG21    LD      A,C
+178B CD6818   01356         CALL    SETBIT          ;Show it allocated
+178E B6       01357         OR      (HL)
+178F 77       01358         LD      (HL),A
+1790 1D       01359         DEC     E               ;Backup to starting cyl
+1791 1A       01360         LD      A,(DE)          ;Bump by one to see if
+1792 3C       01361         INC     A               ;  this alloc is the 1st
+1793 2002     01362         JR      NZ,CG22         ;  one for the extent &amp;
+1795 7D       01363         LD      A,L             ;  we have to set the
+              01364                                 ;  starting cylinder
+1796 12       01365         LD      (DE),A          ;Stuff starting cyl
+1797 1C       01366 CG22    INC     E
+1798 1A       01367         LD      A,(DE)          ;Add 1 to # of contiguous
+1799 3C       01368         INC     A               ;  granules
+179A 12       01369         LD      (DE),A
+179B C1       01370         POP     BC              ;Decrement needed gran
+179C 0B       01371         DEC     BC              ;  count since we just
+179D C5       01372         PUSH    BC              ;  allocated one
+179E 78       01373         LD      A,B             ;Loop if we need more
+179F B1       01374         OR      C               ;  space allocated
+17A0 C21617   01375         JP      NZ,CG12
+17A3 C1       01376         POP     BC
+17A4 DD4E06   01377 CG23    LD      C,(IX+6)        ;Else p/u the drive #
+17A7 CD7518   01378         CALL    @GATWR          ;  &amp; write out the GAT
+17AA C0       01379         RET     NZ
+17AB 0600     01380 STUFDEC LD      B,0             ;P/u DEC of FPDE
+17AD 1854     01381         JR      @DIRWR
+              01382 ;
+              01383 ;       Get new HIT for FXDE
+              01384 ;
+17AF DD4E06   01385 NEWHIT  LD      C,(IX+6)        ;P/u drive #
+17B2 CD9718   01386         CALL    @HITRD          ;Read the HIT
+17B5 C0       01387         RET     NZ
+17B6 DD7E07   01388         LD      A,(IX+7)        ;P/u FPDE DEC so 1st ck
+17B9 E61F     01389         AND     1FH             ;  will be for next
+17BB CD1F18   01390         CALL    @SCNHIT         ;  in line
+17BE 3E1E     01391         LD      A,1EH           ;Init "full directory...
+17C0 C0       01392         RET     NZ              ;Ret if no space
+17C1 45       01393         LD      B,L             ;Set DEC for
+17C2 7D       01394         LD      A,L             ;  directory read
+17C3 320218   01395         LD      (NHIT3+1),A     ;Stuff new DEC from HIT
+17C6 54       01396         LD      D,H
+17C7 DD5E07   01397         LD      E,(IX+7)        ;P/u current DEC
+17CA 1A       01398         LD      A,(DE)          ;Copy filespec hash code
+17CB 77       01399         LD      (HL),A          ;  to new DEC
+17CC CD9818   01400         CALL    @HITWR
+17CF CCBB18   01401         CALL    Z,@DIRRD
+17D2 C0       01402         RET     NZ
+17D3 3690     01403         LD      (HL),90H        ;Show dir rec in use as
+17D5 2C       01404         INC     L               ;  FXDE record
+17D6 C5       01405         PUSH    BC              ;P/u DEC of FPDE &amp;
+17D7 3AAC17   01406         LD      A,(STUFDEC+1)   ;  stuff it into FXDE's
+17DA 77       01407         LD      (HL),A          ;  DIR+1 to link back
+17DB 2C       01408         INC     L
+17DC 0614     01409         LD      B,20            ;Zero out 20 bytes
+17DE 3600     01410 NHIT1   LD      (HL),0          ;  in the FXDE
+17E0 2C       01411         INC     L
+17E1 10FB     01412         DJNZ    NHIT1
+17E3 E5       01413         PUSH    HL              ;Save ptr to 1st extent
+17E4 060A     01414         LD      B,10            ;Init to X'FF' 10 bytes
+17E6 36FF     01415 NHIT2   LD      (HL),0FFH       ;  or 5 extents
+17E8 2C       01416         INC     L
+17E9 10FB     01417         DJNZ    NHIT2
+17EB D1       01418         POP     DE              ;Rcvr ptr to 1st extent
+17EC 13       01419         INC     DE              ;Pt to allocation byte
+17ED C1       01420         POP     BC
+17EE CD0318   01421         CALL    @DIRWR          ;Write FXDE back to disk
+17F1 C0       01422         RET     NZ              ;Return if error
+17F2 3AAC17   01423         LD      A,(STUFDEC+1)   ;  else p/u DEC of FPDE
+17F5 47       01424         LD      B,A
+17F6 CDBB18   01425         CALL    @DIRRD          ;Read its directory
+17F9 C0       01426         RET     NZ              ;  &amp; return if error
+17FA 7D       01427         LD      A,L
+17FB C61E     01428         ADD     A,1EH           ;Point to FXDE posn
+17FD 6F       01429         LD      L,A             ;  in FPDE
+17FE 36FE     01430         LD      (HL),0FEH       ;Show link to FXDE
+1800 2C       01431         INC     L
+1801 3600     01432 NHIT3   LD      (HL),0          ;Show what's the FXDE DEC
+              01433                                 ;  &amp; write the DIR back
+              01434 ;
+              01435 ;       Routine to write a directory sector
+              01436 ;       B =&gt; DEC of FPDE, C =&gt; logical drive number
+              01437 ;       HL &lt;= points to directory record in SBUFF$
+              01438 ;
+1803 CD0718   01439 @DIRWR  CALL    DIRWR           ;Permit two attempts
+1806 C8       01440         RET     Z
+1807 D5       01441 DIRWR   PUSH    DE              ;Save the reg
+1808 CDCA18   01442         CALL    CALCDIR         ;Calc dir cyl
+180B 2E00     01443         LD      L,0             ;Set buffer to start
+180D CDEC19   01444         CALL    @WRSSC          ;Write the sector
+1810 CCDC19   01445         CALL    Z,@VRSEC        ;Verify on no error
+1813 D606     01446         SUB     6
+1815 D1       01447         POP     DE
+1816 C8       01448         RET     Z               ;Back on system sector
+1817 FE09     01449         CP      0FH-6           ;WP error?
+1819 3E12     01450         LD      A,18            ;Set dir write error
+181B C0       01451         RET     NZ              ;  if not WP
+181C D603     01452         SUB     3
+181E C9       01453         RET
+              01454 ;
+              01455 ;       Find a spare HIT entry
+              01456 ;
+181F F5       01457 @SCNHIT PUSH    AF
+1820 3E07     01458         LD      A,7             ;Get highest # sector
+1822 CD2B1A   01459         CALL    @DCTBYT         ;  on a cylinder
+1825 D5       01460         PUSH    DE              ;  into register E
+1826 57       01461         LD      D,A
+1827 E61F     01462         AND     1FH
+1829 5F       01463         LD      E,A
+182A 1C       01464         INC     E               ;&amp; get number of heads
+182B AA       01465         XOR     D               ;  into register A
+182C 07       01466         RLCA
+182D 07       01467         RLCA
+182E 07       01468         RLCA
+182F 3C       01469         INC     A
+1830 CD0A19   01470         CALL    @MUL8           ;To calc sectors/cylinder
+1833 CD3B19   01471         CALL    CKDBLBIT        ;Double if necessary
+1836 D1       01472         POP     DE              ;Total sectors per cyl
+1837 D602     01473         SUB     2               ;Reduce for GAT &amp; HIT
+1839 324D18   01474         LD      (NHIT7+1),A     ;# of directory sectors
+183C F1       01475         POP     AF              ;Get DEC init entry
+183D 6F       01476         LD      L,A
+183E CD4918   01477         CALL    NHIT6           ;Ck if HIT slot is spare
+1841 C8       01478         RET     Z               ;Return if it is spare
+1842 2E01     01479         LD      L,1             ;Start at beginning
+1844 2C       01480 NHIT5   INC     L
+1845 2002     01481         JR      NZ,NHIT6
+1847 B4       01482         OR      H
+1848 C9       01483         RET
+1849 7D       01484 NHIT6   LD      A,L
+184A E61F     01485         AND     1FH
+184C FE00     01486 NHIT7   CP      0
+184E 7D       01487         LD      A,L
+184F 3805     01488         JR      C,NHIT8
+1851 F61F     01489         OR      1FH
+1853 6F       01490         LD      L,A
+1854 18EE     01491         JR      NHIT5
+1856 7E       01492 NHIT8   LD      A,(HL)
+1857 B7       01493         OR      A
+1858 C8       01494         RET     Z
+1859 18E9     01495         JR      NHIT5
+              01496 ;
+              01497 ;       Test if gran is free in GAT
+              01498 ;
+185B E607     01499 TSTBIT  AND     7               ;Get 0 to 7
+185D 07       01500         RLCA                    ;Shift to match BIT n,
+185E 07       01501         RLCA                    ;  opcode
+185F 07       01502         RLCA
+1860 F640     01503         OR      40H
+1862 326618   01504         LD      (TBIT1+1),A     ;Modify BIT instruction
+1865 CB40     01505 TBIT1   BIT     0,B
+1867 C9       01506         RET
+              01507 ;
+              01508 ;       Set gran to allocated in GAT
+              01509 ;
+1868 07       01510 SETBIT  RLCA                    ;Shift to create opcode
+1869 07       01511         RLCA                    ;  to match current bit
+186A 07       01512         RLCA
+186B F6C7     01513         OR      0C7H
+186D 327218   01514         LD      (SBIT1+1),A     ;Create SET n, opcode
+1870 AF       01515         XOR     A
+1871 CBC7     01516 SBIT1   SET     0,A
+1873 C9       01517         RET
+              01518 ;
+              01519 ;       Routine reads/writes the Granule Allocation Table
+              01520 ;
+1874 F6       01521 @GATRD  DB      0F6H            ;Set NZ for test
+1875 AF       01522 @GATWR  XOR     A               ;Set Z for test
+1876 D5       01523         PUSH    DE
+1877 E5       01524         PUSH    HL
+1878 F5       01525         PUSH    AF              ;Save flag for test
+1879 CDF718   01526         CALL    @DIRCYL
+187C 210023   01527         LD      HL,DIRBUF$
+187F 5D       01528         LD      E,L             ;Set E to 0
+1880 F1       01529         POP     AF              ;Rcvr flag for R/W
+1881 2807     01530         JR      Z,GATRW1        ;Go if @GATWR
+1883 CDD818   01531         CALL    @RDSSC
+1886 3E14     01532         LD      A,14H           ;Init "GAT read error"
+1888 180A     01533         JR      GATRW2
+188A CDEC19   01534 GATRW1  CALL    @WRSSC          ;Protected sector write
+188D CCDC19   01535         CALL    Z,@VRSEC        ;Verify if OK
+1890 FE06     01536         CP      6               ;Protected sector?
+1892 3E15     01537         LD      A,15H           ;Init "GAT write error"
+1894 E1       01538 GATRW2  POP     HL
+1895 D1       01539         POP     DE
+1896 C9       01540         RET
+              01541 ;
+              01542 ;       Read or write the hash index table
+              01543 ;
+1897 F6       01544 @HITRD  DB      0F6H            ;Set NZ for test
+1898 AF       01545 @HITWR  XOR     A               ;Set Z for test
+1899 C5       01546         PUSH    BC
+189A D5       01547         PUSH    DE
+189B F5       01548         PUSH    AF              ;Save flag for test
+189C CDF718   01549         CALL    @DIRCYL         ;D =&gt; directory cylinder
+189F 1E01     01550         LD      E,1             ;E =&gt; HIT sector
+18A1 21001D   01551         LD      HL,SBUFF$       ;HL =&gt; HIT buffer area
+18A4 F1       01552         POP     AF              ;Rcvr flag for RD/WR
+18A5 2807     01553         JR      Z,HITRW1        ;Go if @HITWR
+18A7 CDD818   01554         CALL    @RDSSC          ;Read cyl D, sector E
+18AA 3E16     01555         LD      A,22            ;Init "HIT read error"
+18AC 180A     01556         JR      HITRW2
+18AE CDEC19   01557 HITRW1  CALL    @WRSSC          ;Protected sector write
+18B1 CCDC19   01558         CALL    Z,@VRSEC        ;Verify the write
+18B4 FE06     01559         CP      6               ;Protected sector?
+18B6 3E17     01560         LD      A,23            ;"HIT write error"
+18B8 D1       01561 HITRW2  POP     DE              ;Message for other than
+18B9 C1       01562         POP     BC              ;  attempt protected sector
+18BA C9       01563         RET
+              01564 ;
+              01565 ;       Routine to read a directory sector
+              01566 ;       B =&gt; DEC of FPDE, C =&gt; logical drive number
+              01567 ;       HL &lt;= points to directory record in SBUFF$
+              01568 ;
+18BB D5       01569 @DIRRD  PUSH    DE
+18BC CDCA18   01570         CALL    CALCDIR         ;Set HL to SBUFF$
+18BF E5       01571         PUSH    HL
+18C0 2E00     01572         LD      L,0             ;Start of bfr
+18C2 CDD818   01573         CALL    @RDSSC          ;Read it
+18C5 E1       01574         POP     HL
+18C6 3E11     01575         LD      A,17            ;Init to dir read err
+18C8 D1       01576         POP     DE
+18C9 C9       01577         RET
+              01578 ;
+              01579 ;       Routine to get directory access data
+              01580 ;       B =&gt; DEC
+              01581 ;       DE &lt;= cylinder and sector needed
+              01582 ;       HL &lt;= pointer to directory record in SBUFF$
+              01583 ;
+18CA CDF718   01584 CALCDIR CALL    @DIRCYL         ;Get directory cyl in D
+18CD 78       01585         LD      A,B             ;Calculate record start
+18CE E6E0     01586         AND     0E0H            ;  from the DEC
+18D0 6F       01587         LD      L,A
+18D1 261D     01588         LD      H,SBUFF$&lt;-8     ;Point to buffer start
+18D3 A8       01589         XOR     B               ;Calculate directory
+18D4 C602     01590         ADD     A,2             ;  sector needed
+18D6 5F       01591         LD      E,A
+18D7 C9       01592         RET
+              01593 ;
+              01594 ;       Read system sector, D=Track, E=Sector, HL=Buffer
+              01595 ;
+18D8 CDF118   01596 @RDSSC  CALL    READIR
+18DB C8       01597         RET     Z
+18DC D5       01598         PUSH    DE
+18DD 110100   01599         LD      DE,1            ;Pt to tk 0, sec 1
+18E0 CDF419   01600         CALL    @RDSEC          ;Read to find dir cyl
+18E3 D1       01601         POP     DE
+18E4 C0       01602         RET     NZ
+18E5 E5       01603         PUSH    HL
+18E6 23       01604         INC     HL              ;Pt to dir tk #
+18E7 23       01605         INC     HL
+18E8 56       01606         LD      D,(HL)          ;P/u dir tk fm boot
+18E9 2609     01607         LD      H,9             ;Update memory table
+18EB CD341A   01608         CALL    DCTFLD@
+18EE 6F       01609         LD      L,A
+18EF 72       01610         LD      (HL),D
+18F0 E1       01611         POP     HL
+18F1 CDF419   01612 READIR  CALL    @RDSEC          ;Retry dir read
+18F4 D606     01613         SUB     6               ;Test protected
+18F6 C9       01614         RET
+              01615 ;
+18F7 3E09     01616 @DIRCYL LD      A,9
+18F9 CD2B1A   01617         CALL    @DCTBYT         ;Get the dir cylinder
+18FC 57       01618         LD      D,A
+18FD C9       01619         RET
+              01620 ;
+18FE 3E06     01621 MAXCYL  LD      A,6
+1900 C5       01622         PUSH    BC
+1901 DD4E06   01623         LD      C,(IX+6)
+1904 CD2B1A   01624         CALL    @DCTBYT         ;Get highest # cyl
+1907 3C       01625         INC     A               ;Adjust for zero offset
+1908 C1       01626         POP     BC
+1909 C9       01627         RET
+              01628 ;
+              01629 ;       Multiply register E by register A
+              01630 ;
+190A C5       01631 @MUL8   PUSH    BC              ;Mult A x E
+190B 57       01632         LD      D,A
+190C AF       01633         XOR     A
+190D 0608     01634         LD      B,8
+190F 87       01635 MEA1    ADD     A,A
+1910 CB23     01636         SLA     E
+1912 3001     01637         JR      NC,MEA2
+1914 82       01638         ADD     A,D
+1915 10F8     01639 MEA2    DJNZ    MEA1
+1917 C1       01640         POP     BC
+1918 C9       01641         RET
+              01642 ;
+              01643 ;       Calculate relative cylinder for granule needed
+              01644 ;
+1919 5F       01645 RELCYL  LD      E,A
+191A CD261A   01646         CALL    @DCTBYT-5       ;Get # of grans/track
+191D 47       01647         LD      B,A             ;Hang on to this
+191E 07       01648         RLCA
+191F 07       01649         RLCA
+1920 07       01650         RLCA
+1921 E607     01651         AND     7
+1923 3C       01652         INC     A               ;Adj for 0 offset
+1924 CD3B19   01653         CALL    CKDBLBIT
+              01654 ;
+              01655 ;       Divide register E by register A
+              01656 ;
+1927 C5       01657 @DIV8   PUSH    BC
+1928 4F       01658         LD      C,A
+1929 0608     01659         LD      B,8
+192B AF       01660         XOR     A
+192C CB23     01661 DEA1    SLA     E
+192E 17       01662         RLA
+192F B9       01663         CP      C
+1930 3802     01664         JR      C,DEA2
+1932 91       01665         SUB     C
+1933 1C       01666         INC     E
+1934 10F6     01667 DEA2    DJNZ    DEA1
+1936 4F       01668         LD      C,A
+1937 7B       01669         LD      A,E
+1938 59       01670         LD      E,C
+1939 C1       01671         POP     BC
+193A C9       01672         RET
+              01673 ;
+              01674 ;       Routine to double the A register if DBL bit is set
+              01675 ;
+              01676 CKDBLBIT
+193B 57       01677         LD      D,A             ;Adjust for 2-sided &amp;
+193C 3E04     01678         LD      A,4             ;  calculate # of cyls
+193E CD2B1A   01679         CALL    @DCTBYT
+1941 CB6F     01680         BIT     5,A             ;Test if 2-sided
+1943 7A       01681         LD      A,D
+1944 2801     01682         JR      Z,$+3           ;Double the grans if 2
+1946 87       01683         ADD     A,A             ;  &amp; fall thru to DIV8
+1947 C9       01684         RET
+1948          01686 CORE$   DEFL    $
+F80D          01687         ORG     CRTBGN$+13
+              01688         IF      @BLD631
+F80D 4C       01689         DB      'LS-DOS 06.03.01'       ;&lt;631&gt;
+     53 2D 44 4F 53 20 30 36
+     2E 30 33 2E 30 31 
+              01690         ELSE
+              01691         DB      'LS-DOS 06.03.00'
+              01692         ENDIF
+              01693         IF      @USA
+F81C 20       01694         DB      ' '
+              01695         ENDIF
+              01696         IF      @GERMAN
+              01697         DB      'D'
+              01698         ENDIF
+              01699         IF      @FRENCH
+              01700         DB      'F'
+              01701         ENDIF
+              01702         IF      @BLD631
+F81D 2D       01703         DB      '- Copyright 1986/90 '  ;&lt;631&gt;
+     20 43 6F 70 79 72 69 67
+     68 74 20 31 39 38 36 2F
+     39 30 20 
+F831 4D       01704         DB      'MISOSYS, Inc.    '     ;&lt;631&gt;
+     49 53 4F 53 59 53 2C 20
+     49 6E 63 2E 20 20 20 20
+              01705         ELSE
+              01706         DB      '- Copyright 1986 '
+              01707         DB      'Logical Systems Inc.'
+              01708         ENDIF
+F85E          01709         ORG     CRTBGN$+80+14
+F85E 20       01710         DB      '               All Rights Reserved. '
+     20 20 20 20 20 20 20 20
+     20 20 20 20 20 20 41 6C
+     6C 20 52 69 67 68 74 73
+     20 52 65 73 65 72 76 65
+     64 2E 20 
+F882 20       01711         DB      '               '
+     20 20 20 20 20 20 20 20
+     20 20 20 20 20 20 
+              01712 ;       DB      'Licensed to Tandy Corporation.'
+1948          01713         ORG     CORE$
+              01714 ;
+              01715 ;       get the system loader
+              01716 ;
+1948          01719 *GET    LOADER:3
+              01720 ;LOADER/ASM - LS-DOS 6.2
+1948          01721 CORE$   DEFL    $
+0100          01722         ORG     SVCTAB$
+              01723 ;
+              01724 ;       Supervisor Call table - Page 5
+              01725 ;
+0100 F21B     01726         DW      @IPL,@KEY,@DSP,@GET             ;0-3
+     2806 4206 3806 
+0108 4506     01727         DW      @PUT,@CTL,@PRT,@WHERE           ;4-7
+     2306 3D06 7919 
+0110 3506     01728         DW      @KBD,@KEYIN,@DSPLY,@LOGER       ;8-11
+     8505 2D05 0305 
+0118 0005     01729         DW      @LOGOT,@MSG,@PRINT,@VDCTL       ;12-15
+     3005 2805 990B 
+0120 8203     01730         DW      @PAUSE,@PARAM,@DATE,@TIME       ;16-19
+     8719 2014 8D07 
+0128 8906     01731         DW      @CHNIO,@ABORT,@EXIT,SVCERR      ;20-23
+     081B 0B1B F41A 
+0130 7E19     01732         DW      @CMNDI,@CMNDR,@ERROR,@DEBUG     ;24-27
+     7B19 0F1B A019 
+0138 F51C     01733         DW      @CKTSK,@ADTSK,@RMTSK,@RPTSK     ;28-31
+     DA1C D71C EB1C 
+0140 D01C     01734         DW      @KLTSK,@CKDRV,@DODIR,@RAMDIR    ;32-35
+     9319 AF19 AC19 
+0148 F41A     01735         DW      SVCERR,SVCERR,SVCERR,SVCERR     ;36-39
+     F41A F41A F41A 
+0150 B519     01736         DW      @DCSTAT,@SLCT,@DCINIT,@DCRES    ;40-43
+     BC19 C019 C419 
+0158 C819     01737         DW      @RSTOR,@STEPI,@SEEK,@RSLCT      ;44-47
+     CC19 D019 D419 
+0160 D819     01738         DW      @RDHDR,@RDSEC,@VRSEC,@RDTRK     ;48-51
+     F419 DC19 E019 
+0168 E419     01739         DW      @HDFMT,@WRSEC,@WRSSC,@WRTRK     ;52-55
+     E819 EC19 F019 
+0170 9619     01740         DW      @RENAME,@REMOVE,@INIT,@OPEN     ;56-59
+     A619 8D19 8A19 
+0178 9919     01741         DW      @CLOSE,@BKSP,@CKEOF,@LOC        ;60-63
+     AD14 8F15 DA14 
+0180 0515     01742         DW      @LOF,@PEOF,@POSN,@READ          ;64-67
+     C914 5B14 1315 
+0188 C214     01743         DW      @REW,@RREAD,@RWRIT,@SEEKSC      ;68-71
+     9A14 AD13 A013 
+0190 5714     01744         DW      @SKIP,@VER,@WEOF,@WRITE         ;72-75
+     6015 3014 3115 
+0198 381B     01745         DW      @LOAD,@RUN,@FSPEC,@FEXT         ;76-79
+     1D1B 8119 8419 
+01A0 9C19     01746         DW      @FNAME,@GTDCT,@GTDCB,@GTMOD     ;80-83
+     1E1A 9019 B219 
+01A8 F41A     01747         DW      SVCERR,@RDSSC,@GATRD,@DIRRD     ;84-87
+     D818 7418 BB18 
+01B0 0318     01748         DW      @DIRWR,@GATWR,@MUL8,@MUL16      ;88-91
+     7518 0A19 C906 
+01B8 F41A     01749         DW      SVCERR,@DIV8,@DIV16,@HEXD       ;92-95
+     2719 E306 F806 
+01C0 E103     01750         DW      @DECHEX,@HEXDEC,@HEX8,@HEX16    ;96-99
+     F606 C207 BD07 
+01C8 4819     01751         DW      @HIGH$,@FLAGS,@BANK,@BREAK      ;100-103
+     6A19 7708 6F19 
+01D0 9203     01752         DW      @SOUND,@CLS,@CKBRKC,@VDPRT      ;104-107
+     4505 5305 3509 
+01D8 F41A     01753         DW      SVCERR,SVCERR,SVCERR,SVCERR     ;108-111
+     F41A F41A F41A 
+01E0 F41A     01754         DW      SVCERR,SVCERR,SVCERR,SVCERR     ;112-115
+     F41A F41A F41A 
+01E8 F41A     01755         DW      SVCERR,SVCERR,SVCERR,SVCERR     ;116-119
+     F41A F41A F41A 
+01F0 F41A     01756         DW      SVCERR,SVCERR,SVCERR,SVCERR     ;120-123
+     F41A F41A F41A 
+01F8 F41A     01757         DW      SVCERR,SVCERR,SVCERR,SVCERR     ;124-127
+     F41A F41A F41A 
+1948          01758         ORG     CORE$
+              01759 ;
+              01760 ;       Routine to set or retrieve HIGH$/LOW$
+              01761 ;
+1948 7C       01762 @HIGH$  LD      A,H             ;Test if put or get
+1949 B5       01763         OR      L
+194A 2812     01764         JR      Z,GETHILO       ;Go if get
+194C 3A6C00   01765         LD      A,(CFLAG$)      ;Is HIGH$ changeable?
+194F 0F       01766         RRCA
+1950 3E2B     01767         LD      A,43            ;Init SVC parm error
+1952 D8       01768         RET     C               ;Back with NZ
+1953 04       01769         INC     B               ;Test for HIGH$/LOW$
+1954 05       01770         DEC     B
+1955 200E     01771         JR      NZ,PUTLO        ;Go if LOW$
+1957 220E04   01772         LD      (HIGH$),HL      ;Set new HIGH$
+195A 2A0E04   01773 GETHI   LD      HL,(HIGH$)      ;P/u the value &amp;
+195D C9       01774         RET                     ;  ret with Z-flag
+195E 04       01775 GETHILO INC     B               ;Test for HIGH$/LOW$
+195F 05       01776         DEC     B
+1960 28F8     01777         JR      Z,GETHI
+1962 2A1E00   01778         LD      HL,(LOW$)       ;P/u LOW$
+1965 221E00   01779 PUTLO   LD      (LOW$),HL       ;Get LOW$
+1968 AF       01780         XOR     A               ;Set Z-flag
+1969 C9       01781         RET
+              01782 ;
+196A FD216A00 01783 @FLAGS  LD      IY,FLGTAB$
+196E C9       01784         RET
+              01785 ;
+196F E5       01786 @BREAK  PUSH    HL              ;Save user vector
+1970 2A881C   01787         LD      HL,(BRKVEC$)    ;P/u current vector
+1973 E3       01788         EX      (SP),HL         ;Save current &amp; get user
+1974 22881C   01789         LD      (BRKVEC$),HL    ;Stuff new vector
+1977 E1       01790         POP     HL              ;Recover old vector
+1978 C9       01791         RET
+              01792 ;
+1979 E1       01793 @WHERE  POP     HL
+197A E9       01794         JP      (HL)
+              01795 ;
+              01796 ;       Code for these SVCs is in system overlays
+              01797 ;
+197B 3EA3     01798 @CMNDR  LD      A,0A3H          ;Interpret command &amp; RET
+197D EF       01799         RST     40
+197E 3EB3     01800 @CMNDI  LD      A,0B3H          ;Interpret a command
+1980 EF       01801         RST     40
+1981 3EC3     01802 @FSPEC  LD      A,0C3H          ;Parse a filespec
+1983 EF       01803         RST     40
+1984 3ED3     01804 @FEXT   LD      A,0D3H          ;Optional default EXT
+1986 EF       01805         RST     40
+1987 3EE3     01806 @PARAM  LD      A,0E3H          ;Parameter scanner
+1989 EF       01807         RST     40
+198A 3E94     01808 @OPEN   LD      A,94H           ;Open a file
+198C EF       01809         RST     40
+198D 3EA4     01810 @INIT   LD      A,0A4H          ;Initialize a file
+198F EF       01811         RST     40
+1990 3EB4     01812 @GTDCB  LD      A,0B4H          ;Get a DCB vector
+1992 EF       01813         RST     40
+1993 3EC4     01814 @CKDRV  LD      A,0C4H          ;Drive available?
+1995 EF       01815         RST     40
+1996 3EF4     01816 @RENAME LD      A,0F4H          ;Rename a file
+1998 EF       01817         RST     40
+1999 3E95     01818 @CLOSE  LD      A,95H           ;Close a file
+199B EF       01819         RST     40
+199C 3EA5     01820 @FNAME  LD      A,0A5H          ;Recover filespec
+199E EF       01821         RST     40
+199F C9       01822 @DBGHK  RET                     ;Init DEBUG off (NOP=on)
+19A0 F5       01823 @DEBUG  PUSH    AF
+19A1 3E97     01824         LD      A,97H           ;Enter system Debugger
+19A3 EF       01825         RST     40
+19A4 0315     01826 EXTDBG$ DW      ORARET@         ;Hook for extended DEBUG
+19A6 3E9C     01827 @REMOVE LD      A,9CH           ;Remove a file/device
+19A8 EF       01828         RST     40
+19A9 3ECD     01829 @DOKEY  LD      A,0CDH          ;DO execution
+19AB EF       01830         RST     40
+19AC 3E9E     01831 @RAMDIR LD      A,09EH          ;Directory data
+19AE EF       01832         RST     40
+19AF 3EAE     01833 @DODIR  LD      A,0AEH          ;Directory data
+19B1 EF       01834         RST     40
+19B2 3EBE     01835 @GTMOD  LD      A,0BEH          ;Get module address
+19B4 EF       01836         RST     40
+              01837 ;
+              01838 ;       These SVCs handle the disk primitive requests
+              01839 ;
+19B5 AF       01840 @DCSTAT XOR     A               ;FDC status
+19B6 183E     01841         JR      IOFUNC
+19B8 3A2300   01842 TAPDRV  LD      A,(LDRV$)       ;P/u drive #
+19BB 4F       01843         LD      C,A
+19BC 3E01     01844 @SLCT   LD      A,1             ;Select drive
+19BE 1836     01845         JR      IOFUNC
+19C0 3E02     01846 @DCINIT LD      A,2             ;FDC init
+19C2 1832     01847         JR      IOFUNC
+19C4 3E03     01848 @DCRES  LD      A,3             ;FDC reset
+19C6 182E     01849         JR      IOFUNC
+19C8 3E04     01850 @RSTOR  LD      A,4             ;Restore to cyl 0
+19CA 182A     01851         JR      IOFUNC
+19CC 3E05     01852 @STEPI  LD      A,5             ;Step in 1 cyl
+19CE 1826     01853         JR      IOFUNC
+19D0 3E06     01854 @SEEK   LD      A,6             ;Seek a track/sector
+19D2 1822     01855         JR      IOFUNC
+19D4 3E07     01856 @RSLCT  LD      A,7             ;Re-select drive
+19D6 181E     01857         JR      IOFUNC
+19D8 3E08     01858 @RDHDR  LD      A,8
+19DA 181A     01859         JR      IOFUNC
+19DC 3E0A     01860 @VRSEC  LD      A,10            ;Verify a sector
+19DE 1816     01861         JR      IOFUNC
+19E0 3E0B     01862 @RDTRK  LD      A,11
+19E2 1812     01863         JR      IOFUNC
+19E4 3E0C     01864 @HDFMT  LD      A,12
+19E6 180E     01865         JR      IOFUNC
+19E8 3E0D     01866 @WRSEC  LD      A,13            ;Write standard sector
+19EA 180A     01867         JR      IOFUNC
+19EC 3E0E     01868 @WRSSC  LD      A,14            ;Write a system sector
+19EE 1806     01869         JR      IOFUNC
+19F0 3E0F     01870 @WRTRK  LD      A,15            ;Write a track
+19F2 1802     01871         JR      IOFUNC
+19F4 3E09     01872 @RDSEC  LD      A,9             ;Read a sector
+              01873 ;
+19F6 C5       01874 IOFUNC  PUSH    BC              ;Save reg pair
+19F7 47       01875         LD      B,A             ;Xfer the function code
+              01876 ;
+              01877 ;       Bring up bank 0
+              01878 ;
+19F8 C5       01879         PUSH    BC
+19F9 AF       01880         XOR     A
+19FA 47       01881         LD      B,A             ;Set bank function 0,
+19FB 4F       01882         LD      C,A             ;  bank number 0
+19FC CD7708   01883         CALL    @BANK           ;Bring up bank
+19FF F1       01884         POP     AF              ;Perform EX (SP),BC
+1A00 C5       01885         PUSH    BC
+1A01 F5       01886         PUSH    AF
+1A02 C1       01887         POP     BC
+              01888 ;
+              01889 ;       Continue disk I/O setup
+              01890 ;
+1A03 79       01891         LD      A,C             ;Xfer the drive code
+1A04 322300   01892         LD      (LDRV$),A
+1A07 FDE5     01893         PUSH    IY
+1A09 CD1E1A   01894         CALL    @GTDCT          ;Get DCT address in IY
+1A0C 3E20     01895         LD      A,20H           ;Set illegal drive #
+1A0E B7       01896         OR      A               ;  if drive disabled
+1A0F CD1C1A   01897         CALL    GODOIO
+1A12 FDE1     01898         POP     IY
+              01899 ;
+              01900 ;       Bring back the old bank
+              01901 ;
+1A14 C1       01902         POP     BC
+1A15 F5       01903         PUSH    AF              ;Save disk I/O retcod
+1A16 3E66     01904         LD      A,102           ;Set for @BANK
+1A18 EF       01905         RST     40              ;No need to ck for error
+              01906                                 ;  from @BANK
+1A19 F1       01907         POP     AF
+1A1A C1       01908         POP     BC
+1A1B C9       01909         RET
+              01910 ;
+1A1C FDE9     01911 GODOIO  JP      (IY)
+              01912 ;
+1A1E E5       01913 @GTDCT  PUSH    HL              ;Get i/o routine addr
+1A1F CD341A   01914         CALL    DCTFLD@         ;  into IY
+1A22 E3       01915         EX      (SP),HL
+1A23 FDE1     01916         POP     IY
+1A25 C9       01917         RET
+              01918 ;
+              01919 ;       Entry to get DCT+8 of FCB (IX) drive spec
+              01920 ;
+1A26 DD4E06   01921 D@FBYT8 LD      C,(IX+6)        ;P/u drive
+              01922 ;
+              01923 ;       Entry to get DCT+8 of Reg C drive spec
+              01924 ;
+              01925 DCTBYT8@
+1A29 3E08     01926         LD      A,8
+              01927 ;
+              01928 ;       Entry to get byte (Reg A) from DCT of Reg C drive
+              01929 ;        C =&gt; logical drive specification
+              01930 ;        A =&gt; relative byte requested from DCT
+              01931 ;        A &lt;= data at position requested
+              01932 ;
+1A2B E5       01933 @DCTBYT PUSH    HL              ;Save the register pair
+1A2C 67       01934         LD      H,A             ;Xfer relative position
+1A2D CD341A   01935         CALL    DCTFLD@         ;Get HL pointing to
+1A30 6F       01936         LD      L,A             ;  DCT position
+1A31 7E       01937         LD      A,(HL)          ;Get the byte
+1A32 E1       01938         POP     HL
+1A33 C9       01939         RET
+              01940 ;
+              01941 ;       Entry to get HL pointing to DCT byte Reg C, Reg A
+              01942 ;        C =&gt; logical drive number
+              01943 ;        A =&gt; relative byte in DCT requested
+              01944 ;       HL &lt;= start of requested DCT for the drive
+              01945 ;        A &lt;= low order pointer to relative byte request
+              01946 ;
+1A34 79       01947 DCTFLD@ LD      A,C             ;Get drive spec &amp;
+1A35 E607     01948         AND     7               ;  strip excess data
+1A37 87       01949         ADD     A,A             ;Times 2
+1A38 6F       01950         LD      L,A             ;  &amp; saved
+1A39 87       01951         ADD     A,A             ;Times 4
+1A3A 87       01952         ADD     A,A             ;Times 8
+1A3B 85       01953         ADD     A,L             ;Times 10
+1A3C C670     01954         ADD     A,70H           ;Add DCT offset from 0
+1A3E 6F       01955         LD      L,A             ;Point L to DCT low order
+1A3F 84       01956         ADD     A,H             ;Add in rel pos desired
+1A40 2604     01957         LD      H,DCT$&lt;-8       ;Point H to DCT hi-order
+1A42 C9       01958         RET
+              01959 ;
+              01960 ;       Process supervisory calls &lt;0-127&gt;
+              01961 ;
+1A43 FE1A     01962 SVCUSER CP      26              ;Check for @ERROR
+1A45 2808     01963         JR      Z,ERRSVC        ;Skip next if so
+1A47 320D00   01964         LD      (LSVC$),A       ;Store SVC request
+1A4A E3       01965         EX      (SP),HL         ;P/u RET address
+1A4B 220B00   01966         LD      (SVCRET$),HL    ;  and save it
+1A4E E3       01967         EX      (SP),HL         ;Restore RET address
+1A4F E5       01968 ERRSVC  PUSH    HL              ;Save HL
+1A50 07       01969         RLCA                    ;Multiply by two
+1A51 2601     01970         LD      H,SVCTAB$&lt;-8    ;Base of table
+1A53 6F       01971         LD      L,A             ;Set up the low order
+1A54 7E       01972         LD      A,(HL)          ;P/u table entry
+1A55 2C       01973         INC     L
+1A56 66       01974         LD      H,(HL)
+1A57 6F       01975         LD      L,A
+1A58 E3       01976         EX      (SP),HL         ;P/u HL &amp; stuff vector
+1A59 79       01977         LD      A,C             ;Xfer for PUT type ops
+1A5A C9       01978         RET
+              01979 ;
+              01980 ;       RST 28 vector - System &amp; user SVCs
+              01981 ;
+1A5B B7       01982 RST28   OR      A               ;Test if bit 7 set
+1A5C F2431A   01983         JP      P,SVCUSER       ;Jump on user SVC attempt
+1A5F E3       01984         EX      (SP),HL         ;Discard return addr &amp;
+1A60 F5       01985         PUSH    AF              ;  save HL, AF
+1A61 219F19   01986         LD      HL,@DBGHK       ;Set up DEBUG linkage
+1A64 7E       01987         LD      A,(HL)
+1A65 32791A   01988         LD      (SET@EXEC),A
+1A68 36C9     01989         LD      (HL),0C9H
+1A6A F1       01990         POP     AF              ;Restore AF, HL
+1A6B E1       01991         POP     HL
+1A6C CD7F1A   01992 HKRES$  CALL    CKMOD@          ;Get overlay if needed
+1A6F 3E00     01993         LD      A,0             ;P/u new overlay #
+1A70          01994 OVRLYOLD        EQU     $-1
+1A71 326900   01995         LD      (OVRLY$),A      ;  &amp; update current
+1A74 CD0000   01996 TRANSFR CALL    0               ;Traadr of SYSx
+1A77 F5       01997         PUSH    AF
+1A78 3E00     01998         LD      A,0             ;Set to C9 if EXEC only
+1A79          01999 SET@EXEC        EQU     $-1
+1A7A 329F19   02000         LD      (@DBGHK),A
+1A7D F1       02001         POP     AF
+1A7E C9       02002         RET
+              02003 ;
+              02004 ;       DOS command overlay request
+              02005 ;
+1A7F E5       02006 CKMOD@  PUSH    HL
+1A80 67       02007         LD      H,A             ;Save command value
+1A81 78       02008         LD      A,B
+1A82 32D21A   02009         LD      (EXOVR2+1),A    ;Set overlay #
+1A85 7C       02010         LD      A,H
+1A86 F601     02011         OR      1               ;Set for SYS6 &amp; SYS7
+1A88 FE89     02012         CP      89H             ;Is it either?
+1A8A 7C       02013         LD      A,H             ;Get back the correct #
+1A8B 2813     02014         JR      Z,EXOVR         ;Sys6/7 req? Use ISAM!
+1A8D FE8A     02015         CP      8AH             ;Sys8 also ISAM
+1A8F 280F     02016         JR      Z,EXOVR
+1A91 3A6900   02017         LD      A,(OVRLY$)      ;P/u current overlay
+1A94 AC       02018         XOR     H               ;Ck if it's the one
+1A95 E60F     02019         AND     0FH             ;  we need to execute
+1A97 7C       02020         LD      A,H
+1A98 32701A   02021         LD      (OVRLYOLD),A    ;Update current tempy
+1A9B 21001E   02022         LD      HL,OVERLAY      ;Init to SYSx entry
+1A9E 283A     02023         JR      Z,EXOVR3        ;Go exec if resident
+              02024 ;
+              02025 ;       Execute a system overlay
+              02026 ;
+1AA0 D5       02027 EXOVR   PUSH    DE
+1AA1 C5       02028         PUSH    BC
+1AA2 E60F     02029         AND     0FH             ;Get right nybble
+1AA4 CB5F     02030         BIT     3,A             ;Check for SYS0-7
+1AA6 2802     02031         JR      Z,EXOVR1        ;  w/o changing carry
+1AA8 C618     02032         ADD     A,18H           ;Adjust for sys8-15
+1AAA 329300   02033 EXOVR1  LD      (SFCB$+7),A
+1AAD 47       02034         LD      B,A             ;Set DEC for directory
+1AAE 3E20     02035         LD      A,20H           ;Set bit 5 of FCB+1
+1AB0 328D00   02036         LD      (SFCB$+1),A
+1AB3 ED62     02037         SBC     HL,HL           ;Carry is clear here
+1AB5 229600   02038         LD      (SFCB$+10),HL   ;Zero NRN
+1AB8 4C       02039         LD      C,H             ;Init for drive 0
+1AB9 CDBB18   02040         CALL    @DIRRD          ;Read dir entry
+1ABC 201A     02041         JR      NZ,EXERR        ;Go if error
+1ABE 7E       02042         LD      A,(HL)          ;Was overlay purged?
+1ABF E650     02043         AND     50H             ;  or is it non-system?
+1AC1 EE50     02044         XOR     50H
+1AC3 3E07     02045         LD      A,7             ;Init "deleted error
+1AC5 2011     02046         JR      NZ,EXERR
+1AC7 7D       02047         LD      A,L
+1AC8 C616     02048         ADD     A,22            ;Point to 1st extent
+1ACA 6F       02049         LD      L,A
+1ACB 119A00   02050         LD      DE,SFCB$+14     ;Extent field in FCB
+1ACE CDE11A   02051         CALL    PAT1            ;Stuff 1st two extents
+1AD1 0600     02052 EXOVR2  LD      B,0             ;P/u ISAM # or zero
+1AD3 1E8C     02053         LD      E,SFCB$&amp;0FFH
+1AD5 CD561B   02054         CALL    LOADER          ;Read system overlay
+1AD8 C1       02055 EXERR   POP     BC
+1AD9 D1       02056         POP     DE
+1ADA 22751A   02057 EXOVR3  LD      (TRANSFR+1),HL  ;Stuff overlay entry pt
+1ADD E1       02058         POP     HL
+1ADE C8       02059         RET     Z
+1ADF 1816     02060         JR      SYSERR          ;Go if I/O error on read
+              02061 ;
+              02062 ;       Routine to calculate 1st two extents of SYS file
+              02063 ;
+1AE1 CDEC1A   02064 PAT1    CALL    PAT1A           ;Move first extent
+1AE4 E61F     02065         AND     1FH             ;Compute # of granules
+1AE6 3C       02066         INC     A
+1AE7 12       02067         LD      (DE),A          ;And store in FCB
+1AE8 13       02068         INC     DE
+1AE9 AF       02069         XOR     A
+1AEA 12       02070         LD      (DE),A
+1AEB 13       02071         INC     DE
+1AEC CDEF1A   02072 PAT1A   CALL    PAT1B           ;Move second extent
+1AEF 7E       02073 PAT1B   LD      A,(HL)
+1AF0 12       02074         LD      (DE),A
+1AF1 23       02075         INC     HL
+1AF2 13       02076         INC     DE
+1AF3 C9       02077         RET
+              02078 ;
+              02079 ;       System error display routine
+              02080 ;       The NOP is provided so an intercept routine vector
+              02081 ;        may be patched in during program development
+              02082 ;
+1AF4 3E2B     02083 SVCERR  LD      A,43            ;SVC error
+1AF6 00       02084         NOP
+1AF7 E63F     02085 SYSERR  AND     3FH             ;Strip excess bits
+1AF9 21191B   02086         LD      HL,ERRNUM       ;Pack error number
+1AFC CDC207   02087         CALL    @HEX8           ;  into message
+1AFF 21131B   02088         LD      HL,SYSERR$
+1B02 CD0005   02089         CALL    @LOGOT          ;Log the error &amp; ABORT
+1B05 318003   02090         LD      SP,STACK$       ;reset stack
+1B08 21FFFF   02091 @ABORT  LD      HL,-1
+1B0B 3E93     02092 @EXIT   LD      A,93H           ;Exit to DOS
+1B0D EF       02093         RST     40
+              02094 ;
+1B0E E1       02095 POPERR  POP     HL              ;Pop extended error
+1B0F F5       02096 @ERROR  PUSH    AF              ;Save the error code
+1B10 3E96     02097         LD      A,96H           ;Display the error number
+1B12 EF       02098         RST     40
+              02099 ;
+1B13 45       02100 SYSERR$ DM      'Error '
+     72 72 6F 72 20 
+1B19 78       02101 ERRNUM  DM      'xxH',CR
+     78 48 0D 
+              02102 ;
+              02103 ;       Routine to RUN a program
+              02104 ;
+1B1D E5       02105 @RUN    PUSH    HL              ;Save register pair
+1B1E 217C00   02106         LD      HL,SFLAG$
+1B21 CBD6     02107         SET     2,(HL)          ;Turn on RUN flag bit
+1B23 CD381B   02108         CALL    @LOAD           ;Load the program module
+1B26 E3       02109         EX      (SP),HL         ;Put traadr on the stack
+              02110 ;
+              02111 ;       Note: The error code is set to NOT abort. Errors
+              02112 ;        will be passed back to the calling module after
+              02113 ;        @ERROR. Note that HL will contain the error #.
+              02114 ;
+1B27 20E5     02115         JR      NZ,POPERR
+              02116 ;
+              02117 ;       Place the INBUF$ pointer in register pair BC
+              02118 ;
+1B29 012004   02119         LD      BC,INBUF$       ;Reflect buffer pointer
+              02120 ;
+              02121 ;       Get TRAADR then test if we need to go to DEBUG
+              02122 ;
+1B2C 3A7C00   02123         LD      A,(SFLAG$)
+1B2F CB4F     02124         BIT     1,A             ;Go to the program if
+1B31 C0       02125         RET     NZ              ;  its EXEC only access
+1B32 CB7F     02126         BIT     7,A             ;  else test if DEBUG
+1B34 C23000   02127         JP      NZ,@RST30       ;  is on &amp; go to it
+1B37 C9       02128         RET                     ;  else go to program
+              02129 ;
+              02130 ;       This routine LOADs a Load Module Format file
+              02131 ;
+1B38 0600     02132 @LOAD   LD      B,0             ;LRL=256
+1B3A 217C00   02133         LD      HL,SFLAG$
+1B3D CBC6     02134         SET     0,(HL)          ;Don't set "file open"
+1B3F 21001D   02135         LD      HL,SBUFF$       ;Set buffer to system
+1B42 CD8A19   02136         CALL    @OPEN           ;Open the file
+1B45 D5       02137         PUSH    DE              ;Save FCB pointer
+1B46 CC561B   02138         CALL    Z,LOADER        ;Load if no OPEN error
+1B49 D1       02139         POP     DE              ;Restore FCB pointer
+1B4A C8       02140         RET     Z               ;Back if no error
+1B4B 6F       02141         LD      L,A             ;Xfer the error code
+1B4C 2600     02142         LD      H,0
+1B4E F6C0     02143         OR      0C0H            ;Set RETurn &amp; abbrev
+1B50 FED8     02144         CP      0D8H            ;Change "file not in dir"
+1B52 C0       02145         RET     NZ              ;  to "program not found"
+1B53 C607     02146         ADD     A,7
+1B55 C9       02147         RET
+              02148 ;
+              02149 ;       System command file loader
+              02150 ;
+1B56 78       02151 LOADER  LD      A,B             ;Set overlay # (0 on non
+1B57 32B31B   02152         LD      (LDR14+1),A     ;  SYStem file)
+1B5A D5       02153         PUSH    DE              ;Save IX &amp; xfer FCB to IX
+1B5B DDE3     02154         EX      (SP),IX
+1B5D 11FF1D   02155         LD      DE,SBUFF$+255   ;Init to end of buffer
+1B60 CD6F1B   02156         CALL    LDR01           ;Do the load
+1B63 DDE1     02157         POP     IX              ;Recover IX
+1B65 C9       02158         RET
+              02159 ;
+              02160 ;       Routine to ignore the LMF record
+              02161 ;
+1B66 CDD61B   02162 LDR05   CALL    LDR15           ;Get length of "comment"
+1B69 47       02163         LD      B,A
+1B6A CDD61B   02164 LDR06   CALL    LDR15           ;Read &amp; ignore that many
+1B6D 10FB     02165         DJNZ    LDR06           ;  bytes then fall thru
+              02166 ;
+              02167 ;       Routine to parse LMF record types
+              02168 ;
+1B6F CDD61B   02169 LDR01   CALL    LDR15           ;Get record type
+1B72 FE01     02170 LDR02   CP      1               ;Start of block?
+1B74 281F     02171         JR      Z,LDR08
+1B76 FE02     02172         CP      2               ;Start of TRAADR?
+1B78 2814     02173 LDR03   JR      Z,LDR07
+1B7A FE04     02174         CP      4               ;End of LIB member?
+1B7C 282A     02175         JR      Z,LDR12
+1B7E FE08     02176         CP      8               ;Begin ISAM table entry?
+1B80 2828     02177         JR      Z,LDR13
+1B82 FE0A     02178         CP      10              ;End of ISAM map?
+1B84 2804     02179         JR      Z,LDR04
+1B86 FE20     02180         CP      20H             ;Ignore all other control
+1B88 38DC     02181         JR      C,LDR05
+1B8A 3E22     02182 LDR04   LD      A,22H           ;Load file format err
+1B8C B7       02183         OR      A
+1B8D C9       02184         RET
+              02185 ;
+              02186 ;       Grab transfer address
+              02187 ;
+1B8E CDD61B   02188 LDR07   CALL    LDR15           ;Bypass 2nd X'02'
+1B91 CDE81B   02189         CALL    GETADR          ;P/u transfer address
+1B94 C9       02190         RET                     ;Ret Z or NZ
+              02191 ;
+              02192 ;       Grab load block
+              02193 ;
+1B95 CDD61B   02194 LDR08   CALL    LDR15           ;P/u block len
+1B98 47       02195         LD      B,A
+1B99 CDE81B   02196         CALL    GETADR          ;P/u load address
+1B9C C0       02197         RET     NZ
+1B9D 05       02198         DEC     B               ;Adj length for adr
+1B9E 05       02199         DEC     B
+1B9F CDD61B   02200 LDR09   CALL    LDR15           ;P/u block byte
+1BA2 77       02201         LD      (HL),A
+1BA3 23       02202         INC     HL
+1BA4 10F9     02203         DJNZ    LDR09           ;Loop until block end
+1BA6 18C7     02204         JR      LDR01
+              02205 ;
+1BA8 E1       02206 LDR12   POP     HL
+1BA9 C9       02207         RET
+              02208 ;
+              02209 ;       Routine to check ISAM table match
+              02210 ;
+1BAA CDD61B   02211 LDR13   CALL    LDR15           ;Get record length
+1BAD 47       02212         LD      B,A
+1BAE CDD61B   02213         CALL    LDR15           ;Get ISAM number
+1BB1 05       02214         DEC     B               ;  &amp; decrement counter
+1BB2 FE00     02215 LDR14   CP      0               ;Either ISAM# or 0
+1BB4 20B4     02216         JR      NZ,LDR06        ;Go if not a match
+1BB6 CDE81B   02217         CALL    GETADR          ;  else get the TRAADR
+1BB9 E5       02218         PUSH    HL              ;  &amp; save it
+1BBA CCE81B   02219         CALL    Z,GETADR        ;Get the NRN for member
+1BBD 2027     02220         JR      NZ,LODERR
+1BBF CDD61B   02221         CALL    LDR15           ;Get the sector offset
+1BC2 5F       02222         LD      E,A             ;Update pointer offset
+1BC3 C5       02223         PUSH    BC
+1BC4 44       02224         LD      B,H             ;Xfer NRN position needed
+1BC5 4D       02225         LD      C,L
+1BC6 D5       02226         PUSH    DE              ;Save buffer ptr offset
+1BC7 DDE5     02227         PUSH    IX
+1BC9 D1       02228         POP     DE              ;P/u FCB into DE
+1BCA CD5B14   02229         CALL    @POSN           ;Position to ISAM rec
+1BCD D1       02230         POP     DE              ;Rcvr buffer ptr offset
+1BCE C1       02231         POP     BC
+1BCF 2015     02232         JR      NZ,LODERR
+1BD1 CDDB1B   02233         CALL    LDR17           ;Read the sector
+1BD4 189C     02234         JR      LDR02           ;Now go read the member
+              02235 ;
+              02236 ;       Routine to get the next file byte
+              02237 ;
+1BD6 1C       02238 LDR15   INC     E               ;Bump buf pointer
+1BD7 2802     02239         JR      Z,LDR17         ;Read sector if needed
+1BD9 1A       02240 LDR16   LD      A,(DE)          ;P/U byte from buffer
+1BDA C9       02241         RET
+1BDB E5       02242 LDR17   PUSH    HL              ;Save regs
+1BDC D5       02243         PUSH    DE
+1BDD C5       02244         PUSH    BC
+1BDE CD7513   02245         CALL    NXTSECT         ;Read next record
+1BE1 C1       02246         POP     BC              ;Restore regs
+1BE2 D1       02247         POP     DE
+1BE3 E1       02248         POP     HL
+1BE4 28F3     02249         JR      Z,LDR16         ;Bypass if no error
+1BE6 C1       02250 LODERR  POP     BC              ;Pop return address
+1BE7 C9       02251         RET
+              02252 ;
+              02253 ;       Routine to get an address field
+              02254 ;
+1BE8 CDD61B   02255 GETADR  CALL    LDR15           ;Get low order byte
+1BEB 6F       02256         LD      L,A
+1BEC CDD61B   02257         CALL    LDR15           ;Get hi order byte
+1BEF 67       02258         LD      H,A
+1BF0 BF       02259         CP      A
+1BF1 C9       02260         RET
+              02261 ;
+              02262 ;       BOOT code brings back the ROM
+              02263 ;
+4300          02264 MOD3BUF EQU     4300H
+1BF2 21FB03   02265 @IPL    LD      HL,BOOTCOD      ;Code to toggle in ROM
+1BF5 110043   02266         LD      DE,MOD3BUF      ;Buffer used by ROM
+1BF8 D5       02267         PUSH    DE              ;This is return address
+1BF9 010500   02268         LD      BC,BOOTLEN
+1BFC EDB0     02269         LDIR                    ;Transfer boot code and
+1BFE C9       02270         RET                     ;  jump to it
+              02271 ;
+              02272 ;       End of loader module
+              02273 ;
+1BFF          02276 *GET    TASKER:3
+              02277 ;TASKER/ASM - LS-DOS 6.2
+              02278 ;
+              02279 ;       Interrupt task table, IM 1
+              02280 ;
+1BFF          02281 CORE$   DEFL    $
+004E          02282         ORG     TCB$
+004E E91C     02283         DW      NOTASK,NOTASK,NOTASK,NOTASK
+     E91C E91C E91C 
+0056 E91C     02284         DW      NOTASK,NOTASK,NOTASK,NOTASK
+     E91C E91C E91C 
+005E E91C     02285         DW      NOTASK,NOTASK,TYPTSK$,NOTASK
+     E91C 260B E91C 
+1BFF          02286         ORG     CORE$
+              02287 ;
+              02288 ;       Model IV task processor
+              02289 ;
+              02290 RST38@
+1BFF E3       02291         EX      (SP),HL
+1C00 22AF07   02292         LD      (PCSAVE$),HL    ;Save for TRACE
+1C03 E3       02293         EX      (SP),HL
+1C04 E5       02294         PUSH    HL              ;Save HL for now
+1C05 F5       02295         PUSH    AF              ;Save AF for now
+1C06 217700   02296         LD      HL,NFLAG$       ;Show the system we
+1C09 CBF6     02297         SET     6,(HL)          ;  are in the TASKER
+1C0B 210202   02298         LD      HL,LBANK$       ;P/U &amp; save the current
+1C0E 7E       02299         LD      A,(HL)          ;  logical bank #
+1C0F 3600     02300         LD      (HL),0
+1C11 F5       02301         PUSH    AF
+1C12 217800   02302         LD      HL,OPREG$       ;Get current memory
+1C15 7E       02303         LD      A,(HL)
+1C16 F5       02304         PUSH    AF              ;  config &amp; save
+1C17 E68C     02305         AND     8CH             ;Strip bits 0, 1, 4-6
+1C19 F603     02306         OR      3               ;Bring up regular 64K
+1C1B 77       02307         LD      (HL),A
+1C1C D384     02308         OUT     (@OPREG),A
+00E0          02309 INTLAT  EQU     0E0H
+1C1E DBE0     02310         IN      A,(INTLAT)      ;Get interrupt latch
+1C20 2F       02311         CPL                     ;Mod IV is reverse
+1C21 213C00   02312         LD      HL,INTIM$       ;Store state of int
+1C24 77       02313         LD      (HL),A
+1C25 2C       02314         INC     L               ;Advance to int mask
+1C26 A6       02315         AND     (HL)            ;Mask the latch bits
+1C27 2808     02316         JR      Z,TSTBRK        ;Go if nothing interptd
+1C29 2C       02317 NXTVCT  INC     L               ;Ck on INTVC$
+1C2A 1F       02318         RRA                     ;Ck if device interrupted
+1C2B 381C     02319         JR      C,ACTVTSK
+1C2D 2C       02320 NXTMSK  INC     L               ;Ck all 8 bits of mask
+1C2E B7       02321         OR      A               ;When fin, ck overhead
+1C2F 20F8     02322         JR      NZ,NXTVCT       ;  task routine
+              02323 ;
+1C31 CDD607   02324 TSTBRK  CALL    KCK@            ;Test <break>, <shift>
+1C34 202A     02325         JR      NZ,BREAK?       ;Go if break
+1C36 F1       02326 TSKEXIT POP     AF              ;Get previous mem config
+1C37 327800   02327         LD      (OPREG$),A      ;  &amp; restore to it
+1C3A D384     02328         OUT     (@OPREG),A
+1C3C F1       02329         POP     AF
+1C3D 320202   02330         LD      (LBANK$),A
+1C40 217700   02331         LD      HL,NFLAG$       ;Now leaving the TASKER
+1C43 CBB6     02332         RES     6,(HL)          ; show the system
+1C45 F1       02333         POP     AF              ;Restore previous regs
+1C46 E1       02334         POP     HL
+1C47 FB       02335         EI
+1C48 C9       02336 RETINST RET
+              02337 ;
+              02338 ;
+              02339 ;       Found active INTVC$
+              02340 ;
+1C49 F5       02341 ACTVTSK PUSH    AF              ;Save the regs
+1C4A C5       02342         PUSH    BC
+1C4B D5       02343         PUSH    DE
+1C4C E5       02344         PUSH    HL
+1C4D DDE5     02345         PUSH    IX
+1C4F 11581C   02346         LD      DE,POPREGS      ;Stack return vector
+1C52 D5       02347         PUSH    DE
+1C53 5E       02348         LD      E,(HL)          ;P/u INTVC pointer vector
+1C54 2C       02349         INC     L
+1C55 56       02350         LD      D,(HL)
+1C56 EB       02351         EX      DE,HL           ;Shift it to HL
+1C57 E9       02352         JP      (HL)            ;Go to service routine
+              02353 ;
+              02354 ;       Register restoral after service routine
+              02355 ;
+1C58 DDE1     02356 POPREGS POP     IX
+1C5A E1       02357         POP     HL
+1C5B D1       02358         POP     DE
+1C5C C1       02359         POP     BC
+1C5D F1       02360         POP     AF
+1C5E 18CD     02361         JR      NXTMSK          ;Loop to next mask bit
+              02362 ;
+              02363 ;       BREAK key detected
+              02364 ;
+1C60 3008     02365 BREAK?  JR      NC,GOTBRK       ;Go if <break> only
+1C62 C5       02366         PUSH    BC              ;Was <shift-break>
+1C63 F3       02367         DI
+1C64 CDB819   02368         CALL    TAPDRV          ;Reselect drive
+1C67 C1       02369         POP     BC
+1C68 18CC     02370         JR      TSKEXIT
+              02371 ;
+              02372 ;       BREAK during tasking - enter DEBUG? - user BREAK?
+              02373 ;
+1C6A 3A7C00   02374 GOTBRK  LD      A,(SFLAG$)      ;Check if BREAK key is
+1C6D E610     02375         AND     10H             ;  disabled to inhibit
+1C6F 20C5     02376         JR      NZ,TSKEXIT      ;  DEBUG or BREAK vector
+1C71 219F19   02377         LD      HL,@DBGHK       ;Merge DEBUG flag &amp;
+1C74 B6       02378         OR      (HL)            ;  hook (X'00' or X'C9')
+1C75 36C9     02379         LD      (HL),0C9H       ;Turn off DEBUG
+1C77 23       02380         INC     HL              ;Point to @DEBUG vector &amp;
+1C78 2814     02381         JR      Z,EXITBRK       ;  go if DEBUG is active
+              02382 ;
+1C7A 3AB007   02383         LD      A,(PCSAVE$+1)   ;Don't allow vectored break
+1C7D FE24     02384         CP      MAXCOR$&lt;-8      ; if old PC is in SYSRES
+1C7F 38B5     02385         JR      C,TSKEXIT
+1C81 210F04   02386         LD      HL,HIGH$+1      ; or if old PC is
+1C84 BE       02387         CP      (HL)            ; above HIGH$
+1C85 30AF     02388         JR      NC,TSKEXIT
+1C87 210000   02389         LD      HL,0            ;  else ck if BREAK is
+1C88          02390 BRKVEC$ EQU     $-2
+1C8A 7C       02391         LD      A,H             ;  to be trapped by user
+1C8B B5       02392         OR      L
+1C8C 28A8     02393         JR      Z,TSKEXIT
+1C8E F1       02394 EXITBRK POP     AF              ;Discard old mem config
+1C8F F1       02395         POP     AF              ;Restore reg AF
+1C90 F1       02396         POP     AF
+1C91 E3       02397         EX      (SP),HL         ;P/u HL &amp; stack vector
+1C92 FB       02398         EI
+1C93 C9       02399         RET                     ;To DEBUG or BREAK vector
+              02400 ;
+              02401 ;       Real Time Clock interrupt processor
+              02402 ;
+1C94          02403 RTCPROC EQU     $
+1C94 DBEC     02404         IN      A,(0ECH)        ;Clear the RTC interrupt
+1C96 3E0B     02405         LD      A,11            ;Task 11 executes every
+1C98 CDBB1C   02406         CALL    RTCTASK         ;  RTC interrupt
+1C9B 212B00   02407         LD      HL,TIMSL$
+1C9E CB06     02408         RLC     (HL)            ;Ck on time slice
+1CA0 D0       02409         RET     NC              ;Ignore if nothing
+1CA1 111307   02410         LD      DE,TIMTSK$      ;  on this interrupt
+1CA4 D5       02411         PUSH    DE              ;  else init for clocker
+1CA5 3E08     02412         LD      A,8             ;Task 8 at INT/2 if fast
+1CA7 CDBB1C   02413         CALL    RTCTASK
+1CAA 3E09     02414         LD      A,9             ;Task 9 at INT/2 if fast
+1CAC CDBB1C   02415         CALL    RTCTASK
+1CAF 3E0A     02416         LD      A,10            ;Task 10 at INT/2 if fast
+1CB1 CDBB1C   02417         CALL    RTCTASK
+1CB4 212C00   02418         LD      HL,TIMER$       ;Bump the timer at INT/2
+1CB7 34       02419         INC     (HL)
+1CB8 7E       02420         LD      A,(HL)          ;P/u the heart beat
+1CB9 E607     02421         AND     7               ;For this interrupt,
+1CBB 07       02422 RTCTASK RLCA                    ;  consider 0-7 only
+1CBC C64E     02423         ADD     A,TCB$&amp;0FFH     ;Add offset to table
+1CBE 6F       02424         LD      L,A
+1CBF 2600     02425         LD      H,TCB$&lt;-8
+1CC1 22EC1C   02426         LD      (@RPTSK+1),HL
+1CC4 5E       02427         LD      E,(HL)          ;P/u task vector addr
+1CC5 2C       02428         INC     L
+1CC6 56       02429         LD      D,(HL)
+1CC7 D5       02430         PUSH    DE
+1CC8 DDE1     02431         POP     IX              ;Also to IX
+1CCA EB       02432         EX      DE,HL
+1CCB 5E       02433         LD      E,(HL)          ;P/u task entry point
+1CCC 23       02434         INC     HL
+1CCD 56       02435         LD      D,(HL)
+1CCE EB       02436         EX      DE,HL
+1CCF E9       02437         JP      (HL)            ;Go to task
+              02438 ;
+1CD0 D1       02439 @KLTSK  POP     DE              ;Remove ret
+1CD1 3AEC1C   02440         LD      A,(@RPTSK+1)    ;Pt to task tbl entry
+1CD4 D64E     02441         SUB     TCB$&amp;0FFH
+1CD6 0F       02442         RRCA                    ;  of last task
+              02443 ;
+1CD7 11E91C   02444 @RMTSK  LD      DE,NOTASK       ;Remove entry
+              02445 ;
+1CDA FE0C     02446 @ADTSK  CP      12              ;Too large a task?
+1CDC D0       02447         RET     NC              ;Ret if too big else
+1CDD 07       02448         RLCA                    ;  add to task table
+1CDE C64E     02449         ADD     A,TCB$&amp;0FFH     ;Add the offset
+1CE0 6F       02450         LD      L,A             ;Estab ptr to vector
+1CE1 2600     02451         LD      H,TCB$&lt;-8
+1CE3 F3       02452 CHGTASK DI
+1CE4 73       02453         LD      (HL),E          ;Vector adr to ptr tbl
+1CE5 2C       02454         INC     L
+1CE6 72       02455         LD      (HL),D
+1CE7 FB       02456         EI
+1CE8 C9       02457         RET
+              02458 ;
+1CE9 E81C     02459 NOTASK  DW      $-1             ;Current task vector
+              02460 ;
+1CEB 210000   02461 @RPTSK  LD      HL,0            ;P/u last task done
+1CEE 5E       02462         LD      E,(HL)          ;P/u task vector addr
+1CEF 23       02463         INC     HL
+1CF0 56       02464         LD      D,(HL)
+1CF1 EB       02465         EX      DE,HL
+1CF2 D1       02466         POP     DE              ;Pop ret addr
+1CF3 18EE     02467         JR      CHGTASK
+              02468 ;
+              02469 ;       Routine to check if task slot active
+              02470 ;
+1CF5 07       02471 @CKTSK  RLCA                    ;Task number * 2
+1CF6 C64F     02472         ADD     A,TCB$&amp;0FFH+1   ;Index into task table
+1CF8 6F       02473         LD      L,A
+1CF9 2600     02474         LD      H,TCB$&lt;-8
+1CFB 3E1C     02475         LD      A,NOTASK&lt;-8     ;Check match of high
+1CFD BE       02476         CP      (HL)            ;  order only
+1CFE C9       02477         RET                     ; Z or NZ result
+              02478         IFGT    $,1D00H+START$
+              02479         ERR     'SYSRES memory overflow
+              02480         ENDIF
+1CFF          02481 CORE$   DEFL    $
+1CFF 00       02482         DC      1D00H-CORE$,0
+1CFF          02483         ORG     CORE$
+1D00          02484         ORG     1D00H+START$
+1D00          02485 SBUFF$  EQU     $
+1D00          02486         DS      256             ;Page disk I/O buffer
+2300          02487 DIRBUF$ EQU     MAXCOR$-256     ;Another file buffer
+              02488 ;
+              02489 ;       get the system initialization module
+              02490 ;
+1E00          02491 OVERLAY EQU     $
+1E00          02494 *GET    SYSINIT4:3
+              02495 ;SYSINIT4/ASM - LS-DOS 6.3
+              02496 ;
+              02497 ;       This is the initialization part of SYSRES
+              02498 ;
+00F1          02499 TRKREG  EQU     0F1H            ;FDC track register
+F401          02500 KB1     EQU     0F401H          ;Keyboard row 1
+F460          02501 KB67    EQU     0F460H          ;Keyboard rows 6&amp;7
+F440          02502 KB7     EQU     0F440H          ;Keyboard row 7
+001D          02503 BOL     EQU     1DH             ;Beginning of line
+              02504 ;
+1E00          02505         ORG     1E00H+START$
+              02506 ;
+1E00 F3       02507         DI
+1E01 21E90F   02508         LD      HL,@RSTNMI      ;Reset NMI vector to
+1E04 226700   02509         LD      (@NMI+1),HL     ;  SYSRES's needs
+1E07 211004   02510         LD      HL,PAKNAM$      ;Pt to pack name
+1E0A 11BEF8   02511         LD      DE,2*80+CRTBGN$+30
+1E0D 010800   02512         LD      BC,8
+1E10 EDB0     02513         LDIR                    ;move pack name to crt
+1E12 0E08     02514         LD      C,8             ;B contains 0 already
+1E14 13       02515         INC     DE              ;Leave 2 spaces
+1E15 13       02516         INC     DE
+1E16 EDB0     02517         LDIR                    ;Move pack date to crt
+1E18 13       02518         INC     DE
+1E19 13       02519         INC     DE
+1E1A 0E12     02520         LD      C,18
+1E1C 218521   02521         LD      HL,SERIAL$
+              02522         IF      @BLD631
+1E1F 00       02523         NOP                     ;&lt;631&gt;
+1E20 00       02524         NOP                     ;&lt;631&gt;
+              02525         ELSE
+              02526         LDIR
+              02527         ENDIF
+              02528 ;
+              02529 ;       Initialization routines
+              02530 ;
+1E21 AF       02531         XOR     A               ;Clear out stack area
+1E22 218103   02532         LD      HL,STACK$+1     ;Stack start +1
+1E25 2D       02533 CLRLOOP DEC     L               ;Move down a byte
+1E26 77       02534         LD      (HL),A          ;Now loop and fill
+1E27 20FC     02535         JR      NZ,CLRLOOP      ;  and fill with 0's
+              02536 ;
+1E29 ED56     02537         IM      1
+1E2B 318003   02538         LD      SP,STACK$       ;Set the stack area
+1E2E AF       02539         XOR     A
+1E2F 320202   02540         LD      (LBANK$),A      ;Set logical bank #
+1E32 D3E4     02541         OUT     (0E4H),A        ;Disable INTRQ &amp; DRQ
+              02542 ;
+1E34 213802   02543         LD      HL,S1DCB$
+1E37 77       02544 ZERDCB  LD      (HL),A          ;Zero spare dcb area
+1E38 2C       02545         INC     L
+1E39 20FC     02546         JR      NZ,ZERDCB
+              02547 ;
+1E3B 3A7600   02548         LD      A,(MODOUT$)     ;Set hi-speed
+1E3E D3EC     02549         OUT     (0ECH),A        ;  and external bus
+1E40 3A8000   02550         LD      A,(WRINT$)
+1E43 D3E0     02551         OUT     (0E0H),A        ;Enable RTC interrupts
+1E45 3A7800   02552         LD      A,(OPREG$)      ;Set memory configuration
+1E48 47       02553         LD      B,A
+1E49 3EA7     02554         LD      A,0A7H          ;Value for AUX/RAM
+1E4B 0E84     02555         LD      C,@OPREG        ;Set the memory mgt port
+1E4D ED41     02556         OUT     (C),B           ;Bring up reg RAM
+1E4F 21FFFF   02557         LD      HL,-1           ;Ck for extended RAM
+1E52 220E04   02558         LD      (HIGH$),HL
+1E55 221C00   02559         LD      (PHIGH$),HL
+              02560 ;       Check the BANKS
+1E58 56       02561         LD      D,(HL)          ;Save what's in RAM
+1E59 3655     02562         LD      (HL),55H        ;Stuff in reg RAM
+1E5B ED79     02563         OUT     (C),A           ;Switch in alt RAM
+1E5D 5E       02564         LD      E,(HL)          ;Save the byte there
+1E5E 77       02565         LD      (HL),A          ;Stuff alt RAM
+1E5F ED41     02566         OUT     (C),B           ;Switch to reg RAM
+1E61 BE       02567         CP      (HL)            ;See what's there now
+1E62 72       02568         LD      (HL),D          ;Restore original value
+1E63 ED79     02569         OUT     (C),A           ;Back to alt RAM
+1E65 73       02570         LD      (HL),E          ;Restore original byte
+1E66 ED41     02571         OUT     (C),B           ;Back to reg RAM
+1E68 3EFE     02572         LD      A,0FEH          ;Init BAR$ for bank-0
+1E6A 2802     02573         JR      Z,$+4           ;Bypass if only 64K
+1E6C 3EF8     02574         LD      A,0F8H          ;Init BAR$ for bank 0-2
+1E6E 320102   02575         LD      (BAR$),A        ;Load Bank Avail RAM
+1E71 320002   02576         LD      (BUR$),A        ;Load Bank Used RAM
+1E74 3A6F00   02577         LD      A,(FEMSK$)      ;P/u port FE mask
+1E77 D3FE     02578         OUT     (0FEH),A        ;  &amp; set it
+1E79 00       02579         DC      3,0             ;Space for a JUMP
+     00 00 
+              02580 ;
+              02581 ;       Update DCT$ info for SYSTEM drive
+              02582 ;
+1E7C 3A9D43   02583         LD      A,(BOOTST$)     ;P/u Boot Step rate
+1E7F E603     02584         AND     3               ;Strip all but it
+1E81 47       02585         LD      B,A             ;Save tempy
+1E82 217304   02586         LD      HL,DCT$+3       ;Pt to DCT step
+1E85 7E       02587         LD      A,(HL)          ;P/u DCT Step
+1E86 E6FC     02588         AND     0FCH            ;Strip step rate
+1E88 B0       02589         OR      B               ;Merge in Boot step
+1E89 77       02590         LD      (HL),A          ;Update DCT
+1E8A DBF1     02591         IN      A,(TRKREG)      ;Update DCT with current
+1E8C 327504   02592         LD      (DCT$+5),A      ;  track posn of head
+              02593 ;
+1E8F 110802   02594         LD      DE,KIDCB$       ;Flush type,init ptrs.
+1E92 3E03     02595         LD      A,3
+1E94 CD2306   02596         CALL    @CTL
+1E97 FB       02597         EI                      ;Interrupts on
+              02598 ;
+              02599 ;       P/u CONFIG status &amp; set ZERO byte
+              02600 ;
+1E98 210104   02601         LD      HL,ZERO$
+1E9B 7E       02602         LD      A,(HL)          ;set to NOP if SYSGEN'd
+1E9C 3600     02603         LD      (HL),0          ;Make always zero byte
+1E9E F5       02604         PUSH    AF              ;save SYSGEN flag
+              02605 ;
+              02606 ;       Check if date prompt is to be suppressed
+              02607 ;
+1E9F 3AC204   02608         LD      A,(DTPMT$)      ;No prompt for date?
+1EA2 B7       02609         OR      A
+              02610 ;
+              02611 ;       Check on currency of date
+              02612 ;
+1EA3 213300   02613         LD      HL,DATE$        ;Point to Year
+1EA6 4E       02614         LD      C,(HL)          ;  &amp; save in reg C
+1EA7 3600     02615         LD      (HL),0          ;  while resetting to zero
+1EA9 23       02616         INC     HL              ;Bump to day
+1EAA 46       02617         LD      B,(HL)          ;  &amp; save in reg B
+1EAB 3600     02618         LD      (HL),0          ;  while resetting to zero
+1EAD 23       02619         INC     HL              ;Bump to Month
+1EAE 7E       02620         LD      A,(HL)          ;  &amp; save in Reg A
+1EAF 3600     02621         LD      (HL),0          ;  while resetting to zero
+1EB1 C2AD1F   02622         JP      NZ,TIMIN        ;Ck time if DATE=OFF
+1EB4 2EFF     02623         LD      L,CFGFCB$+31&amp;0FFH       ;Reset pointer
+              02624 ;
+              02625         IF      @INTL
+              02626         LD      (HL),B          ;Stuff day
+              02627         DEC     HL
+              02628         LD      (HL),A          ;Stuff month
+              02629         ELSE
+1EB6 77       02630         LD      (HL),A          ;Stuff month
+1EB7 2B       02631         DEC     HL
+1EB8 70       02632         LD      (HL),B          ;Stuff day
+              02633         ENDIF
+              02634 ;
+1EB9 2B       02635         DEC     HL
+1EBA 71       02636         LD      (HL),C          ;Stuff Year
+1EBB EB       02637         EX      DE,HL           ;  &amp; point DE to CFGFCB$+29
+1EBC 3D       02638         DEC     A               ;Check for month range &lt;1-12&gt;
+1EBD FE0C     02639         CP      12              ;OK if 0-11 now
+1EBF 380E     02640         JR      C,DATIN1
+              02641 ;
+1EC1 211B15   02642 DATIN   LD      HL,21&lt;8!27      ;Set video row,col
+1EC4 115C21   02643         LD      DE,DATEPR       ;DATE? question
+1EC7 013008   02644         LD      BC,8&lt;+8!'0'     ;Set buf len &amp; char
+1ECA CDD620   02645         CALL    GETPARM         ;Get response
+1ECD 30F2     02646         JR      NC,DATIN        ;Jump on format error
+1ECF 1A       02647 DATIN1  LD      A,(DE)          ;Is year a leap year?
+              02648         IF      @BLD631
+1ED0 FE0C     02649         CP      0CH             ;&lt;631&gt;
+1ED2 3003     02650         JR      NC,1ED7H        ;&lt;631&gt;
+1ED4 C664     02651         ADD     A,64H           ;&lt;631&gt;
+1ED6 12       02652         LD      (DE),A          ;&lt;631&gt;
+              02653         ENDIF
+1ED7 4F       02654         LD      C,A             ;Save year for later
+1ED8 D650     02655         SUB     80              ;Reduce for range test
+1EDA FE20     02656         CP      ' '
+1EDC 30E3     02657         JR      NC,DATIN
+1EDE E603     02658         AND     3
+1EE0 3E1C     02659         LD      A,28            ;Init February
+1EE2 2006     02660         JR      NZ,NOTLEAP
+1EE4 213700   02661         LD      HL,DATE$+3+1    ;Set leap flag
+1EE7 CBFE     02662         SET     7,(HL)
+1EE9 3C       02663         INC     A               ;Feb to 29 days
+1EEA 210304   02664 NOTLEAP LD      HL,MAXDAY$+2    ;Set Feb max day #
+1EED 77       02665         LD      (HL),A
+              02666 ;
+              02667         IF      @INTL
+              02668         NOP                     ;Keep same length
+              02669         ELSE
+1EEE 13       02670         INC     DE              ;Bump to DAY
+              02671         ENDIF
+1EEF 13       02672         INC     DE              ;Bump to month &amp; get it
+1EF0 1A       02673         LD      A,(DE)
+1EF1 47       02674         LD      B,A             ;Save month in reg B
+1EF2 3D       02675         DEC     A               ;Range check
+1EF3 FE0C     02676         CP      12
+1EF5 30CA     02677         JR      NC,DATIN        ;Go if 0 or &gt;12
+1EF7 2B       02678         DEC     HL              ;Point to Jan entry
+1EF8 85       02679         ADD     A,L             ;Index the month
+1EF9 6F       02680         LD      L,A
+              02681 ;
+              02682         IF      @INTL
+              02683         INC     DE              ;Point to day
+              02684         ELSE
+1EFA 1B       02685         DEC     DE              ;Point to day
+              02686         ENDIF
+              02687 ;
+1EFB 1A       02688         LD      A,(DE)          ;P/u day entry
+1EFC 3D       02689         DEC     A               ;Reduce for test (0-&gt;FF)
+1EFD BE       02690         CP      (HL)
+1EFE 30C1     02691         JR      NC,DATIN        ;Go if too large (or 0)
+              02692 ;
+              02693 ;       Range checks OK - move into DATE$
+              02694 ;
+1F00 213500   02695         LD      HL,DATE$+2
+1F03 3C       02696         INC     A               ;Compensate for DEC A
+1F04 70       02697         LD      (HL),B          ;Stuff month
+1F05 2D       02698         DEC     L
+1F06 77       02699         LD      (HL),A          ;Stuff day
+1F07 2D       02700         DEC     L
+1F08 71       02701         LD      (HL),C          ;Stuff year
+              02702 ;
+              02703 ;       Date is in DATE$ - display it
+              02704 ;
+1F09 79       02705         LD      A,C
+1F0A F5       02706         PUSH    AF              ;  &amp; save it for later
+1F0B E603     02707         AND     3               ;Check on leap year
+1F0D 210304   02708         LD      HL,MAXDAY$+2    ;Init and adjust Feb
+1F10 361C     02709         LD      (HL),28         ;  as required
+1F12 2001     02710         JR      NZ,$+3
+1F14 34       02711         INC     (HL)            ;Bump to 29
+1F15 3A3500   02712         LD      A,(DATE$+2)     ;P/u month &amp; xfer to B
+1F18 47       02713         LD      B,A
+1F19 3A3400   02714         LD      A,(DATE$+1)     ;P/u day of month
+              02715 ;
+              02716 ;       Compute day of year and day of week
+              02717 ;
+1F1C 6F       02718         LD      L,A             ;Start off with days
+1F1D 2600     02719         LD      H,0             ;  in this month
+1F1F 110104   02720         LD      DE,MAXDAY$
+1F22 1A       02721 DAYLP   LD      A,(DE)
+1F23 85       02722         ADD     A,L             ;8 bit add to 16 bit
+1F24 6F       02723         LD      L,A
+1F25 8C       02724         ADC     A,H             ;Add in hi order &amp; carry
+1F26 95       02725         SUB     L               ;Subtract off lo order
+1F27 67       02726         LD      H,A             ;Update hi order
+1F28 13       02727         INC     DE
+1F29 10F7     02728         DJNZ    DAYLP
+1F2B EB       02729         EX      DE,HL           ;Move day of year to DE
+1F2C 213600   02730         LD      HL,DATE$+3      ;  and store
+1F2F 73       02731         LD      (HL),E
+1F30 23       02732         INC     HL
+1F31 7A       02733         LD      A,D             ;Get bit "8"
+1F32 B6       02734         OR      (HL)            ;  and OR it in
+1F33 77       02735         LD      (HL),A          ;Then put it back
+1F34 EB       02736         EX      DE,HL           ;Get DOY back to HL
+1F35 F1       02737         POP     AF              ;Pop the year &amp; mask
+1F36 D650     02738         SUB     80              ;Compute day of week
+1F38 5F       02739         LD      E,A             ;  offset
+1F39 C603     02740         ADD     A,3             ;offset, get # of leaps first
+1F3B 0F       02741         RRCA
+1F3C 0F       02742         RRCA
+              02743         IF      @BLD631
+1F3D E60F     02744         AND     0FH             ;&lt;631&gt;
+              02745         ELSE
+              02746         AND     7               ;can be 0-5
+              02747         ENDIF
+1F3F 83       02748         ADD     A,E
+1F40 5F       02749         LD      E,A             ;And add it in
+1F41 1600     02750         LD      D,0             ;Add into HL
+1F43 19       02751         ADD     HL,DE
+1F44 23       02752         INC     HL              ;To start in right place
+1F45 3E07     02753         LD      A,7             ;Now divide by 7 
+1F47 CDE306   02754 DIV7    CALL    @DIV16          ;Call lowcore divide
+1F4A 3C       02755         INC     A               ; adjust to 1-7
+1F4B 47       02756         LD      B,A             ;Save in reg B
+1F4C 07       02757         RLCA                    ;Shift to bits 1-3
+1F4D 4F       02758         LD      C,A             ;Save tempy
+1F4E 213700   02759         LD      HL,DATE$+3+1
+1F51 7E       02760         LD      A,(HL)          ;Pack into field
+1F52 E6F1     02761         AND     0F1H
+1F54 B1       02762         OR      C
+1F55 77       02763         LD      (HL),A
+1F56 C5       02764         PUSH    BC
+1F57 211B15   02765         LD      HL,21&lt;8!27      ;Set video row,col
+1F5A 0603     02766         LD      B,3             ;Set function code 3
+1F5C CD990B   02767         CALL    @VDCTL          ;  to position cursor
+1F5F C1       02768         POP     BC
+1F60 21C704   02769         LD      HL,DAYTBL$
+1F63 CD3C21   02770         CALL    SPACE4          ;Write out the DAY
+1F66 3E2C     02771         LD      A,','
+1F68 CD4206   02772         CALL    @DSP
+1F6B 3E20     02773         LD      A,' '
+1F6D CD4206   02774         CALL    @DSP
+1F70 3A3500   02775         LD      A,(DATE$+2)     ;P/u month number
+1F73 47       02776         LD      B,A
+1F74 2EDC     02777         LD      L,MONTBL$&amp;0FFH  ;Reset HL for month table
+1F76 CD4421   02778         CALL    DSPMDY          ;Write out the month name
+1F79 3E20     02779         LD      A,' '
+1F7B CD4206   02780         CALL    @DSP
+1F7E 3A3400   02781         LD      A,(DATE$+1)     ;P/u day
+1F81 05       02782         DEC     B               ;From 0 to X'FF'
+1F82 04       02783 DIV10   INC     B               ;Divide by 10
+1F83 D60A     02784         SUB     10              ;  with quotient in B
+1F85 30FB     02785         JR      NC,DIV10
+1F87 F5       02786         PUSH    AF              ;Save remainder (-10)
+1F88 78       02787         LD      A,B             ;P/u quotient
+1F89 C630     02788         ADD     A,'0'           ;Change to ASCII
+1F8B FE30     02789         CP      '0'             ;Zero?
+1F8D C44206   02790         CALL    NZ,@DSP         ;Display if not
+1F90 F1       02791         POP     AF              ;Get back remainder
+1F91 C63A     02792         ADD     A,3AH           ;Change to ASCII
+1F93 CD4206   02793         CALL    @DSP
+1F96 3A3300   02794         LD      A,(DATE$)       ;Get year
+              02795         IF      @BLD631
+1F99 216C07   02796         LD      HL,76CH         ;&lt;631&gt;
+1F9C 85       02797         ADD     A,L             ;&lt;631&gt;
+1F9D 6F       02798         LD      L,A             ;&lt;631&gt;
+1F9E 8C       02799         ADC     A,H             ;&lt;631&gt;
+1F9F 95       02800         SUB     L               ;&lt;631&gt;
+1FA0 67       02801         LD      H,A             ;&lt;631&gt;
+1FA1 115521   02802         LD      DE,PARTYR+1     ;&lt;631&gt;
+1FA4 CDF606   02803         CALL    @HEXDEC         ;&lt;631&gt;
+1FA7 215421   02804         LD      HL,PARTYR       ;&lt;631&gt;
+1FAA CD2D05   02805         CALL    @DSPLY          ;&lt;631&gt;
+              02806         ELSE
+              02807         SUB     80-'0'          ;Offset only and convert to ascii
+              02808         LD      L,'8'           ;init to 198x
+              02809         CP      10+'0'          ;In 1980's?
+              02810         JR      C,WAS80         ;Go if so
+              02811         INC     L               ;change to 199x
+              02812         SUB     10              ;Sub off decade
+              02813 WAS80   LD      H,A             ;set ones digit
+              02814         LD      (PARTYR+4),HL   ;stuff into dsplay string
+              02815         LD      HL,PARTYR
+              02816         CALL    @DSPLY
+              02817         ENDIF
+              02818 ;
+              02819 ;       Prompt for time
+              02820 ;
+1FAD 3AC304   02821 TIMIN   LD      A,(TMPMT$)      ;Time to be prompted
+1FB0 B7       02822         OR      A
+1FB1 2037     02823         JR      NZ,SELDCT       ;Skip if not
+1FB3 0603     02824 TIMIN0  LD      B,3
+1FB5 21FF00   02825         LD      HL,CFGFCB$+31   ;Init time string
+1FB8 3600     02826 TIMINIT LD      (HL),0          ;Init 00:00:00
+1FBA 2B       02827         DEC     HL
+1FBB 10FB     02828         DJNZ    TIMINIT
+1FBD 3EFF     02829         LD      A,-1            ;Make non-zero
+1FBF 32EF20   02830         LD      (ISTIM),A
+1FC2 211B16   02831         LD      HL,22&lt;8!27
+1FC5 116E21   02832         LD      DE,TIMEPR       ;Set prompt message
+1FC8 013008   02833         LD      BC,8&lt;+8!'0'     ;Set len &amp; separ char
+1FCB CDD620   02834         CALL    GETPARM
+1FCE 30E3     02835         JR      NC,TIMIN0       ;Loop on format error
+1FD0 21FF00   02836         LD      HL,CFGFCB$+31
+1FD3 3E17     02837         LD      A,23
+1FD5 BE       02838         CP      (HL)            ;Test hour range
+1FD6 38DB     02839         JR      C,TIMIN0
+1FD8 2B       02840         DEC     HL
+1FD9 3E3B     02841         LD      A,59
+1FDB BE       02842         CP      (HL)            ;Test minute range
+1FDC 38D5     02843         JR      C,TIMIN0
+1FDE 2B       02844         DEC     HL
+1FDF BE       02845         CP      (HL)            ;Test the second range
+1FE0 38D1     02846         JR      C,TIMIN0
+1FE2 112D00   02847         LD      DE,TIME$        ;Move the time value
+1FE5 010300   02848         LD      BC,3            ;  into the TIME$ field
+1FE8 EDB0     02849         LDIR
+              02850 ;
+              02851 ;       Check on any AUTO command
+              02852 ;
+1FEA 0680     02853 SELDCT  LD      B,80H
+1FEC CD8203   02854         CALL    @PAUSE
+1FEF 212004   02855         LD      HL,INBUF$
+1FF2 7E       02856         LD      A,(HL)          ;Pt to 1st byte of AUTO
+1FF3 FE2A     02857         CP      '*'             ;BREAK disable?
+1FF5 200F     02858         JR      NZ,CKDCR
+1FF7 23       02859         INC     HL
+1FF8 3EE6     02860         LD      A,0E6H          ;Set BREAK bit in flag by
+1FFA 328220   02861         LD      (STUB1+1),A     ;  changing RES 4,(SFLAG$)
+              02862                                 ;  to SET 4,(SFLAG$)
+1FFD 181A     02863         JR      AUTO?
+1FFF CD1708   02864 GETKB17 CALL    ENADIS_DO_RAM
+2002 3A41F4   02865         LD      A,(KB1!KB7)     ;scan row 1 &amp; 7
+2005 C9       02866         RET
+2006 CDFF1F   02867 CKDCR   CALL    GETKB17         ;Strobe keyboard
+2009 CB67     02868         BIT     4,A             ;Is 'D' depressed?
+200B E5       02869         PUSH    HL              ;Save auto command pt
+200C 21081B   02870         LD      HL,@ABORT       ;P/u abort address
+200F E3       02871         EX      (SP),HL         ;Swap them around
+2010 C2A019   02872         JP      NZ,@DEBUG       ;DEBUG on <d>
+2013 D1       02873         POP     DE              ;Stack integrity
+2014 2F       02874         CPL
+2015 E601     02875         AND     1               ;No AUTO if <enter>
+2017 2803     02876         JR      Z,NOAUT1
+2019 7E       02877 AUTO?   LD      A,(HL)          ;Any AUTO command?
+201A FE0D     02878         CP      CR              ;None if equal
+201C D1       02879 NOAUT1  POP     DE              ;Get back SYSGEN flag
+201D 7A       02880         LD      A,D             ;  &amp; move into reg A
+201E 110B1B   02881         LD      DE,@EXIT        ;Where to go after boot
+2021 010000   02882         LD      BC,0            ;Init BC(HL)=0 for @EXIT
+2024 280F     02883         JR      Z,NOAUT         ;Go if no AUTO
+2026 E5       02884         PUSH    HL              ;Save buffer pointer
+2027 21AC20   02885         LD      HL,CURSET       ;Point to cusor setting
+202A 34       02886         INC     (HL)            ;Bump it down a line
+202B E1       02887         POP     HL              ;Recover INBUF$ pointer
+202C 117E19   02888         LD      DE,@CMNDI       ;Lo order of @CMNDI
+202F D5       02889         PUSH    DE              ;Put on stack for RET
+2030 44       02890         LD      B,H             ;Put INBUF$ pointer on
+2031 4D       02891         LD      C,L             ;  stack for @CMNDI
+2032 112D05   02892         LD      DE,@DSPLY       ;But do this first
+2035 D5       02893 NOAUT   PUSH    DE              ;Put on stack for RET
+2036 C5       02894         PUSH    BC              ;Either INBUF$ or 0
+2037 217E20   02895         LD      HL,STUB
+203A 115043   02896         LD      DE,MOD3BUF+80   ;Must move out of way
+203D 015800   02897         LD      BC,STUBLEN      ;  amount to move
+2040 D5       02898         PUSH    DE              ;Add ret vector to stack
+2041 EDB0     02899         LDIR                    ;Move stub up
+2043 CD7420   02900         CALL    GETKB67
+2046 117004   02901         LD      DE,DCT$         ;Set up to move DCT's
+2049 210043   02902         LD      HL,MOD3BUF      ;  from configed area
+204C 015000   02903         LD      BC,80           ;Count for DCTs (8*10)
+204F D9       02904         EXX                     ;Keep in alternate set
+2050 E682     02905         AND     82H             ;Load config if zero
+2052 C0       02906         RET     NZ              ;No config &gt; Go back
+2053 210015   02907         LD      HL,21&lt;8         ;Set to line 21
+2056 0603     02908         LD      B,3             ;Position cursor
+2058 CD990B   02909         CALL    @VDCTL
+205B 216720   02910         LD      HL,CONFIG$      ;Show sysgen message
+205E CD2D05   02911         CALL    @DSPLY
+2061 11E000   02912         LD      DE,CFGFCB$      ;Set up to load config
+2064 C3381B   02913         JP      @LOAD           ;Go to load config
+              02914 ;
+2067 2A       02915 CONFIG$ DB      '** SYSGEN **',03       ; Config DSP
+     2A 20 53 59 53 47 45 4E
+     20 2A 2A 03 
+              02916 ;
+2074 2160F4   02917 GETKB67 LD      HL,KB67         ;Check <clear> key
+2077 4F       02918         LD      C,A
+2078 CD1708   02919         CALL    ENADIS_DO_RAM
+207B 79       02920         LD      A,C
+207C B6       02921         OR      (HL)            ;Key down OR not SYSGENed
+207D C9       02922         RET
+              02923 ;
+              02924 ;       Final initialization code
+              02925 ;
+207E 217C00   02926 STUB    LD      HL,SFLAG$
+2081 CBA6     02927 STUB1   RES     4,(HL)          ;Test or SET Break bit
+              02928                                 ;  without changing Z/NZ
+2083 200C     02929         JR      NZ,NOTSG        ;Go if no SYSGEN found
+2085 217600   02930         LD      HL,MODOUT$      ;P/u ptr to port mask
+2088 7E       02931         LD      A,(HL)          ;P/u mask byte
+2089 D3EC     02932         OUT     (0ECH),A        ;Speed it up
+208B D9       02933         EXX                     ;Set to move DCT's
+208C EDB0     02934         LDIR                    ;Move 'em
+208E CD8600   02935         CALL    @ICNFG          ;Init config
+              02936 NOTSG
+2091 0E07     02937         LD      C,7
+              02938 SETCYL0
+2093 CD1E1A   02939         CALL    @GTDCT
+2096 FDCB035E 02940         BIT     3,(IY+3)        ;If hard drive, don't stuff FF
+209A 200B     02941         JR      NZ,NOFF         ;  &amp; don't restore
+209C FD3605FF 02942         LD      (IY+5),0FFH     ;Set in case no restore
+20A0 3AC404   02943         LD      A,(RSTOR$)      ;Do we restore the drives?
+20A3 B7       02944         OR      A
+20A4 CCC819   02945         CALL    Z,@RSTOR        ;Restore drives 1-7
+20A7 0D       02946 NOFF    DEC     C
+20A8 20E9     02947         JR      NZ,SETCYL0
+20AA 210015   02948         LD      HL,21&lt;8         ;Set cursor
+20AC          02949 CURSET  EQU     $-1
+20AD 0603     02950         LD      B,3
+20AF CD990B   02951         CALL    @VDCTL
+              02952 ;
+              02953 ;       Detect Model 4 or 4P and adjust TFLAG$
+              02954 ;       Look at 'MODEL' at 4018H. If so MOD-4P (5)
+              02955 ;
+              02956 ;
+20B2 114D4F   02957         LD      DE,'OM'
+20B5 2A1840   02958         LD      HL,(4018H)      ;P/u 4P rom leftover
+20B8 ED52     02959         SBC     HL,DE           ;Check if it's 'MO'
+20BA 3E04     02960         LD      A,4             ;Init for MOD 4 REG.
+20BC 2002     02961         JR      NZ,MOD4REG
+20BE 3E05     02962         LD      A,5             ;Change to MOD 4P
+20C0 327D00   02963 MOD4REG LD      (TFLAG$),A
+              02964 ;
+20C3 213800   02965         LD      HL,@RST38
+20C6 36C3     02966         LD      (HL),0C3H       ;Activate task processor
+20C8 E1       02967         POP     HL              ;Pop INBUF$
+20C9 C9       02968         RET                     ;To @CMD or @DSPLY,@CMNDI
+20CA 00       02969         DC      12,0            ;Space for more code
+     00 00 00 00 00 00 00 00
+     00 00 00 
+20D6          02970 STUBEND EQU     $
+0058          02971 STUBLEN EQU     STUBEND-STUB
+              02972 ;
+              02973 ;       Date &amp; Time prompting
+              02974 ;
+20D6 C5       02975 GETPARM PUSH    BC              ;Save separator char
+20D7 D5       02976         PUSH    DE              ;Save message pointer
+20D8 0603     02977         LD      B,3
+20DA CD990B   02978         CALL    @VDCTL          ;Position the cursor
+20DD E1       02979         POP     HL              ;Recover message pointer
+20DE CD2D05   02980         CALL    @DSPLY          ;  &amp; display the message
+20E1 21001E   02981         LD      HL,OVERLAY      ;Buffer for reply
+20E4 C1       02982         POP     BC
+20E5 C5       02983         PUSH    BC
+20E6 CD8505   02984         CALL    @KEYIN          ;Get reply &amp; wait a bit
+20E9 AF       02985         XOR     A               ;  disable test
+20EA B0       02986         OR      B
+20EB C1       02987         POP     BC              ;  of key prior to AUTO
+20EC 2006     02988         JR      NZ,GETP1        ;Go if some chars
+20EE 3E00     02989         LD      A,$-$
+20EF          02990 ISTIM   EQU     $-1             ;See if time prompt
+20F0 B7       02991         OR      A
+20F1 C8       02992         RET     Z               ;Back if date, bad
+20F2 37       02993         SCF
+20F3 C9       02994         RET                     ;If time, good return
+20F4 C5       02995 GETP1   PUSH    BC
+20F5 0640     02996         LD      B,40H
+20F7 CD8203   02997         CALL    @PAUSE          ;  to let finger off
+20FA C1       02998         POP     BC
+              02999 ;
+              03000 ;       Routine to parse DATE entry
+              03001 ;
+20FB 11FF00   03002 PARSDAT LD      DE,CFGFCB$+31   ;Point to buf end
+20FE 0603     03003         LD      B,3             ;Process 3 fields
+2100 D5       03004 PRSD1   PUSH    DE              ;Save pointer
+              03005 ;
+              03006 ;       Routine to parse a digit pair
+              03007 ;
+2101 CD3521   03008         CALL    PRSD3           ;Get a digit
+2104 300F     03009         JR      NC,PRSD2        ;Jump if bad digit
+2106 5F       03010         LD      E,A             ;Multiply by ten
+2107 07       03011         RLCA
+2108 07       03012         RLCA
+2109 83       03013         ADD     A,E
+210A 07       03014         RLCA
+210B 5F       03015         LD      E,A
+210C CD3521   03016         CALL    PRSD3           ;Get another digit
+210F 3004     03017         JR      NC,PRSD2        ;Jump on bad digit
+2111 83       03018         ADD     A,E             ;Accumulate new digit
+2112 5F       03019         LD      E,A             ;Save 2-digit value
+2113 37       03020         SCF                     ;Show valid
+2114 7B       03021         LD      A,E             ;Xfer field value
+2115 D1       03022 PRSD2   POP     DE              ;Recover pointer
+2116 D0       03023         RET     NC              ;Ret if bad digit pair
+2117 12       03024         LD      (DE),A          ;Else stuff the value
+2118 05       03025         DEC     B               ;Loop countdown
+2119 37       03026         SCF
+211A C8       03027         RET     Z               ;Ret when through
+211B 1B       03028         DEC     DE              ;Backup the pointer
+211C 7E       03029         LD      A,(HL)          ;Ck for valid separator
+211D 23       03030         INC     HL              ;Bump pointer
+211E FE3A     03031         CP      ':'             ;Check for colon ':'
+2120 28DE     03032         JR      Z,PRSD1         ;  loop if match
+2122 B9       03033         CP      C               ;Separator char required
+2123 3014     03034         JR      NC,PRSD4        ;Exit if bad char
+2125 FE0D     03035         CP      CR              ;Is it a CR?
+2127 20D7     03036         JR      NZ,PRSD1        ;Go if not
+2129 78       03037         LD      A,B
+212A 3D       03038         DEC     A               ;Was B one?
+212B 20D3     03039         JR      NZ,PRSD1
+212D 3AEF20   03040         LD      A,(ISTIM)       ;Are we doing time?
+2130 B7       03041         OR      A
+2131 28CD     03042         JR      Z,PRSD1         ;Go if not
+2133 37       03043         SCF
+2134 C9       03044         RET                     ;Back, good time
+2135 7E       03045 PRSD3   LD      A,(HL)          ;P/u a digit &amp;
+2136 23       03046         INC     HL              ;  convert to binary
+2137 D630     03047         SUB     30H
+2139 FE0A     03048 PRSD4   CP      10
+213B C9       03049         RET
+              03050 ;
+              03051 ;       Routine to display month or day of week
+              03052 ;
+213C E5       03053 SPACE4  PUSH    HL              ;Print 4 SPACES
+213D 218021   03054         LD      HL,SPACE4$      ;  point to string
+2140 CD2D05   03055         CALL    @DSPLY
+2143 E1       03056         POP     HL
+2144 05       03057 DSPMDY  DEC     B               ;Point to Bth entry
+2145 7D       03058         LD      A,L             ;  in table
+2146 80       03059         ADD     A,B
+2147 80       03060         ADD     A,B
+2148 80       03061         ADD     A,B
+2149 6F       03062         LD      L,A
+214A 0603     03063         LD      B,3             ;Print 3 characters
+214C 7E       03064 DSPM1   LD      A,(HL)
+214D 23       03065         INC     HL
+214E CD4206   03066         CALL    @DSP
+2151 10F9     03067         DJNZ    DSPM1
+2153 C9       03068         RET
+2154 2C       03069 PARTYR  DB      ', 198 ',30,3
+     20 31 39 38 20 1E 03 
+              03070 ;
+              03071         IF      @INTL
+              03072 DATEPR  DB      30,'Date DD/MM/YY ? ',3
+              03073         ELSE
+215C 1E       03074 DATEPR  DB      30,'Date MM/DD/YY ? ',3
+     44 61 74 65 20 4D 4D 2F
+     44 44 2F 59 59 20 3F 20
+     03 
+              03075         ENDIF
+              03076 ;
+216E 1E       03077 TIMEPR  DB      30,'Time HH:MM:SS ? ',3
+     54 69 6D 65 20 48 48 3A
+     4D 4D 3A 53 53 20 3F 20
+     03 
+2180 20       03078 SPACE4$ DB      '   ',03,03     ;3 or 4 space string
+     20 20 03 03 
+              03079         IF      @BLD631
+2185 00       03080 SERIAL$ DC      21,00           ;&lt;631&gt;What was used for Serial # field in 630
+     00 00 00 00 00 00 00 00
+     00 00 00 00 00 00 00 00
+     00 00 00 00 
+              03081         ELSE
+              03082 SERIAL$ DB      'Serial# A400B00110',3EH,99H,0C9H
+              03083         ENDIF
+219A 00       03084         DC      32,00           ;Space for message, or??
+     00 00 00 00 00 00 00 00
+     00 00 00 00 00 00 00 00
+     00 00 00 00 00 00 00 00
+     00 00 00 00 00 00 00 
+'<misc. 21ba="" 03087="" *get="" sound:3="" 03088="" ;sound/asm="" ls-dos="" 6.2="" 03089="" 03090="" contains="" ipl="" and="" dechex="" routines="" 03091="" will="" be="" loaded="" into="" lowcore="" area="" along="" with="" sysres="" 03092="" 03093="" *mod="" 0090="" 03094="" sndport="" equ="" 90h="" 03095="" org="" stack="" 0380="" 0000="" 03096="" dw="" 00="" ;stack="" gaurd="" 03097="" 03098="" pause="" 03099="" 0382="" c5="" 03100="" @pause="" push="" ;save="" 03101="" srl="" ;adjust="" for="" wait="" states="" 03102="" rr="" 0383="" 3a7c00="" 03103="" a,(sflag="" ;if="" system="" (fast="" 0386="" cb5f="" 03104="" bit="" 3,a="" then="" double="" it="" 0388="" c48c03="" 03105="" call="" ;call="" if="" fast="" 038b="" c1="" 03106="" pop="" ;restore="" the="" count="" 038c="" 0b="" 03107="" cdloop="" dec="" bc="" ;count="" down="" routine="" 038d="" 78="" 03108="" ld="" a,b="" 038e="" b1="" 03109="" or="" c="" 038f="" 20fb="" 03110="" jr="" nz,cdloop="" 0391="" c9="" 03111="" ret="" 03112="" 03113="" @sound="" svc-104="" -="" operates="" sound="" generator="" 03114="" ;="" b=""> sound function
+              03115 ;       Bits 0-2 &lt;0-7&gt; = note # (0 highest)
+              03116 ;       Bits 3-7 &lt;0-31&gt; = relative sound duration
+              03117 ;       All regs except A left unchanged
+              03118 ;       Z-flag set on exit
+              03119 ;       Note that interrupts disabled during duration
+              03120 ;
+0392 C5       03121 @SOUND  PUSH    BC              ;Save registers
+0393 E5       03122         PUSH    HL
+0394 78       03123         LD      A,B             ;P/u sound data
+0395 E607     03124         AND     7               ;  &amp; strip off duration
+0397 07       03125         RLCA                    ;Adj for 2-byte fields
+0398 21D103   03126         LD      HL,SNDTAB
+039B 4F       03127         LD      C,A
+039C 78       03128         LD      A,B             ;Pick up duration data
+039D 0600     03129         LD      B,0             ;Index into tone table
+039F 09       03130         ADD     HL,BC           ;  to get note-on/off
+03A0 4E       03131         LD      C,(HL)          ;P/u note-on/off data
+03A1 23       03132         INC     HL
+03A2 6E       03133         LD      L,(HL)          ;P/u note duration
+03A3 0F       03134         RRCA                    ;Rotate sound duration
+03A4 0F       03135         RRCA                    ;  into bits 0-4
+03A5 0F       03136         RRCA
+03A6 E61F     03137         AND     1FH             ;Strip off sound #
+03A8 3C       03138         INC     A               ;Adjust for offset
+03A9 67       03139         LD      H,A             ;Set sound counter
+03AA 3A7C00   03140         LD      A,(SFLAG$)      ;If fast, double values
+03AD E608     03141         AND     8H
+03AF 2806     03142         JR      Z,$A1
+03B1 CB24     03143         SLA     H
+03B3 CB25     03144         SLA     L
+03B5 CB21     03145         SLA     C
+03B7 F3       03146 $A1     DI                      ;Can't interrupt timing
+03B8 E5       03147 $A2     PUSH    HL              ;Save note duration
+03B9 41       03148 $A3     LD      B,C             ;Play tone
+03BA 3E01     03149         LD      A,1             ;Hold output high
+03BC D390     03150         OUT     (SNDPORT),A     ;  for count of (B)
+03BE 10FE     03151         DJNZ    $
+03C0 41       03152         LD      B,C             ;Hold output low for
+03C1 3C       03153         INC     A               ;  for count of (B)
+03C2 D390     03154         OUT     (SNDPORT),A
+03C4 10FE     03155         DJNZ    $
+03C6 2D       03156         DEC     L               ;Dec the duration
+03C7 20F0     03157         JR      NZ,$A3
+03C9 E1       03158         POP     HL              ;Get sound/note durations
+03CA 25       03159         DEC     H               ;Count down the sound
+03CB 20EB     03160         JR      NZ,$A2          ;  duration counter
+03CD FB       03161         EI                      ;Restore interrupts
+03CE E1       03162         POP     HL
+03CF C1       03163         POP     BC
+03D0 C9       03164         RET
+              03165 ;
+              03166 ;       Note table
+              03167 ;
+00B4          03168 SNDOFF  EQU     180             ;Sound duration offset
+001C          03169 TONER   EQU     28
+03D1 50       03170 SNDTAB  DB      108-TONER       ;Note 0 (highest)
+03D2 4C       03171         DB      0-SNDOFF
+03D3 56       03172         DB      114-TONER
+03D4 48       03173         DB      252-SNDOFF
+03D5 5C       03174         DB      120-TONER
+03D6 44       03175         DB      248-SNDOFF
+03D7 62       03176         DB      126-TONER
+03D8 40       03177         DB      244-SNDOFF
+03D9 6B       03178         DB      135-TONER
+03DA 3C       03179         DB      240-SNDOFF
+03DB 72       03180         DB      142-TONER
+03DC 38       03181         DB      236-SNDOFF
+03DD 79       03182         DB      149-TONER
+03DE 34       03183         DB      232-SNDOFF
+03DF 80       03184         DB      156-TONER       ;Note 7 (lowest)
+03E0 30       03185         DB      228-SNDOFF
+004F          03186 SNDLEN  EQU     $-@SOUND
+              03187 ;
+              03188 ;       Process decimal assignment
+              03189 ;
+03E1 010000   03190 @DECHEX LD      BC,0            ;Init value to zero
+03E4 7E       03191 DEC1    LD      A,(HL)          ;P/u a char
+03E5 D630     03192         SUB     30H             ;Cvrt to binary
+03E7 D8       03193         RET     C               ;Return if &lt; "0"
+03E8 FE0A     03194         CP      10              ;Ck for bad decimal
+03EA D0       03195         RET     NC              ;Ret if not 0-9
+03EB C5       03196         PUSH    BC              ;Exchange BC &amp; HL
+03EC E3       03197         EX      (SP),HL         ;  &amp; save HL on stack
+03ED 29       03198         ADD     HL,HL           ;Multiply by 10
+03EE 29       03199         ADD     HL,HL
+03EF 09       03200         ADD     HL,BC
+03F0 29       03201         ADD     HL,HL
+03F1 0600     03202         LD      B,0             ;Merge in new digit
+03F3 4F       03203         LD      C,A             ;New digit to C
+03F4 09       03204         ADD     HL,BC           ;  &amp; add it in
+03F5 44       03205         LD      B,H             ;Current value to BC
+03F6 4D       03206         LD      C,L
+03F7 E1       03207         POP     HL              ;Recover HL pointer
+03F8 23       03208         INC     HL
+03F9 18E9     03209         JR      DEC1            ;Loop
+              03210 ;
+              03211 ;       Special Boot code to be moved to 4300h by IPL
+              03212 ;
+03FB F3       03213 BOOTCOD DI                      ;Boot stub for @IPL to
+03FC AF       03214         XOR     A               ;  to move to 4300h
+03FD D384     03215         OUT     (@OPREG),A
+03FF C7       03216         RST     0
+0005          03217 BOOTLEN EQU     $-BOOTCOD
+              03218 ;
+0400          03220 *GET    LSILOGO:3
+              03221 ; LSI "BASIC" LS-DOS Sign-on file 10/22/83
+              03222 ;
+FA4D          03223         ORG     7*80+CRTBGN$+29
+              03224 ;
+              03225         IF      @BLD631
+FA4D BF       03226         DB      0BFH                    ;&lt;631&gt;
+FA4E 83       03227         DC      17,083H                 ;&lt;631&gt;
+     83 83 83 83 83 83 83 83
+     83 83 83 83 83 83 83 83
+FA5F BF       03228         DB      0BFH                    ;&lt;631&gt;
+FA60          03229         DS      61                      ;&lt;631&gt;
+FA9D BF       03230         DB      0BFH,'                 ',0BFH   ;&lt;631&gt;
+     20 20 20 20 20 20 20 20
+     20 20 20 20 20 20 20 20
+     20 BF 
+FAB0          03231         DS      61                      ;&lt;631&gt;
+FAED BF       03232         DB      0BFH,'  W E L C O M E  ',0BFH   ;&lt;631&gt;
+     20 20 57 20 45 20 4C 20
+     43 20 4F 20 4D 20 45 20
+     20 BF 
+FB00          03233         DS      61                      ;&lt;631&gt;
+FB3D BF       03234         DB      0BFH,'                 ',0BFH   ;&lt;631&gt;
+     20 20 20 20 20 20 20 20
+     20 20 20 20 20 20 20 20
+     20 BF 
+FB50          03235         DS      61                      ;&lt;631&gt;
+FB8D BF       03236         DB      0BFH,'       t o       ',0BFH   ;&lt;631&gt;
+     20 20 20 20 20 20 20 74
+     20 6F 20 20 20 20 20 20
+     20 BF 
+FBA0          03237         DS      61                      ;&lt;631&gt;
+FBDD BF       03238         DB      0BFH,'                 ',0BFH   ;&lt;631&gt;
+     20 20 20 20 20 20 20 20
+     20 20 20 20 20 20 20 20
+     20 BF 
+FBF0          03239         DS      61                      ;&lt;631&gt;
+FC2D BF       03240         DB      0BFH,'   L S - D O S   ',0BFH   ;&lt;631&gt;
+     20 20 20 4C 20 53 20 2D
+     20 44 20 4F 20 53 20 20
+     20 BF 
+FC40          03241         DS      61                      ;&lt;631&gt;
+FC7D BF       03242         DB      0BFH,'                 ',0BFH   ;&lt;631&gt;
+     20 20 20 20 20 20 20 20
+     20 20 20 20 20 20 20 20
+     20 BF 
+FC90          03243         DS      61                      ;&lt;631&gt;
+FCCD 83       03244         DC      19,083H                 ;&lt;631&gt;
+     83 83 83 83 83 83 83 83
+     83 83 83 83 83 83 83 83
+     83 83 
+              03245         ELSE
+              03246         DB      '*******************'
+              03247         DS      61
+              03248         DB      '*                 *'
+              03249         DS      61
+              03250         DB      '*  W E L C O M E  *'
+              03251         DS      61
+              03252         DB      '*                 *'
+              03253         DS      61
+              03254         DB      '*       t o       *'
+              03255         DS      61
+              03256         DB      '*                 *'
+              03257         DS      61
+              03258         DB      '*   L S - D O S   *'
+              03259         DS      61
+              03260         DB      '*                 *'
+              03261         DS      61
+              03262         DB      '*******************'
+              03263         ENDIF
+              03264 ;
+              03265         IF      @BLD631
+0036          03266         ORG     DATE$+3                 ;&lt;631&gt;
+0036 00       03267         DB      0                       ;&lt;631&gt;
+              03268         ENDIF
+1E00          03269         END     OVERLAY
+1E00 is the transfer address
+00000 Total errors
+</misc.></clear></enter></d></shift-break></break></shift></break></pre>
+<p>
+<br>
+</p><blockquote>
+<pre>[Copyright 1999,2002 Frank Durda IV, All Rights Reserved.
+Mirroring of any material on this page in any form is expressly prohibited.
+The official web site for this material is:  http://nemesis.lonestar.org
+Contact this address for use clearances: clearance at nemesis.lonestar.org
+Comments and queries to this address: web_software at nemesis.lonestar.org]
+</pre>
+</blockquote>
+<p>
+<img src="sys0.lst_files/vh401.gif" alt="Valid HTML 4.01!" height="31" width="88">
+
+</p></body></html>
